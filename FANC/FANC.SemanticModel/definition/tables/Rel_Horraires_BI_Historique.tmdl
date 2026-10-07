@@ -1,0 +1,75 @@
+table Rel_Horraires_BI_Historique
+	lineageTag: c244b1ef-f65b-4f95-b6b2-796f2ea1682b
+
+	column tab_AjouterDesHorairesDiffeRents_ID
+		dataType: string
+		lineageTag: 97b716b8-e810-414b-8635-abda4433dccd
+		summarizeBy: none
+		sourceColumn: tab_AjouterDesHorairesDiffeRents_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column BonsDIntervention_ID
+		dataType: string
+		lineageTag: f2cd5028-8109-43a9-b126-a52746c61ad8
+		summarizeBy: none
+		sourceColumn: BonsDIntervention_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateHeure
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e0d2e6e2-b990-43b4-9a4e-820f235fdbe7
+		summarizeBy: none
+		sourceColumn: DateHeure
+
+		annotation SummarizationSetBy = Automatic
+
+	column FinDIntervention
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: db46afee-495e-4369-932d-36ae2dd3eec9
+		summarizeBy: none
+		sourceColumn: FinDIntervention
+
+		annotation SummarizationSetBy = Automatic
+
+	column TempsEnHeure
+		dataType: int64
+		formatString: 0
+		lineageTag: 63321539-1e5e-435c-8b3b-20f7f3954a71
+		summarizeBy: sum
+		sourceColumn: TempsEnHeure
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Rel_Horraires_BI_Historique = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/d6c1a035-aba4-488e-8e40-e24499b26ba3",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "PmtCJuCO9kd2YV8LALTJZebodSV0rXt3Xepaq49LxDKRESZlxydxHQKlLMbN+er8K7q/fm0xHg5eqBAQ+1gGJshnJzE58WJqAzSITxChxcM="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    tab_AjouterDesHorair_Sheet = Source{[Item="tab_AjouterDesHorair",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(tab_AjouterDesHorair_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"tab_AjouterDesHorairesDiffeRents_ID", type text}, {"ExemplePlanning_ID", type text}, {"DateHeure", type datetime}, {"FinDIntervention", type datetime}, {"TempsEnHeure", Int64.Type}}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Type modifié",{{"ExemplePlanning_ID", "BonsDIntervention_ID"}})
+				in
+				    #"Colonnes renommées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,418 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "18bcf86bd739a8c3d824",
+  "position": {
+    "x": 291.84,
+    "y": 206.848,
+    "z": 4000,
+    "height": 513.024,
+    "width": 988.16,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Equipements"
+                    }
+                  },
+                  "Property": "Local"
+                }
+              },
+              "queryRef": "Tab_Equipements.Local",
+              "nativeQueryRef": "Local"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Equipements"
+                    }
+                  },
+                  "Property": "Numéro unique"
+                }
+              },
+              "queryRef": "Tab_Equipements.NumeRoDeLEQuipement",
+              "nativeQueryRef": "Numéro unique"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Equipements"
+                    }
+                  },
+                  "Property": "Numéro de série"
+                }
+              },
+              "queryRef": "Tab_Equipements.NumeRoDeSeRie",
+              "nativeQueryRef": "NumeRoDeSeRie"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Equipements"
+                    }
+                  },
+                  "Property": "Désignation"
+                }
+              },
+              "queryRef": "Tab_Equipements.DeSignationDeLEQuipement",
+              "nativeQueryRef": "DeSignationDeLEQuipement"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Equipements"
+                    }
+                  },
+                  "Property": "Marque"
+                }
+              },
+              "queryRef": "Tab_Equipements.MarqueDeLEQuipement",
+              "nativeQueryRef": "MarqueDeLEQuipement"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Equipements"
+                    }
+                  },
+                  "Property": "Statut"
+                }
+              },
+              "queryRef": "Tab_Equipements.StatutDeLEQuipement",
+              "nativeQueryRef": "StatutDeLEQuipement"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Equipements"
+                    }
+                  },
+                  "Property": "Criticite"
+                }
+              },
+              "queryRef": "Tab_Equipements.Criticite",
+              "nativeQueryRef": "Criticite"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Equipements"
+                    }
+                  },
+                  "Property": "Puissance"
+                }
+              },
+              "queryRef": "Tab_Equipements.PuissanceDeLEQuipement",
+              "nativeQueryRef": "PuissanceDeLEQuipement"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Equipements"
+                    }
+                  },
+                  "Property": "Commentaire"
+                }
+              },
+              "queryRef": "Tab_Equipements.CommentaireDeMaintenanceSurLEQuipement",
+              "nativeQueryRef": "CommentaireDeMaintenanceSurLEQuipement"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Equipements"
+                    }
+                  },
+                  "Property": "Mesures"
+                }
+              },
+              "queryRef": "Tab_Equipements.MesuresReAliseS",
+              "nativeQueryRef": "MesuresReAliseS"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Tab_Equipements"
+                  }
+                },
+                "Property": "Criticite"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "85.29196466911264D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Tab_Equipements.NumeRoDeLEQuipement"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "89.17618954180148D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Tab_Equipements.NumeRoDeSeRie"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "85.44D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Tab_Equipements.MarqueDeLEQuipement"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "152.112D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Tab_Equipements.Local"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "275.736D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Tab_Equipements.CommentaireDeMaintenanceSurLEQuipement"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "274.56D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Tab_Equipements.MesuresReAliseS"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b474752613ad967bda08",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tab_Equipements"
+              }
+            },
+            "Property": "Local"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9d1af6648162ae1572a9",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tab_Equipements"
+              }
+            },
+            "Property": "Numéro unique"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8aebf5591036030cb310",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tab_Equipements"
+              }
+            },
+            "Property": "Numéro de série"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f036eb3f8593c71f972c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tab_Equipements"
+              }
+            },
+            "Property": "Désignation"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6535b29f4c189b9d668f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tab_Equipements"
+              }
+            },
+            "Property": "Marque"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "ed78de8020424a113e62",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tab_Equipements"
+              }
+            },
+            "Property": "Criticite"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "e6810ad942fcc12e1050",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tab_Equipements"
+              }
+            },
+            "Property": "Statut"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "5291507aff6a004c3295",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tab_Equipements"
+              }
+            },
+            "Property": "Commentaire"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "22579305759a767ef86c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tab_Equipements"
+              }
+            },
+            "Property": "Mesures"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "ecd93d43bb311e9a8e5c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tab_Equipements"
+              }
+            },
+            "Property": "Puissance"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

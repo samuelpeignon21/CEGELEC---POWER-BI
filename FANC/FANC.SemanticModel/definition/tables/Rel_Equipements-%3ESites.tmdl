@@ -1,0 +1,67 @@
+table Rel_Equipements->Sites
+	lineageTag: 357f3961-2fbf-4816-866f-c52c209016bf
+
+	column EquipementsV2_ID
+		dataType: string
+		lineageTag: 33cb824a-9acb-4801-ace7-7a59b0c9c141
+		summarizeBy: none
+		sourceColumn: EquipementsV2_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column AgencesClients_ID
+		dataType: string
+		lineageTag: 9500cb19-7657-439a-ad43-f653b0bb6451
+		summarizeBy: none
+		sourceColumn: AgencesClients_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Site
+		dataType: string
+		lineageTag: 1b3296c8-2380-4c97-b504-eec742d51bfc
+		summarizeBy: none
+		sourceColumn: Site
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statut
+		dataType: string
+		lineageTag: 3bf9298f-c43b-4711-a6f0-57d5f49feb94
+		summarizeBy: none
+		sourceColumn: Statut
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Rel_Equipements->Sites = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/eac81fae-2d68-4102-9ebe-52dbdfd36e4d",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "x3WXzw7WjLaiGwsl41kiGXcASYPp9fTbwJmmL2yRYAK6PSp1jXdQq3sCwY3rUuMYCd8Jv08wq1DztSkAWd+SbIPyNUB/HiuXyhCp3ioAoqo="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    #"Rel_Désignation du s_Sheet" = Source{[Item="Rel_Désignation du s",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Désignation du s_Sheet", [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"EquipementsV2_ID", type text}, {"AgencesClients_ID", type text}}),
+				    #"Requêtes fusionnées" = Table.NestedJoin(#"Type modifié", {"AgencesClients_ID"}, Tab_Sites, {"Sites_ID"}, "Tab_Sites", JoinKind.LeftOuter),
+				    #"Tab_Sites développé" = Table.ExpandTableColumn(#"Requêtes fusionnées", "Tab_Sites", {"Site", "StatutDActivite"}, {"Tab_Sites.Site", "Tab_Sites.StatutDActivite"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Tab_Sites développé",{{"Tab_Sites.Site", "Site"}, {"Tab_Sites.StatutDActivite", "Statut"}}),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"Colonnes renommées",{{"Statut", type text}})
+				in
+				    #"Type modifié1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

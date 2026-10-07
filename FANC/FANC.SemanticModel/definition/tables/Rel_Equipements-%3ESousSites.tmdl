@@ -1,0 +1,66 @@
+table Rel_Equipements->SousSites
+	lineageTag: 5a84964c-9be1-4a46-82e3-0fc56c72efa0
+
+	column EquipementsV2_ID
+		dataType: string
+		lineageTag: 3fba9aee-c326-48ac-9f9d-105e16a4c6a5
+		summarizeBy: none
+		sourceColumn: EquipementsV2_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column SitesClients_ID
+		dataType: string
+		lineageTag: 957df023-d028-402b-90d5-f2443824560a
+		summarizeBy: none
+		sourceColumn: SitesClients_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sous site'
+		dataType: string
+		lineageTag: ee518545-4a46-4611-bd4e-e81b2d0bfbd2
+		summarizeBy: none
+		sourceColumn: Sous site
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statut
+		dataType: string
+		lineageTag: 76f17c20-9843-481d-8c80-aab413c22ea3
+		summarizeBy: none
+		sourceColumn: Statut
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Rel_Equipements->SousSites = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/eac81fae-2d68-4102-9ebe-52dbdfd36e4d",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "x3WXzw7WjLaiGwsl41kiGXcASYPp9fTbwJmmL2yRYAK6PSp1jXdQq3sCwY3rUuMYCd8Jv08wq1DztSkAWd+SbIPyNUB/HiuXyhCp3ioAoqo="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    #"Rel_Désignation du b_Sheet" = Source{[Item="Rel_Désignation du b",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Désignation du b_Sheet", [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"EquipementsV2_ID", type text}, {"SitesClients_ID", type text}}),
+				    #"Requêtes fusionnées" = Table.NestedJoin(#"Type modifié", {"SitesClients_ID"}, Tab_SousSites, {"SitesClients_ID"}, "Tab_SousSites", JoinKind.LeftOuter),
+				    #"Tab_SousSites développé" = Table.ExpandTableColumn(#"Requêtes fusionnées", "Tab_SousSites", {"Sous site", "Statut"}, {"Tab_SousSites.Sous site", "Tab_SousSites.Statut"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Tab_SousSites développé",{{"Tab_SousSites.Sous site", "Sous site"}, {"Tab_SousSites.Statut", "Statut"}})
+				in
+				    #"Colonnes renommées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

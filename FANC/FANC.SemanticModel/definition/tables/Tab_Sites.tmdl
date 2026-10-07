@@ -1,0 +1,91 @@
+table Tab_Sites
+	lineageTag: 25ba882b-7544-4367-af4f-28be3efe71b4
+
+	column Sites_ID
+		dataType: string
+		lineageTag: 3f65721e-bcb7-4e73-b602-e908a463e73a
+		summarizeBy: none
+		sourceColumn: Sites_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Adresse
+		dataType: string
+		lineageTag: 0a500d39-ae4c-4e6c-9318-7c6f29b4605b
+		summarizeBy: none
+		sourceColumn: Adresse
+
+		annotation SummarizationSetBy = Automatic
+
+	column Site
+		dataType: string
+		lineageTag: 1dfa53be-9e40-4435-a680-643ada7b8308
+		summarizeBy: none
+		sourceColumn: Site
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValeurDeSiteClientUnique
+		dataType: string
+		lineageTag: 97018c9a-fce0-4e6a-8495-ef1e05a2bc4b
+		summarizeBy: none
+		sourceColumn: ValeurDeSiteClientUnique
+
+		annotation SummarizationSetBy = Automatic
+
+	column StatutDActivite
+		dataType: string
+		lineageTag: 16bb7d71-99d3-4011-8546-d220ecc661af
+		summarizeBy: none
+		sourceColumn: StatutDActivite
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tab_Sites = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/3fad2c09-c681-4a18-bc26-7da3c3040cc1",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "Mw+CH+JqJFkiDjFW2ky3H82aNmF7K0ZoYfueCIIaa+uQ9YB8dTI7fqAR0+XA4JsD1FjrfmB424hQPcle1UdHJPf2sUqAZI2z1czeF7svwec="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    AgencesClients_Sheet = Source{[Item="AgencesClients",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(AgencesClients_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"AgencesClients_ID", type text}, {"AdresseDuSite", type text}, {"NomDelAgence", type text}, {"DecompteNbrSite", Int64.Type}, {"IDAgenceSite", Int64.Type}, {"Commentaires", type any}, {"Statut", type text}}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"DecompteNbrSite", "IDAgenceSite", "Commentaires"}),
+				    #"Colonnes renommées1" = Table.RenameColumns(#"Colonnes supprimées",{{"AdresseDuSite", "Adresse"}, {"NomDelAgence", "Site"}, {"AgencesClients_ID", "Sites_ID"}, {"Statut", "StatutDActivite"}}),
+				    #"Requête ajoutée" = Table.Combine({#"Colonnes renommées1", Tab_Site_Historique}),
+				    #"Valeur remplacée" = Table.TransformColumns(
+				    #"Requête ajoutée",
+				    {
+				        "Site",
+				        each
+				            let
+				                s1 = Text.Replace(_, "FANC - ", ""),
+				                s2 = Text.Replace(s1, "FANC ", ""),
+				                s3 = Text.Replace(s2, "NANDAIL", "NANDAÏ"),
+				                s4 = Text.Replace(s3, "NANDAI", "NANDAÏ"),
+				                s5 = Text.Replace(s4, "BA 186", "BASE AERIENNE 186")
+				            in
+				                Text.Trim(s5),
+				        type text
+				    }
+				),
+				    #"Valeur remplacée1" = Table.ReplaceValue(#"Valeur remplacée","BA186","BASE AERIENNE 186",Replacer.ReplaceText,{"Site"})
+				in
+				    #"Valeur remplacée1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

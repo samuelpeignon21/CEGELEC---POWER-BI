@@ -1,0 +1,185 @@
+table Tab_Tickets
+	lineageTag: d610797f-88a1-47f4-a5b8-6cdfa00f25aa
+
+	column Ticket_ID
+		dataType: string
+		lineageTag: f9b1f8e8-1ab2-4bd2-bd5e-8c42a9ac72a1
+		summarizeBy: none
+		sourceColumn: Ticket_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Motif
+		dataType: string
+		lineageTag: 63dfe756-1f39-429e-91e4-5d68ecdcf88a
+		summarizeBy: none
+		sourceColumn: Motif
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statut
+		dataType: string
+		lineageTag: 8580e6ef-8b48-40d6-9cd0-f11d5aac9981
+		summarizeBy: none
+		sourceColumn: Statut
+
+		annotation SummarizationSetBy = Automatic
+
+	column Priorite
+		dataType: string
+		lineageTag: 13a61826-c861-46d2-89c8-46bb092d49e3
+		summarizeBy: none
+		sourceColumn: Priorite
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 5e9b85b1-2e0e-43d0-acea-c6bfbc8efdaa
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Courriel
+		dataType: string
+		lineageTag: ffc2c63e-c4ad-4331-a44d-e02d05bc6754
+		summarizeBy: none
+		sourceColumn: Courriel
+
+		annotation SummarizationSetBy = Automatic
+
+	column Telephone
+		dataType: int64
+		formatString: 0
+		lineageTag: 7def33d9-f40f-47fb-9bc2-fdde92472eb6
+		summarizeBy: sum
+		sourceColumn: Telephone
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date création'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ff548971-065e-41f8-8d04-fb98abf0cd33
+		summarizeBy: none
+		sourceColumn: Date création
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'heure de création'
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: 2859f676-5d14-4890-b43a-95947ffb0204
+		summarizeBy: none
+		sourceColumn: heure de création
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column 'Justification d''annulation'
+		dataType: string
+		lineageTag: cc2c1663-fb22-4484-aa0d-aa91e1dc1d65
+		summarizeBy: none
+		sourceColumn: Justification d'annulation
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numéro de ticket'
+		dataType: int64
+		formatString: 0
+		lineageTag: e1d63317-417a-4709-92ee-a41178f539c6
+		summarizeBy: sum
+		sourceColumn: Numéro de ticket
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Validation de la demande en interne par le client'
+		dataType: string
+		lineageTag: 345b89a7-6c5f-4989-b023-bc63d4ed8628
+		summarizeBy: none
+		sourceColumn: Validation de la demande en interne par le client
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de résolution de la demande'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 36cf1c3a-b9c7-41fa-bc54-80b3551bb464
+		summarizeBy: none
+		sourceColumn: Date de résolution de la demande
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nom demandeur'
+		dataType: string
+		lineageTag: 9d7b539d-4a0d-4112-92db-6597cdc77522
+		summarizeBy: none
+		sourceColumn: Nom demandeur
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prénom demandeur'
+		dataType: string
+		lineageTag: f19abb69-da12-4ff7-ac3e-5d8e9fc15505
+		summarizeBy: none
+		sourceColumn: Prénom demandeur
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tab_Tickets = m
+		mode: import
+		source =
+				let
+				    url = "https://safeplace.teepee.fr",
+				    key = "/source/api/powerbi/getfile/3fad2c09-c681-4a18-bc26-7da3c3040cc1",
+				
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                //"https://safeplace.teepee.fr/source/api/powerbi/getfile/3fad2c09-c681-4a18-bc26-7da3c3040cc1"
+				                url,
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "Mw+CH+JqJFkiDjFW2ky3H82aNmF7K0ZoYfueCIIaa+uQ9YB8dTI7fqAR0+XA4JsD1FjrfmB424hQPcle1UdHJPf2sUqAZI2z1czeF7svwec="
+				                    ],
+				                    RelativePath = key
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    DemandeDIntervention_Sheet = Source{[Item="DemandeDIntervention",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(DemandeDIntervention_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDInterventionSolutionTertiaire_ID", type text}, {"Motif", type text}, {"Statut", type text}, {"PrioriteDeLaDemande", type text}, {"Description", type text}, {"EMail", type text}, {"Telephone", Int64.Type}, {"DateEtHeureDeCreAtionDeLaDemande", type datetime}, {"JustificationDAnnulation", type text}, {"NumeRoDeTicket", Int64.Type}, {"DemandeValiderParLeClient", type text}, {"DateDeReSolutionDeLaDemande", type datetime}, {"NomDemandeur", type text}, {"PreNomDemandeur", type text}}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Type modifié",{{"DemandeDInterventionSolutionTertiaire_ID", "Ticket_ID"}, {"PrioriteDeLaDemande", "Priorite"}, {"EMail", "Courriel"}, {"DateEtHeureDeCreAtionDeLaDemande", "Date et heure de création"}, {"JustificationDAnnulation", "Justification d'annulation"}, {"NumeRoDeTicket", "Numéro de ticket"}, {"DemandeValiderParLeClient", "Validation de la demande en interne par le client"}, {"DateDeReSolutionDeLaDemande", "Date de résolution de la demande"}, {"NomDemandeur", "Nom demandeur"}, {"PreNomDemandeur", "Prénom demandeur"}}),
+				    #"Remplacer les valeurs -> Priorite" = Table.TransformColumns(
+				    #"Colonnes renommées",
+				    {
+				        {"Priorite",
+				            each
+				                if _ = "1Urgent" then "Urgent"
+				                else if _ = "2Important" then "Important"
+				                else if _ = "3Moyen" then "Moyen"
+				                else if _ = "4Amelioration" then "Amelioration"
+				                else _,
+				            type text
+				        }
+				    }
+				),
+				    #"Motif -> Remplacement de valeur" = Table.ReplaceValue(#"Remplacer les valeurs -> Priorite","IncidentClimatisation","Incident Climatisation",Replacer.ReplaceText,{"Motif"}),
+				    #"Duplication date création" = Table.DuplicateColumn(#"Motif -> Remplacement de valeur", "Date et heure de création", "Date et heure de création - Copier"),
+				    #"Emplacement date création" = Table.ReorderColumns(#"Duplication date création",{"Ticket_ID", "Motif", "Statut", "Priorite", "Description", "Courriel", "Telephone", "Date et heure de création", "Date et heure de création - Copier", "Justification d'annulation", "Numéro de ticket", "Validation de la demande en interne par le client", "Date de résolution de la demande", "Nom demandeur", "Prénom demandeur"}),
+				    #"Type -> ""date"" & ""Heure""" = Table.TransformColumnTypes(#"Emplacement date création",{{"Date et heure de création", type date}, {"Date et heure de création - Copier", type time}}),
+				    #"Colonnes dates renommées" = Table.RenameColumns(#"Type -> ""date"" & ""Heure""",{{"Date et heure de création", "Date création"}, {"Date et heure de création - Copier", "heure de création"}})
+				in
+				    #"Colonnes dates renommées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

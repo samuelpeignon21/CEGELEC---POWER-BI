@@ -1,0 +1,58 @@
+table Rel_Equipements->Entreprise
+	lineageTag: 58ad36e9-87e3-4776-b0b7-84f61aa6da47
+
+	column EquipementsV2_ID
+		dataType: string
+		lineageTag: 792aedbb-65dc-4dde-869c-6d78e929b2b8
+		summarizeBy: none
+		sourceColumn: EquipementsV2_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Clients_ID
+		dataType: string
+		lineageTag: 8f7c9360-3796-4fb7-a72f-fe5acac748b1
+		summarizeBy: none
+		sourceColumn: Clients_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nom
+		dataType: string
+		lineageTag: b5af7c11-0625-4965-a28f-5f3988189a3a
+		summarizeBy: none
+		sourceColumn: Nom
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Rel_Equipements->Entreprise = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/eac81fae-2d68-4102-9ebe-52dbdfd36e4d",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "x3WXzw7WjLaiGwsl41kiGXcASYPp9fTbwJmmL2yRYAK6PSp1jXdQq3sCwY3rUuMYCd8Jv08wq1DztSkAWd+SbIPyNUB/HiuXyhCp3ioAoqo="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    Rel_Entreprise_Sheet = Source{[Item="Rel_Entreprise",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(Rel_Entreprise_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"EquipementsV2_ID", type text}, {"Clients_ID", type text}}),
+				    #"Requêtes fusionnées" = Table.NestedJoin(#"Type modifié", {"Clients_ID"}, Tab_Entreprise, {"Clients_ID"}, "Tab_Entreprise", JoinKind.LeftOuter),
+				    #"Tab_Entreprise développé" = Table.ExpandTableColumn(#"Requêtes fusionnées", "Tab_Entreprise", {"Nom"}, {"Tab_Entreprise.Nom"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Tab_Entreprise développé",{{"Tab_Entreprise.Nom", "Nom"}})
+				in
+				    #"Colonnes renommées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

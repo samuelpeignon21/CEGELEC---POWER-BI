@@ -1,0 +1,58 @@
+table Rel_BI->Entreprise_Historique
+	isHidden
+	lineageTag: b7c85be7-8b6b-4fe6-91b7-2b9b764388d5
+
+	column BonsDIntervention_ID
+		dataType: string
+		isHidden
+		lineageTag: 9c9e2ff1-7e72-4fbd-985b-fdae038ff9e4
+		summarizeBy: none
+		sourceColumn: BonsDIntervention_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Clients_ID
+		dataType: string
+		isHidden
+		lineageTag: fc968c3c-7367-4f56-b994-31122df43327
+		summarizeBy: none
+		sourceColumn: Clients_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Rel_BI->Entreprise_Historique = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/d6c1a035-aba4-488e-8e40-e24499b26ba3",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "PmtCJuCO9kd2YV8LALTJZebodSV0rXt3Xepaq49LxDKRESZlxydxHQKlLMbN+er8K7q/fm0xHg5eqBAQ+1gGJshnJzE58WJqAzSITxChxcM="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    #"Rel_Client (ExempleP_Sheet" = Source{[Item="Rel_Client (ExempleP",Kind="Sheet"]}[Data],
+				    #"Type modifié" = Table.TransformColumnTypes(#"Rel_Client (ExempleP_Sheet",{{"Column1", type text}, {"Column2", type text}}),
+				    #"En-têtes promus" = Table.PromoteHeaders(#"Type modifié", [PromoteAllScalars=true]),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"En-têtes promus",{{"ExemplePlanning_ID", type text}, {"TEEPEE_Entreprise_ID", type text}}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Type modifié1",{{"TEEPEE_Entreprise_ID", "Clients_ID"}, {"ExemplePlanning_ID", "BonsDIntervention_ID"}})
+				in
+				    #"Colonnes renommées"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

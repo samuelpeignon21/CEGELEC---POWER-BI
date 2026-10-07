@@ -1,0 +1,212 @@
+table Tab_Entreprise
+	lineageTag: b0f4f89e-48e7-4b40-8c92-76805e801285
+
+	column Clients_ID
+		dataType: string
+		lineageTag: 1c128120-d8f2-438a-ba07-cf7e23de711c
+		summarizeBy: none
+		sourceColumn: Clients_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nom
+		dataType: string
+		lineageTag: 57285165-e011-42a4-8fa4-fa65b182c0b7
+		summarizeBy: none
+		sourceColumn: Nom
+
+		annotation SummarizationSetBy = Automatic
+
+	column IdentifiantEntreprise
+		dataType: string
+		lineageTag: b4dd7eda-2530-4d14-9c7a-9d4072ad203b
+		summarizeBy: none
+		sourceColumn: IdentifiantEntreprise
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mails
+		dataType: string
+		lineageTag: 0268df03-ec9c-4e17-9aee-25679920441b
+		summarizeBy: none
+		sourceColumn: Mails
+
+		annotation SummarizationSetBy = Automatic
+
+	column LogoEntreprise
+		dataType: string
+		lineageTag: e605bd75-0958-4137-91cb-cacae20c7a6b
+		summarizeBy: none
+		sourceColumn: LogoEntreprise
+
+		annotation SummarizationSetBy = Automatic
+
+	column Contacts
+		dataType: string
+		lineageTag: 0031452e-9c7e-4a76-9030-b9d09d3bc66c
+		summarizeBy: none
+		sourceColumn: Contacts
+
+		annotation SummarizationSetBy = Automatic
+
+	column TauxHorairesTech
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c6d70ad-a15e-4052-8d57-a173b0317c61
+		summarizeBy: none
+		sourceColumn: TauxHorairesTech
+
+		annotation SummarizationSetBy = Automatic
+
+	column TauxHorairesRT
+		dataType: int64
+		formatString: 0
+		lineageTag: a34ba9b6-a2da-4d4b-9618-77ff9d3d1111
+		summarizeBy: none
+		sourceColumn: TauxHorairesRT
+
+		annotation SummarizationSetBy = Automatic
+
+	column DePlacements
+		dataType: int64
+		formatString: 0
+		lineageTag: 8348278d-0377-4981-abcf-3789761e4152
+		summarizeBy: none
+		sourceColumn: DePlacements
+
+		annotation SummarizationSetBy = Automatic
+
+	column Web
+		dataType: string
+		lineageTag: af5c074f-b796-4546-ba71-f868715bfce1
+		summarizeBy: none
+		sourceColumn: Web
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProcessDeFacturation
+		dataType: string
+		lineageTag: c97e01d9-0262-4d14-8a52-820451130d09
+		summarizeBy: none
+		sourceColumn: ProcessDeFacturation
+
+		annotation SummarizationSetBy = Automatic
+
+	column AdresseFacturation
+		dataType: string
+		lineageTag: 92ed4c7c-3df6-4b00-88ae-f76e549bbd90
+		summarizeBy: none
+		sourceColumn: AdresseFacturation
+
+		annotation SummarizationSetBy = Automatic
+
+	column CodePostalFacturation
+		dataType: string
+		lineageTag: 14be5cb8-c24e-4584-9516-468fc56faae6
+		summarizeBy: none
+		sourceColumn: CodePostalFacturation
+
+		annotation SummarizationSetBy = Automatic
+
+	column VilleFacturation
+		dataType: string
+		lineageTag: e3c4d5c0-6f01-4566-acd7-da58592c395a
+		summarizeBy: none
+		sourceColumn: VilleFacturation
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaysFacturation
+		dataType: string
+		lineageTag: dd20347c-fb3e-472a-b1f2-5615b478d6ee
+		summarizeBy: none
+		sourceColumn: PaysFacturation
+
+		annotation SummarizationSetBy = Automatic
+
+	column MailSuiviDesTicketsSolutionTemporaire
+		dataType: string
+		lineageTag: 5132c50b-621c-44e8-ad0a-c33710b043b3
+		summarizeBy: none
+		sourceColumn: MailSuiviDesTicketsSolutionTemporaire
+
+		annotation SummarizationSetBy = Automatic
+
+	column IDClient
+		dataType: int64
+		formatString: 0
+		lineageTag: 19235cfc-c0ea-41f9-a890-1ad2ebdef027
+		summarizeBy: none
+		sourceColumn: IDClient
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValidationDesTicketsEnInterneParLeClient
+		dataType: string
+		lineageTag: fde49890-1a74-4a33-bfc0-cca1b4d42d28
+		summarizeBy: none
+		sourceColumn: ValidationDesTicketsEnInterneParLeClient
+
+		annotation SummarizationSetBy = Automatic
+
+	column MailSignatureBI1
+		dataType: string
+		lineageTag: 966bb437-e441-4af5-be18-0f044c682ce8
+		summarizeBy: none
+		sourceColumn: MailSignatureBI1
+
+		annotation SummarizationSetBy = Automatic
+
+	column MailSignatureBI2
+		dataType: string
+		lineageTag: 56e5e564-9ffa-412c-abce-d4129c7a8abd
+		summarizeBy: none
+		sourceColumn: MailSignatureBI2
+
+		annotation SummarizationSetBy = Automatic
+
+	column MailSignatureBI3
+		dataType: string
+		lineageTag: 73463352-c8dd-4d7b-b1ed-221a765d32fc
+		summarizeBy: none
+		sourceColumn: MailSignatureBI3
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statut
+		dataType: string
+		lineageTag: e079dfe0-fb9f-4ddd-bd5e-efc76a88e011
+		summarizeBy: none
+		sourceColumn: Statut
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tab_Entreprise = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/3fad2c09-c681-4a18-bc26-7da3c3040cc1",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "Mw+CH+JqJFkiDjFW2ky3H82aNmF7K0ZoYfueCIIaa+uQ9YB8dTI7fqAR0+XA4JsD1FjrfmB424hQPcle1UdHJPf2sUqAZI2z1czeF7svwec="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    Clients_Sheet = Source{[Item="Clients",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(Clients_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Clients_ID", type text}, {"Nom", type text}, {"IdentifiantEntreprise", type text}, {"Mails", type text}, {"LogoEntreprise", type text}, {"Contacts", type text}, {"TauxHorairesTech", Int64.Type}, {"TauxHorairesRT", Int64.Type}, {"DePlacements", Int64.Type}, {"Web", type text}, {"ProcessDeFacturation", type text}, {"AdresseFacturation", type text}, {"CodePostalFacturation", type text}, {"VilleFacturation", type text}, {"PaysFacturation", type text}, {"MailSuiviDesTicketsSolutionTemporaire", type text}, {"IDClient", Int64.Type}, {"ValidationDesTicketsEnInterneParLeClient", type text}, {"MailSignatureBI1", type text}, {"MailSignatureBI2", type text}, {"MailSignatureBI3", type text}, {"Statut", type text}}),
+				    #"Ajout entreprise Historique" = Table.Combine({#"Type modifié", Tab_Entreprise_Historique})
+				in
+				    #"Ajout entreprise Historique"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

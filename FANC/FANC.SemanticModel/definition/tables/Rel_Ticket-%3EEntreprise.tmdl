@@ -1,0 +1,59 @@
+table Rel_Ticket->Entreprise
+	lineageTag: 43510442-b323-4e7c-85cf-04686a694ca8
+
+	column DemandeDInterventionSolutionTertiaire_ID
+		dataType: string
+		lineageTag: a4ee91de-b939-43ca-ab3f-6281e6a5b18b
+		summarizeBy: none
+		sourceColumn: DemandeDInterventionSolutionTertiaire_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Clients_ID
+		dataType: string
+		lineageTag: d870318d-5603-42c2-839b-1daa21aac425
+		summarizeBy: none
+		sourceColumn: Clients_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Entreprise
+		dataType: string
+		lineageTag: fdb9e440-d813-4cb1-b54a-ae672ee7bd54
+		summarizeBy: none
+		sourceColumn: Entreprise
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Rel_Ticket->Entreprise = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/3fad2c09-c681-4a18-bc26-7da3c3040cc1",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "Mw+CH+JqJFkiDjFW2ky3H82aNmF7K0ZoYfueCIIaa+uQ9YB8dTI7fqAR0+XA4JsD1FjrfmB424hQPcle1UdHJPf2sUqAZI2z1czeF7svwec="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    Rel_Client_Sheet = Source{[Item="Rel_Client",Kind="Sheet"]}[Data],
+				    #"Type modifié" = Table.TransformColumnTypes(Rel_Client_Sheet,{{"Column1", type text}, {"Column2", type text}}),
+				    #"En-têtes promus" = Table.PromoteHeaders(#"Type modifié", [PromoteAllScalars=true]),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDInterventionSolutionTertiaire_ID", type text}, {"Clients_ID", type text}}),
+				    #"Requêtes fusionnées" = Table.NestedJoin(#"Type modifié1", {"Clients_ID"}, Tab_Entreprise, {"Clients_ID"}, "Tab_Entreprise", JoinKind.LeftOuter),
+				    #"Tab_Entreprise développé" = Table.ExpandTableColumn(#"Requêtes fusionnées", "Tab_Entreprise", {"Nom"}, {"Tab_Entreprise.Nom"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Tab_Entreprise développé",{{"Tab_Entreprise.Nom", "Entreprise"}})
+				in
+				    #"Colonnes renommées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

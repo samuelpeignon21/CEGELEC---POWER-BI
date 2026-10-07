@@ -1,0 +1,57 @@
+table Rel_BI->Site_Historique
+	isHidden
+	lineageTag: c699a48f-69fb-4cd0-9f6b-f8e3a25a5a5c
+
+	column BonsDIntervention_ID
+		dataType: string
+		isHidden
+		lineageTag: 0ea07eb9-adbd-4886-9c9a-3a0a99446196
+		summarizeBy: none
+		sourceColumn: BonsDIntervention_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AgencesClients_ID
+		dataType: string
+		isHidden
+		lineageTag: 821307f5-8ed6-476e-81d6-a9093022ee53
+		summarizeBy: none
+		sourceColumn: AgencesClients_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Rel_BI->Site_Historique = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/d6c1a035-aba4-488e-8e40-e24499b26ba3",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "PmtCJuCO9kd2YV8LALTJZebodSV0rXt3Xepaq49LxDKRESZlxydxHQKlLMbN+er8K7q/fm0xHg5eqBAQ+1gGJshnJzE58WJqAzSITxChxcM="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    Rel_sites_Sheet = Source{[Item="Rel_sites",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(Rel_sites_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"En-têtes promus",{{"ExemplePlanning_ID", type text}, {"Site_ID", type text}}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Type modifié1",{{"ExemplePlanning_ID", "BonsDIntervention_ID"}, {"Site_ID", "AgencesClients_ID"}})
+				in
+				    #"Colonnes renommées"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

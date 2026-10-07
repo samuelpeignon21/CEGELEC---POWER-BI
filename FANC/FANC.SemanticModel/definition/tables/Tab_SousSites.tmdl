@@ -1,0 +1,74 @@
+table Tab_SousSites
+	lineageTag: a67cda38-e1d1-4c0f-8201-024943719604
+
+	column SitesClients_ID
+		dataType: string
+		lineageTag: 347b7d2a-139d-4173-a7a2-0f36aab759c9
+		summarizeBy: none
+		sourceColumn: SitesClients_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sous site'
+		dataType: string
+		lineageTag: d564fb3c-db85-4491-8cc9-66ee7192ac80
+		summarizeBy: none
+		sourceColumn: Sous site
+
+		annotation SummarizationSetBy = Automatic
+
+	column UN
+		dataType: int64
+		formatString: 0
+		lineageTag: 493dd9c0-62b1-480f-82c7-1d02b8738391
+		summarizeBy: sum
+		sourceColumn: UN
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statut
+		dataType: string
+		lineageTag: 872a0efe-4c25-467d-9176-56a94729ad00
+		summarizeBy: none
+		sourceColumn: Statut
+
+		annotation SummarizationSetBy = Automatic
+
+	column IDSite
+		dataType: int64
+		formatString: 0
+		lineageTag: 3b85c2b5-0340-4ebf-a064-d40abba1d274
+		summarizeBy: sum
+		sourceColumn: IDSite
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tab_SousSites = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/eac81fae-2d68-4102-9ebe-52dbdfd36e4d",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "x3WXzw7WjLaiGwsl41kiGXcASYPp9fTbwJmmL2yRYAK6PSp1jXdQq3sCwY3rUuMYCd8Jv08wq1DztSkAWd+SbIPyNUB/HiuXyhCp3ioAoqo="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    SitesClients_Sheet = Source{[Item="SitesClients",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(SitesClients_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"SitesClients_ID", type text}, {"NomDuSite", type text}, {"UN", Int64.Type}, {"Statut", type text}, {"IDSite", Int64.Type}}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Type modifié",{{"NomDuSite", "Sous site"}})
+				in
+				    #"Colonnes renommées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
