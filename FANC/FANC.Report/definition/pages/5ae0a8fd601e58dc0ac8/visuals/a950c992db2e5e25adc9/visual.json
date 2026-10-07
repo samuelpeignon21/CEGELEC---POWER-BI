@@ -1,0 +1,178 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "a950c992db2e5e25adc9",
+  "position": {
+    "x": 0,
+    "y": 405.504,
+    "z": 0,
+    "height": 314.368,
+    "width": 1280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Bons d'Intervention_Tickets"
+                    }
+                  },
+                  "Property": "Numéro de BI"
+                }
+              },
+              "queryRef": "Tab_Bons d'Intervention_Tickets.Numéro de BI",
+              "nativeQueryRef": "Numéro de BI"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Bons d'Intervention_Tickets"
+                    }
+                  },
+                  "Property": "Description"
+                }
+              },
+              "queryRef": "Tab_Bons d'Intervention.Description",
+              "nativeQueryRef": "Description"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Bons d'Intervention_Tickets"
+                    }
+                  },
+                  "Property": "Date de création"
+                }
+              },
+              "queryRef": "Tab_Bons d'Intervention_Tickets.Date de création",
+              "nativeQueryRef": "Date d'affectation",
+              "displayName": "Date d'affectation"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Bons d'Intervention_Tickets"
+                    }
+                  },
+                  "Property": "Date de fin d'Intervention"
+                }
+              },
+              "queryRef": "Tab_Bons d'Intervention_Tickets.Date de fin d'Intervention",
+              "nativeQueryRef": "Date de fin d'Intervention"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tab_Bons d'Intervention_Tickets"
+                    }
+                  },
+                  "Property": "Compte rendu preventif"
+                }
+              },
+              "queryRef": "Tab_Bons d'Intervention_Tickets.Compte rendu preventif",
+              "nativeQueryRef": "Conclusion et observations / Réserves",
+              "displayName": "Conclusion et observations / Réserves"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Tab_Bons d'Intervention_Tickets"
+                  }
+                },
+                "Property": "Numéro de BI"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "270.8055568781714D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Tab_Bons d'Intervention.Description"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "679.343476592128D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Tab_Bons d'Intervention_Tickets.Compte rendu preventif"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "109.51898734177215D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Tab_Bons d'Intervention_Tickets.Date de création"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "105.91139240506328D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Tab_Bons d'Intervention_Tickets.Date de fin d'Intervention"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

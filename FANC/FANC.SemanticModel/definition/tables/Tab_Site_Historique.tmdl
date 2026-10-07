@@ -1,0 +1,85 @@
+table Tab_Site_Historique
+	isHidden
+	lineageTag: 132fc712-1466-4f93-99aa-0f414820508a
+
+	column Sites_ID
+		dataType: string
+		isHidden
+		lineageTag: f75367e9-1d9c-4fb8-9848-69f6fbfb2534
+		summarizeBy: none
+		sourceColumn: Sites_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Site
+		dataType: string
+		isHidden
+		lineageTag: b3b109ed-79a0-415b-9567-cc1bc092c48c
+		summarizeBy: none
+		sourceColumn: Site
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Adresse
+		dataType: string
+		isHidden
+		lineageTag: a27c3dec-3332-44ea-a044-19ff4d8fbafe
+		summarizeBy: none
+		sourceColumn: Adresse
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValeurDeSiteClientUnique
+		dataType: string
+		lineageTag: bd8f425e-ece8-4112-b725-c5795d279c42
+		summarizeBy: none
+		sourceColumn: ValeurDeSiteClientUnique
+
+		annotation SummarizationSetBy = Automatic
+
+	column StatutDActivite
+		dataType: string
+		lineageTag: 7a2cc3b3-410a-4a69-8441-edfd9c3f8b99
+		summarizeBy: none
+		sourceColumn: StatutDActivite
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tab_Site_Historique = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/d6c1a035-aba4-488e-8e40-e24499b26ba3",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "PmtCJuCO9kd2YV8LALTJZebodSV0rXt3Xepaq49LxDKRESZlxydxHQKlLMbN+er8K7q/fm0xHg5eqBAQ+1gGJshnJzE58WJqAzSITxChxcM="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    Site_Sheet = Source{[Item="Site",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(Site_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Site_ID", type text}, {"NDeSite", Int64.Type}, {"DeSignationDuSite", type text}, {"Adresse", type text}, {"CodePostal", Int64.Type}, {"Ville", type text}, {"Pays", type text}, {"TeLePhone", type text}, {"GeOlocalisation_Lat", type any}, {"GeOlocalisation_Long", type any}, {"Fax", type any}, {"LAdresseDeLivraisonEstIdentiqueALAdresseDeFacturation", Int64.Type}, {"AdresseLivraison", type text}, {"VilleLivraison", type text}, {"CodePostalLivraison", Int64.Type}, {"PaysLivraison", type text}, {"TelephoneLivraison", type text}, {"FreQuenceDeMaintenance", type text}, {"Statut", type text}}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"GeOlocalisation_Lat", "GeOlocalisation_Long", "Fax", "LAdresseDeLivraisonEstIdentiqueALAdresseDeFacturation", "AdresseLivraison", "VilleLivraison", "CodePostalLivraison", "PaysLivraison", "TelephoneLivraison", "FreQuenceDeMaintenance", "NDeSite", "CodePostal", "Ville", "Pays", "TeLePhone", "Statut"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Colonnes supprimées",{{"DeSignationDuSite", "Site"}, {"Site_ID", "Sites_ID"}})
+				in
+				    #"Colonnes renommées"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,76 @@
+table Tab_Horraires
+	lineageTag: 4f3cfca6-0acd-4a13-9a5c-43468b762b59
+
+	column tab_AjouterDesHorairesDiffeRents_ID
+		dataType: string
+		lineageTag: 38cee337-2176-4a7a-9bf8-fca1956812a9
+		summarizeBy: none
+		sourceColumn: tab_AjouterDesHorairesDiffeRents_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column BonsDIntervention_ID
+		dataType: string
+		lineageTag: 026f2764-3446-4052-97c3-b6f314bd69e4
+		summarizeBy: none
+		sourceColumn: BonsDIntervention_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateHeure
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 15993e9d-8ec0-46c6-9614-f4c3a8ee3dd9
+		summarizeBy: none
+		sourceColumn: DateHeure
+
+		annotation SummarizationSetBy = Automatic
+
+	column FinDIntervention
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c551474a-cb64-480f-a713-9a1b416a18b6
+		summarizeBy: none
+		sourceColumn: FinDIntervention
+
+		annotation SummarizationSetBy = Automatic
+
+	column TempsEnHeure
+		dataType: int64
+		formatString: 0
+		lineageTag: a57e0ae9-2a40-461c-8af0-7243b14f3d5b
+		summarizeBy: sum
+		sourceColumn: TempsEnHeure
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tab_Horraires = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/3fad2c09-c681-4a18-bc26-7da3c3040cc1",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "Mw+CH+JqJFkiDjFW2ky3H82aNmF7K0ZoYfueCIIaa+uQ9YB8dTI7fqAR0+XA4JsD1FjrfmB424hQPcle1UdHJPf2sUqAZI2z1czeF7svwec="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    tab_AjouterDesHorair_Sheet = Source{[Item="tab_AjouterDesHorair",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(tab_AjouterDesHorair_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"tab_AjouterDesHorairesDiffeRents_ID", type text}, {"BonsDIntervention_ID", type text}, {"DateHeure", type datetime}, {"FinDIntervention", type datetime}, {"TempsEnHeure", Int64.Type}}),
+				    #"Ajout tab_horraire_historique" = Table.Combine({#"Type modifié", Rel_Horraires_BI_Historique}),
+				    #"Lignes filtrées" = Table.SelectRows(#"Ajout tab_horraire_historique", each ([TempsEnHeure] <> -743 and [TempsEnHeure] <> -742 and [TempsEnHeure] <> -38 and [TempsEnHeure] <> -7 and [TempsEnHeure] <> 0 and [TempsEnHeure] <> 172 and [TempsEnHeure] <> 199 and [TempsEnHeure] <> 745 and [TempsEnHeure] <> 821 and [TempsEnHeure] <> 824 and [TempsEnHeure] <> 1087405))
+				in
+				    #"Lignes filtrées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

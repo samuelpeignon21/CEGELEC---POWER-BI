@@ -1,0 +1,64 @@
+table 'Tab_Validation ticket'
+	lineageTag: 446f9523-55a7-40d7-9685-34d571aaa619
+
+	column ValidationTicket_ID
+		dataType: string
+		lineageTag: 878b46d1-1cda-4ce4-99c5-774b2e71d4c5
+		summarizeBy: none
+		sourceColumn: ValidationTicket_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValidezVousLeTicket
+		dataType: string
+		lineageTag: 8767244a-800e-4af0-8a36-7aca461e99ae
+		summarizeBy: none
+		sourceColumn: ValidezVousLeTicket
+
+		annotation SummarizationSetBy = Automatic
+
+	column JustificationDeNonValidation
+		dataType: string
+		lineageTag: 4f07afab-fd5d-400e-9936-892730c7626e
+		summarizeBy: none
+		sourceColumn: JustificationDeNonValidation
+
+		annotation SummarizationSetBy = Automatic
+
+	column IDValidation
+		dataType: int64
+		formatString: 0
+		lineageTag: b5698baa-6afa-4389-8b00-3106712e4105
+		summarizeBy: sum
+		sourceColumn: IDValidation
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Tab_Validation ticket' = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/3fad2c09-c681-4a18-bc26-7da3c3040cc1",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "Mw+CH+JqJFkiDjFW2ky3H82aNmF7K0ZoYfueCIIaa+uQ9YB8dTI7fqAR0+XA4JsD1FjrfmB424hQPcle1UdHJPf2sUqAZI2z1czeF7svwec="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    ValidationTicket_Sheet = Source{[Item="ValidationTicket",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(ValidationTicket_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"ValidationTicket_ID", type text}, {"ValidezVousLeTicket", type text}, {"JustificationDeNonValidation", type text}, {"IDValidation", Int64.Type}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

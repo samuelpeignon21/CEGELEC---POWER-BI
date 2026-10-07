@@ -1,0 +1,270 @@
+table 'Tab_Bons d''Intervention_Tickets'
+	lineageTag: 468e2939-62d5-47f8-be99-8b5bb09fd5a1
+
+	column BI_ID
+		dataType: string
+		lineageTag: 3dcdcee8-797b-4dff-a487-4bb76450bfa8
+		summarizeBy: none
+		sourceColumn: BI_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: f6517a43-5dc1-426e-9ef0-184cea49562e
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: e44225ac-0be9-4333-af93-8aac238aa38f
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de création'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 6c634f7a-9fb9-42b7-a7cc-3b12271e80de
+		summarizeBy: none
+		sourceColumn: Date de création
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Type
+		dataType: string
+		lineageTag: 3193f07f-31c2-4901-83b6-70ef55d046cf
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Type d''Intervention'
+		dataType: string
+		lineageTag: 0e2a605a-fb39-4dde-9204-c863fc55d141
+		summarizeBy: none
+		sourceColumn: Type d'Intervention
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Compte Rendu'
+		dataType: string
+		lineageTag: 856cb529-f1f6-4e80-9671-c77b169888c6
+		summarizeBy: none
+		sourceColumn: Compte Rendu
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Signataire Client'
+		dataType: string
+		lineageTag: 456fde4d-9e8d-4d8f-ac9d-423812bf6863
+		summarizeBy: none
+		sourceColumn: Signataire Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valider par un responsable'
+		dataType: int64
+		formatString: 0
+		lineageTag: ba67b827-1543-4832-b40c-fb6252e16947
+		summarizeBy: sum
+		sourceColumn: Valider par un responsable
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Intervention réalisé en'
+		dataType: string
+		lineageTag: ad636818-18c5-4381-bb88-fcb77ed536ac
+		summarizeBy: none
+		sourceColumn: Intervention réalisé en
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facturation
+		dataType: string
+		lineageTag: 02181489-e797-4b26-85a4-361895e667c7
+		summarizeBy: none
+		sourceColumn: Facturation
+
+		annotation SummarizationSetBy = Automatic
+
+	column Secteur
+		dataType: string
+		lineageTag: 3a860873-5e6e-4bdb-8cbe-c5f8f10b039d
+		summarizeBy: none
+		sourceColumn: Secteur
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Informations Demande Client'
+		dataType: string
+		lineageTag: 933b30fe-668e-4b61-b2ce-1c5a460d7249
+		summarizeBy: none
+		sourceColumn: Informations Demande Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Compte rendu preventif'
+		dataType: string
+		lineageTag: 10ce5c3d-3c45-461d-9028-761862f8d61b
+		summarizeBy: none
+		sourceColumn: Compte rendu preventif
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numéro Client'
+		dataType: string
+		lineageTag: 5e38e701-33bb-4d84-8bb6-6b09f526c185
+		summarizeBy: none
+		sourceColumn: Numéro Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Notes Pour Le Technicien'
+		dataType: string
+		lineageTag: 2be280a3-6c5d-401a-a795-d4e6eee92d37
+		summarizeBy: none
+		sourceColumn: Notes Pour Le Technicien
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Temps en heures'
+		dataType: double
+		formatString: 0
+		lineageTag: 073fa26b-10c4-45ae-a4ae-68cc2498940a
+		summarizeBy: sum
+		sourceColumn: Temps en heures
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numéro de BI'
+		dataType: string
+		lineageTag: 2a6d55d7-b065-426f-80cf-7f5e8eae7467
+		summarizeBy: none
+		sourceColumn: Numéro de BI
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Demande de devis'
+		dataType: string
+		lineageTag: b2a17f3c-e3d0-4ba7-b346-5ef4f92d0f8c
+		summarizeBy: none
+		sourceColumn: Demande de devis
+
+		annotation SummarizationSetBy = Automatic
+
+	column BISigneE
+		dataType: string
+		lineageTag: 08ec5f1d-2f2b-4778-985a-344b5bc1f932
+		summarizeBy: none
+		sourceColumn: BISigneE
+
+		annotation SummarizationSetBy = Automatic
+
+	column AttachementSigne
+		dataType: string
+		lineageTag: 206a2e1b-c0b8-4ef5-9b76-ccdba7d6bd73
+		summarizeBy: none
+		sourceColumn: AttachementSigne
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateSignatureNC
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5cf5d929-73c9-422c-97eb-5794ca034c9c
+		summarizeBy: none
+		sourceColumn: DateSignatureNC
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Constat d''arrivée'
+		dataType: string
+		lineageTag: 6a0049e9-b564-407f-862c-30dcc7953ec1
+		summarizeBy: none
+		sourceColumn: Constat d'arrivée
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pièces à remplacer'
+		dataType: string
+		lineageTag: b701d22e-6e55-4230-8192-350dbfd1911c
+		summarizeBy: none
+		sourceColumn: Pièces à remplacer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Signature
+		dataType: string
+		lineageTag: 2db42666-ae0d-4bef-848f-832976bce5e8
+		summarizeBy: none
+		sourceColumn: Signature
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de fin d''Intervention'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5df1b919-6d9c-498b-b751-22788b33432c
+		summarizeBy: none
+		sourceColumn: Date de fin d'Intervention
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition 'Tab_Bons d''Intervention_Tickets' = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/3fad2c09-c681-4a18-bc26-7da3c3040cc1",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "Mw+CH+JqJFkiDjFW2ky3H82aNmF7K0ZoYfueCIIaa+uQ9YB8dTI7fqAR0+XA4JsD1FjrfmB424hQPcle1UdHJPf2sUqAZI2z1czeF7svwec="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    BonsDIntervention_Sheet = Source{[Item="BonsDIntervention",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(BonsDIntervention_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"BonsDIntervention_ID", type text}, {"Description", type text}, {"Status", type text}, {"DateDeCreAtion", type date}, {"Type", type text}, {"TypeDIntervention", type text}, {"AncienDevis", type any}, {"CommandeClient", type any}, {"AncienDevis_1", Int64.Type}, {"Intitule", type any}, {"Take5", type any}, {"CompteRendu", type text}, {"Termine", Int64.Type}, {"CommentairesInternes", type text}, {"SignataireClient", type text}, {"SignatureClient", type any}, {"ValideParUnResponsable", Int64.Type}, {"Intervention_1", type text}, {"Facturation", type text}, {"Secteur", type text}, {"FourniturePrixEnFCFP", type text}, {"TypeDEQuipements", type any}, {"NumeRoClient", type text}, {"InformationsDeFacturation", type any}, {"ProbleMeDeFacturation", type any}, {"InformationImportanteEric", type any}, {"NotesPourLeTechnicien", type text}, {"TempsPasseEnHeure_1", type number}, {"NumeRoDeBI_1", Int64.Type}, {"NbrInterventions", Int64.Type}, {"NbrTechPlanifie", Int64.Type}, {"DemandeDeDevisReAlise", type text}, {"BISigneE", type text}, {"AttachementSigne", type text}, {"DateSignatureFR", type datetime}, {"DateSignatureNC", type datetime}, {"RapportClassique", Int64.Type}, {"RapportFANC", Int64.Type}, {"ConstatDArrive", type text}, {"PieCesARemplacer", type text}}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Type modifié",{{"BonsDIntervention_ID", "BI_ID"}, {"FourniturePrixEnFCFP", "InformationsDemandeClient"}, {"DateHeureBITermineNC", "DateHeureDeFinDInterventionNC"}}),
+				    #"Requête -> Ajout BI Maintenance" = Table.Combine({#"Colonnes renommées", #"Tab_Bons d'Intervention_Maintenance"}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Requête -> Ajout BI Maintenance",{"AncienDevis", "CommandeClient", "AncienDevis_1", "Intitule", "Take5", "CommentairesInternes", "SignatureClient", "TypeDEQuipements", "InformationsDeFacturation", "ProbleMeDeFacturation", "InformationImportanteEric", "NbrInterventions", "NbrTechPlanifie", "DateSignatureFR", "RapportClassique", "RapportFANC", "Priorite", "Termine", "DateHeureBITermineFR"}),
+				    #"Filtre Statut -> Terminer OU Cloturer" = Table.SelectRows(#"Colonnes supprimées", each ([Status] <> null and [Status] <> "AFaire")),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"Filtre Statut -> Terminer OU Cloturer",{{"CommentaireGeNeRal", type text}, {"NumeRoDeBI_1", type text}, {"DateHeureDeFinDInterventionNC", type date}}),
+				    #"Col conditionnel -> Signature" = Table.AddColumn(#"Type modifié1", "Signature", each if [AttachementSigne] = "SigneE" then "OUI" else if [AttachementSigne] = "NonSigneE" then "NON" else if [AttachementSigne] = "OUI" then "OUI" else if [AttachementSigne] = "NON" then "NON" else [AttachementSigne], type text),
+				    #"Filtre Signature -> OUI" = Table.SelectRows(#"Col conditionnel -> Signature", each ([Signature] = "OUI")),
+				    #"Valeur Type d'intervention" = Table.ReplaceValue(
+				    Table.ReplaceValue(
+				        #"Filtre Signature -> OUI",
+				        "EnHeureOuvre",
+				        "Heures Ouvrables",
+				        Replacer.ReplaceText,
+				        {"Intervention_1"}
+				    ),
+				    "EnAstreinte",
+				    "Astreinte",
+				    Replacer.ReplaceText,
+				    {"Intervention_1"}
+				),
+				    #"Type -> Preventif" = Table.ReplaceValue(#"Valeur Type d'intervention","PreVentif","Préventif",Replacer.ReplaceText,{"Type"}),
+				    #"Colonnes renommées1" = Table.RenameColumns(#"Type -> Preventif",{{"DateDeCreAtion", "Date de création"}, {"TypeDIntervention", "Type d'Intervention"}, {"CompteRendu", "Compte Rendu"}, {"SignataireClient", "Signataire Client"}, {"ValideParUnResponsable", "Valider par un responsable"}, {"Intervention_1", "Intervention réalisé en"}, {"InformationsDemandeClient", "Informations Demande Client"}, {"CommentaireGeNeRal", "Compte rendu preventif"}, {"NumeRoClient", "Numéro Client"}, {"NotesPourLeTechnicien", "Notes Pour Le Technicien"}, {"TempsPasseEnHeure_1", "Temps en heures"}, {"NumeRoDeBI_1", "Numéro de BI"}, {"DemandeDeDevisReAlise", "Demande de devis"}, {"ConstatDArrive", "Constat d'arrivée"}, {"PieCesARemplacer", "Pièces à remplacer"}, {"DateHeureDeFinDInterventionNC", "Date de fin d'Intervention"}})
+				in
+				    #"Colonnes renommées1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

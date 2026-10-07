@@ -1,0 +1,47 @@
+table Rel_Ticket->BI
+	lineageTag: 2d7d1f91-cf35-480c-9c78-adab36e49cd9
+
+	column BonsDIntervention_ID
+		dataType: string
+		lineageTag: bd9dd156-f083-44ed-a25c-bb0de8b341fc
+		summarizeBy: none
+		sourceColumn: BonsDIntervention_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DemandeDInterventionSolutionTertiaire_ID
+		dataType: string
+		lineageTag: e22b20b5-0e30-4cc9-b4bb-9c674b61133a
+		summarizeBy: none
+		sourceColumn: DemandeDInterventionSolutionTertiaire_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Rel_Ticket->BI = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/3fad2c09-c681-4a18-bc26-7da3c3040cc1",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "Mw+CH+JqJFkiDjFW2ky3H82aNmF7K0ZoYfueCIIaa+uQ9YB8dTI7fqAR0+XA4JsD1FjrfmB424hQPcle1UdHJPf2sUqAZI2z1czeF7svwec="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    #"Rel_Bon d'interventi_Sheet" = Source{[Item="Rel_Bon d'interventi",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Bon d'interventi_Sheet", [PromoteAllScalars=true]),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"En-têtes promus",{{"BonsDIntervention_ID", type text}, {"DemandeDInterventionSolutionTertiaire_ID", type text}})
+				in
+				    #"Type modifié1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

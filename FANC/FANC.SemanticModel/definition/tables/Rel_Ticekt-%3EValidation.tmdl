@@ -1,0 +1,46 @@
+table Rel_Ticekt->Validation
+	lineageTag: 670e41f6-bbc8-4819-b0d1-81d8ee6c6b30
+
+	column Column1
+		dataType: string
+		lineageTag: ac82c62c-832f-40a5-b5fa-b074307d2f20
+		summarizeBy: none
+		sourceColumn: Column1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Column2
+		dataType: string
+		lineageTag: 45c57190-6ff2-44c7-8441-7a27f5671000
+		summarizeBy: none
+		sourceColumn: Column2
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Rel_Ticekt->Validation = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/3fad2c09-c681-4a18-bc26-7da3c3040cc1",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "Mw+CH+JqJFkiDjFW2ky3H82aNmF7K0ZoYfueCIIaa+uQ9YB8dTI7fqAR0+XA4JsD1FjrfmB424hQPcle1UdHJPf2sUqAZI2z1czeF7svwec="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    #"Rel_Validation Ticke_Sheet" = Source{[Item="Rel_Validation Ticke",Kind="Sheet"]}[Data],
+				    #"Type modifié" = Table.TransformColumnTypes(#"Rel_Validation Ticke_Sheet",{{"Column1", type text}, {"Column2", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

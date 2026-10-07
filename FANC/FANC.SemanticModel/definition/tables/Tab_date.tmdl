@@ -1,0 +1,203 @@
+table Tab_date
+	lineageTag: 8281c7c3-8389-47a3-b682-4494c8b6d6aa
+
+	column Date
+		formatString: Short Date
+		lineageTag: bc4c2a98-89be-4636-a2b9-5749490be96e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Date classique'
+		lineageTag: b72e5fd2-1eb4-4c7d-8134-0a2bca2b5884
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date classique]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Année
+		formatString: 0
+		lineageTag: c3045af5-975f-4611-8621-2ab0f7700387
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Année]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mois Num'
+		formatString: 0
+		lineageTag: 45f43edc-e647-475f-8e04-e49087430e80
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mois Num]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Jour
+		formatString: 0
+		lineageTag: 7ed209e3-488c-47fb-95e5-6e691cba2a42
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Jour]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Année Mois'
+		lineageTag: b3f31127-0962-43fa-beaa-3e7cc53be47f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Année Mois]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mois Nom'
+		lineageTag: 7a3ab83b-0e1a-41f7-9feb-8a9633ca2a9b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mois Nom]
+		sortByColumn: 'Mois Num'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mois Court'
+		lineageTag: c9d1961d-62dc-4304-be2c-33115c6cb1b7
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Mois Court]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimestre
+		lineageTag: 98a87928-7b6d-41ed-b804-7d25190cc7de
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Trimestre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Semaine Num'
+		formatString: 0
+		lineageTag: 25d272bf-5d83-4f00-b950-5b5bc0fd6efd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Semaine Num]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Semaine ISO'
+		lineageTag: a4117843-984b-4076-9ef5-8e85e8231efd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Semaine ISO]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Année-Semaine ISO'
+		lineageTag: e689075d-95d1-4a8f-995d-1c5348a295df
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Année-Semaine ISO]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Jour Semaine Num'
+		formatString: 0
+		lineageTag: cc8dcc51-4e84-405d-a186-e538aa7f770a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Jour Semaine Num]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Jour Semaine Nom'
+		lineageTag: c63cf289-e51e-401c-8fe3-22961a1c2a16
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Jour Semaine Nom]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Jour Ouvré'
+		lineageTag: 44bfeddc-7eb9-4001-9f8e-6a298178ace5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Jour Ouvré]
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCurrentWeek
+		formatString: 0
+		lineageTag: 44601ba4-389e-4cb0-9515-0bfaf897f38d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [IsCurrentWeek]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tab_date = calculated
+		mode: import
+		source =
+				
+				VAR MinDate = DATE(2024,1,1)
+				VAR MaxDate = EOMONTH(TODAY(), 0)
+				RETURN
+				ADDCOLUMNS (
+				    CALENDAR ( MinDate, MaxDate ),
+				
+				    "Date classique",
+				        LOWER(FORMAT([Date], "ddd")) & UNICHAR(10) &
+				        FORMAT([Date], "dd mmmm"),
+				
+				    // 🔹 Base
+				    "Année", YEAR ( [Date] ),
+				    "Mois Num", MONTH ( [Date] ),
+				    "Jour", DAY ( [Date] ),
+				
+				    // 🔹 Formats utiles
+				    "Année Mois", FORMAT ( [Date], "YYYYMM" ),
+				    "Mois Nom", FORMAT ( [Date], "MMMM" ),
+				    "Mois Court", FORMAT ( [Date], "MMM" ),
+				
+				    // 🔹 Trimestre
+				    "Trimestre", "T" & FORMAT ( [Date], "Q" ),
+				
+				    // 🔹 Semaine
+				    "Semaine Num", WEEKNUM ( [Date], 2 ),
+				    "Semaine ISO", "W" & FORMAT(WEEKNUM ([Date], 21 ), "00"),
+				
+				    // 🔹 Année + semaine ISO
+				    "Année-Semaine ISO",
+				        VAR An = YEAR ( [Date] )
+				        VAR Sem = WEEKNUM ( [Date], 2 )
+				        VAR SemISO = WEEKNUM ( [Date], 21 )
+				        RETURN
+				            IF (
+				                SemISO < 5 && Sem > 50, An + 1,
+				                IF ( SemISO > 50 && Sem < 5, An - 1, An )
+				            )
+				            & "-W" & FORMAT ( SemISO, "00" ),
+				
+				    // 🔹 Jour semaine
+				    "Jour Semaine Num", WEEKDAY ( [Date], 2 ),
+				    "Jour Semaine Nom", FORMAT ( [Date], "dddd" ),
+				
+				    // 🔹 Week-end / ouvré
+				    "Jour Ouvré",
+				        IF ( WEEKDAY ( [Date], 2 ) <= 5, "Ouvré", "Week-end" ),
+				    "IsCurrentWeek",
+				    VAR TodayDate = TODAY()
+				    VAR CurrentYearWeek =
+				        YEAR(TodayDate) * 100 + WEEKNUM(TodayDate, 2)
+				    VAR RowYearWeek =
+				        YEAR([Date]) * 100 + WEEKNUM([Date], 2)
+				    RETURN
+				    IF(RowYearWeek = CurrentYearWeek, 1, 0)
+				)
+
+	annotation PBI_Id = 8e5d692687c14e59b15ae3d9950a01d4
+

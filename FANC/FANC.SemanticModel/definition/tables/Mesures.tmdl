@@ -1,0 +1,94 @@
+table Mesures
+	lineageTag: bddd7e0f-13e6-45fe-a4a7-30ff00cc32c6
+
+	measure 'Nb Tickets' =
+			
+			COUNTROWS(Tab_Tickets)
+		formatString: 0
+		lineageTag: 51ae2ced-1101-4c31-8ae4-b8222fafbcc9
+
+	measure 'Nb Tickets Résolus' =
+			
+			CALCULATE(
+			    COUNTROWS(Tab_Tickets),
+			    Tab_Tickets[Statut] = "Resolu"
+			)
+		formatString: 0
+		lineageTag: 4d38f3b4-33f2-4a7f-adf2-97d8c4970edc
+
+	measure 'KPI Couleur Résolution' =
+			
+			IF(
+			    [Nb Tickets Résolus] = [Nb Tickets],
+			    "#16A34A",   -- Vert
+			    "#DC2626"    -- Rouge
+			)
+		lineageTag: 963e2b41-08ca-4442-a03f-8de3ddb564c4
+
+	measure 'Temps Moyen Intervention' =
+			
+			AVERAGE('Tab_Bons d''Intervention_Tickets'[Temps en heures])
+		lineageTag: 63bc615d-68df-4eb4-90e1-9cfe7268c2c4
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Temps Médian Intervention' =
+			
+			MEDIAN('Tab_Bons d''Intervention_Tickets'[Temps en heures])
+		lineageTag: da419fd6-2e68-4e7e-88cc-cea396cbad5e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Temps Total passé' =
+			
+			SUM('Tab_Bons d''Intervention_Tickets'[Temps en heures])
+		lineageTag: 1639de9d-0855-476f-a861-d59506453f6c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Nbr_Equipements_Critiques =
+			
+			CALCULATE(
+			    COUNTROWS('Tab_Equipements'),
+			    'Tab_Equipements'[Criticite] = "Critique"
+			)
+		formatString: 0
+		lineageTag: 6ba9b223-4e09-4536-ae49-32389a7f9a58
+
+	measure Nbr_Equipements_Arrêt =
+			
+			CALCULATE(
+			    COUNTROWS('Tab_Equipements'),
+			    'Tab_Equipements'[Statut] = "Arrêt"
+			)
+		formatString: 0
+		lineageTag: 2ac81e10-6f12-4a48-ad07-cf66b59286da
+
+	measure Nbr_Equipements_Marche_dégradée =
+			
+			CALCULATE(
+			    COUNTROWS('Tab_Equipements'),
+			    'Tab_Equipements'[Statut] = "Marche dégradée"
+			)
+		formatString: 0
+		lineageTag: f75c2cc6-4f24-43ff-8235-e6a112eec5f9
+
+	measure %_Criticité = [Nbr_Equipements_Critiques] / CALCULATE(COUNTROWS(Tab_Equipements))
+		formatString: 0\ %;-0\ %;0\ %
+		lineageTag: 39a579d1-e873-4808-85eb-21b8de0951a5
+
+	column Value
+		formatString: 0
+		lineageTag: 4d86264c-2989-471b-be7c-5909c7b37a1b
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Mesures = calculated
+		mode: import
+		source = { BLANK() }
+
+	annotation PBI_Id = baecf0641d014ad288380345a6d68d12
+

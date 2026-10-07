@@ -1,0 +1,215 @@
+table Tab_Equipements
+	lineageTag: b7a095fc-7c39-46b3-bca8-c4ebe5893b21
+
+	column EquipementsV2_ID
+		dataType: string
+		lineageTag: 0f88f226-de60-448d-9851-61624b18a134
+		summarizeBy: none
+		sourceColumn: EquipementsV2_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Local
+		dataType: string
+		lineageTag: 55c0a786-dd20-4903-b521-d9ab4e53a5a4
+		summarizeBy: none
+		sourceColumn: Local
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numéro unique'
+		dataType: string
+		lineageTag: de1d30ba-5be8-4e26-90b3-12c17e05c2c8
+		summarizeBy: none
+		sourceColumn: Numéro unique
+
+		annotation SummarizationSetBy = Automatic
+
+	column Désignation
+		dataType: string
+		lineageTag: bda34ba8-095c-4c57-9696-6615b52333fe
+		summarizeBy: none
+		sourceColumn: Désignation
+
+		annotation SummarizationSetBy = Automatic
+
+	column Marque
+		dataType: string
+		lineageTag: 43ec63d5-7958-4b7d-ba42-cbf0dc197108
+		summarizeBy: none
+		sourceColumn: Marque
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statut
+		dataType: string
+		lineageTag: 03bf3328-58cb-49a4-986e-426541d55571
+		summarizeBy: none
+		sourceColumn: Statut
+
+		annotation SummarizationSetBy = Automatic
+
+	column Criticite
+		dataType: string
+		lineageTag: 4977959c-abc0-4ced-812d-e6f7ae8142fd
+		summarizeBy: none
+		sourceColumn: Criticite
+
+		annotation SummarizationSetBy = Automatic
+
+	column Puissance
+		dataType: string
+		lineageTag: 83729d76-60fd-4796-92b3-18bae61a917c
+		summarizeBy: none
+		sourceColumn: Puissance
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numéro de série'
+		dataType: string
+		lineageTag: 2e80c648-469d-4830-a918-bc46a012def8
+		summarizeBy: none
+		sourceColumn: Numéro de série
+
+		annotation SummarizationSetBy = Automatic
+
+	column Commentaire
+		dataType: string
+		lineageTag: 38a5043a-370e-4a67-a689-bd0b1821d216
+		summarizeBy: none
+		sourceColumn: Commentaire
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mesures
+		dataType: string
+		lineageTag: b707db90-ae71-4683-b21a-b9ddd9f00484
+		summarizeBy: none
+		sourceColumn: Mesures
+
+		annotation SummarizationSetBy = Automatic
+
+	column PhotoDeLEQuipement
+		dataType: string
+		lineageTag: ae36c056-9ca1-4958-99ba-8cf16636cef6
+		summarizeBy: none
+		sourceColumn: PhotoDeLEQuipement
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e3bb3df-e3fc-4353-977d-ae940a901665
+		summarizeBy: count
+		sourceColumn: ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ActifInactifCommentaires
+		dataType: string
+		lineageTag: 08115cab-d64d-4f82-94c8-cb96d11bbd10
+		summarizeBy: none
+		sourceColumn: ActifInactifCommentaires
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateHeureDEnregistrementDeLEQuipement
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 942d8a28-fb36-449d-8503-657ffa3b89b3
+		summarizeBy: none
+		sourceColumn: DateHeureDEnregistrementDeLEQuipement
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateHeureDEnregistrementFR
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ccb88617-edec-4a75-b06d-7672255e0c57
+		summarizeBy: none
+		sourceColumn: DateHeureDEnregistrementFR
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date & Heure de dernière mise à jour'
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a5fbb9ce-e382-4042-b46b-ab2e31f7791b
+		summarizeBy: none
+		sourceColumn: Date & Heure de dernière mise à jour
+
+		annotation SummarizationSetBy = Automatic
+
+	column Entreprise
+		dataType: string
+		lineageTag: 6609198d-3140-41fb-b170-53d22a3ef031
+		summarizeBy: none
+		sourceColumn: Entreprise
+
+		annotation SummarizationSetBy = Automatic
+
+	column Site
+		dataType: string
+		lineageTag: e34f1c4d-742b-4908-b62a-7abf2f176c72
+		summarizeBy: none
+		sourceColumn: Site
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sous site'
+		dataType: string
+		lineageTag: 11f301e0-c85d-4cb8-b91c-283cddec6d87
+		summarizeBy: none
+		sourceColumn: Sous site
+
+		annotation SummarizationSetBy = Automatic
+
+	column ClientSiteNumeRoUniqueAntiDoublon
+		dataType: string
+		lineageTag: 529768db-7ae9-41c6-a21c-39d50b471959
+		summarizeBy: none
+		sourceColumn: ClientSiteNumeRoUniqueAntiDoublon
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tab_Equipements = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/eac81fae-2d68-4102-9ebe-52dbdfd36e4d",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "x3WXzw7WjLaiGwsl41kiGXcASYPp9fTbwJmmL2yRYAK6PSp1jXdQq3sCwY3rUuMYCd8Jv08wq1DztSkAWd+SbIPyNUB/HiuXyhCp3ioAoqo="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    EquipementsV2_Sheet = Source{[Item="EquipementsV2",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(EquipementsV2_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"EquipementsV2_ID", type text}, {"Local", type text}, {"NumeRoDeLEQuipement", type text}, {"DeSignationDeLEQuipement", type text}, {"MarqueDeLEQuipement", type text}, {"StatutDeLEQuipement", type text}, {"Criticite", type text}, {"PuissanceDeLEQuipement", type text}, {"NumeRoDeSeRie", type text}, {"CommentaireDeMaintenanceSurLEQuipement", type text}, {"MesuresReAliseS", type text}, {"PhotoDeLEQuipement", type text}, {"ID", Int64.Type}, {"ActifInactifCommentaires", type text}, {"DateHeureDEnregistrementDeLEQuipement", type datetime}, {"DateHeureDEnregistrementFR", type datetime}, {"DateHeureDeDernierEnregistrementDeLEQuipement", type datetime}}),
+				    #"Ajout Entreprise" = Table.NestedJoin(#"Type modifié", {"EquipementsV2_ID"}, #"Rel_Equipements->Entreprise", {"EquipementsV2_ID"}, "Rel_Equipements->Entreprise", JoinKind.LeftOuter),
+				    #"Rel_Equipements->Entreprise développé" = Table.ExpandTableColumn(#"Ajout Entreprise", "Rel_Equipements->Entreprise", {"Nom"}, {"Rel_Equipements->Entreprise.Nom"}),
+				    #"Ajouter Site" = Table.NestedJoin(#"Rel_Equipements->Entreprise développé", {"EquipementsV2_ID"}, #"Rel_Equipements->Sites", {"EquipementsV2_ID"}, "Rel_Equipements->Sites", JoinKind.LeftOuter),
+				    #"Rel_Equipements->Sites développé" = Table.ExpandTableColumn(#"Ajouter Site", "Rel_Equipements->Sites", {"Site"}, {"Rel_Equipements->Sites.Site"}),
+				    #"Ajout sous site" = Table.NestedJoin(#"Rel_Equipements->Sites développé", {"EquipementsV2_ID"}, #"Rel_Equipements->SousSites", {"EquipementsV2_ID"}, "Rel_Equipements->SousSites", JoinKind.LeftOuter),
+				    #"Rel_Equipements->SousSites développé" = Table.ExpandTableColumn(#"Ajout sous site", "Rel_Equipements->SousSites", {"Sous site"}, {"Rel_Equipements->SousSites.Sous site"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Rel_Equipements->SousSites développé",{{"Rel_Equipements->Entreprise.Nom", "Entreprise"}, {"Rel_Equipements->Sites.Site", "Site"}, {"Rel_Equipements->SousSites.Sous site", "Sous site"}, {"NumeRoDeLEQuipement", "Numéro unique"}, {"DeSignationDeLEQuipement", "Désignation"}, {"MarqueDeLEQuipement", "Marque"}, {"StatutDeLEQuipement", "Statut"}, {"PuissanceDeLEQuipement", "Puissance"}, {"NumeRoDeSeRie", "Numéro de série"}, {"CommentaireDeMaintenanceSurLEQuipement", "Commentaire"}, {"MesuresReAliseS", "Mesures"}, {"DateHeureDeDernierEnregistrementDeLEQuipement", "Date & Heure de dernière mise à jour"}}),
+				    #"Doublons supprimés" = Table.Distinct(#"Colonnes renommées", {"EquipementsV2_ID"}),
+				    #"Valeur remplacée" = Table.ReplaceValue(#"Doublons supprimés","NonCritique","Non Critique",Replacer.ReplaceText,{"Criticite"}),
+				    #"Valeur remplacée1" = Table.ReplaceValue(#"Valeur remplacée","EnMarche","En Marche",Replacer.ReplaceText,{"Statut"}),
+				    #"Valeur remplacée2" = Table.ReplaceValue(#"Valeur remplacée1","ArreT","Arrêt",Replacer.ReplaceText,{"Statut"}),
+				    #"Valeur remplacée3" = Table.ReplaceValue(#"Valeur remplacée2","MarcheDeGradeE","Marche dégradée",Replacer.ReplaceText,{"Statut"})
+				in
+				    #"Valeur remplacée3"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

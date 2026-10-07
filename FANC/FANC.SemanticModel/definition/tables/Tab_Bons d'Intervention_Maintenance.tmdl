@@ -1,0 +1,335 @@
+table 'Tab_Bons d''Intervention_Maintenance'
+	isHidden
+	lineageTag: b846d36e-8083-4e85-88a3-7665ed88f91f
+
+	column BI_ID
+		dataType: string
+		isHidden
+		lineageTag: 7042b043-ec78-40ea-bcf9-a7481ae14531
+		summarizeBy: none
+		sourceColumn: BI_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		isHidden
+		lineageTag: bcf75e0f-2640-4d33-9780-c06da243b561
+		summarizeBy: none
+		sourceColumn: Description
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		isHidden
+		lineageTag: 2106e7a8-d766-4f3e-9bbc-5340d1b4edd9
+		summarizeBy: none
+		sourceColumn: Status
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeRoDeBI_1
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 93d39453-6f1a-40bc-adb7-7d5b967e3ecb
+		summarizeBy: sum
+		sourceColumn: NumeRoDeBI_1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateDeCreAtion
+		dataType: dateTime
+		isHidden
+		formatString: Short Date
+		lineageTag: a0602f4e-c353-4547-8451-fd398961fb13
+		summarizeBy: none
+		sourceColumn: DateDeCreAtion
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Type
+		dataType: string
+		isHidden
+		lineageTag: 59a72ef1-ce4c-4afd-9c26-b6393264aeec
+		summarizeBy: none
+		sourceColumn: Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column InformationsDemandeClient
+		dataType: string
+		isHidden
+		lineageTag: 0845338c-e655-4856-a04d-f9f05f2f9f69
+		summarizeBy: none
+		sourceColumn: InformationsDemandeClient
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Priorite
+		dataType: string
+		isHidden
+		lineageTag: 67fc057e-c258-4afb-8001-3e810510509c
+		summarizeBy: none
+		sourceColumn: Priorite
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TypeDIntervention
+		dataType: string
+		isHidden
+		lineageTag: 755e1af9-5274-4ce8-b42c-514c7c1f2263
+		summarizeBy: none
+		sourceColumn: TypeDIntervention
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompteRendu
+		dataType: string
+		isHidden
+		lineageTag: 1e95bb80-7a31-4e87-88b8-ffac236808af
+		summarizeBy: none
+		sourceColumn: CompteRendu
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CommentairesInternes
+		dataType: string
+		isHidden
+		lineageTag: 2eed42d1-f12b-4a40-92d9-29f14236f478
+		summarizeBy: none
+		sourceColumn: CommentairesInternes
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SignataireClient
+		dataType: string
+		isHidden
+		lineageTag: cd8e81e1-01c9-4aed-8a17-0aac28a055f2
+		summarizeBy: none
+		sourceColumn: SignataireClient
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ValideParUnResponsable
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f2584737-bb31-478b-9740-0cd5b6c526f4
+		summarizeBy: sum
+		sourceColumn: ValideParUnResponsable
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Intervention_1
+		dataType: string
+		isHidden
+		lineageTag: b4d5bf8b-4807-428a-90e9-058d3360a692
+		summarizeBy: none
+		sourceColumn: Intervention_1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facturation
+		dataType: string
+		isHidden
+		lineageTag: 4372d37f-9909-402a-bc12-3d8fd29f7ea3
+		summarizeBy: none
+		sourceColumn: Facturation
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Secteur
+		dataType: string
+		isHidden
+		lineageTag: e4f0888b-33d3-4e5d-8030-fa92ba03a302
+		summarizeBy: none
+		sourceColumn: Secteur
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeRoClient
+		dataType: string
+		isHidden
+		lineageTag: 9dce2f59-eec6-4c6d-b683-6d579607dc27
+		summarizeBy: none
+		sourceColumn: NumeRoClient
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column InformationsDeFacturation
+		dataType: string
+		isHidden
+		lineageTag: 2c111fbb-5215-4ad4-9b8d-d2416cb9b103
+		summarizeBy: none
+		sourceColumn: InformationsDeFacturation
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProbleMeDeFacturation
+		dataType: string
+		isHidden
+		lineageTag: fd156214-ca79-4609-8e1b-4e8240743264
+		summarizeBy: none
+		sourceColumn: ProbleMeDeFacturation
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column InformationImportanteEric
+		dataType: string
+		isHidden
+		lineageTag: f0536d87-cb91-4b1a-ba42-02c6617f0cf0
+		summarizeBy: none
+		sourceColumn: InformationImportanteEric
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BISigneE
+		dataType: string
+		isHidden
+		lineageTag: f65a3da3-3661-419d-a1a5-f8296c37e2b3
+		summarizeBy: none
+		sourceColumn: BISigneE
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AttachementSigne
+		dataType: string
+		isHidden
+		lineageTag: d0757080-3d70-459e-916b-efb40f81252b
+		summarizeBy: none
+		sourceColumn: AttachementSigne
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TempsPasseEnHeure_1
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2f10423d-c501-4678-a5f4-22fdd4c317e6
+		summarizeBy: sum
+		sourceColumn: TempsPasseEnHeure_1
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DemandeDeDevisReAlise
+		dataType: string
+		isHidden
+		lineageTag: 6e343715-127f-4337-b1de-c403687ce03c
+		summarizeBy: none
+		sourceColumn: DemandeDeDevisReAlise
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CommentaireGeNeRal
+		dataType: string
+		isHidden
+		lineageTag: c673a363-336f-47dd-b619-57c8d7a00f97
+		summarizeBy: none
+		sourceColumn: CommentaireGeNeRal
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateSignatureNC
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a5c83be3-9658-425d-9c10-ca06afc35a53
+		summarizeBy: none
+		sourceColumn: DateSignatureNC
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateHeureDeFinDInterventionNC
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 199f3ef1-3a41-4096-bdd8-74b8e3075abd
+		summarizeBy: none
+		sourceColumn: DateHeureDeFinDInterventionNC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Tab_Bons d''Intervention_Maintenance' = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/d6c1a035-aba4-488e-8e40-e24499b26ba3",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "PmtCJuCO9kd2YV8LALTJZebodSV0rXt3Xepaq49LxDKRESZlxydxHQKlLMbN+er8K7q/fm0xHg5eqBAQ+1gGJshnJzE58WJqAzSITxChxcM="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    ExemplePlanning_Sheet = Source{[Item="ExemplePlanning",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(ExemplePlanning_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"ExemplePlanning_ID", type text}, {"Description", type text}, {"Status", type text}, {"NumeRoDeBI", Int64.Type}, {"DateDeCreAtion", type date}, {"Type", type text}, {"InformationsDemandeClient", type text}, {"Priorite", type text}, {"TypeDIntervention", type text}, {"AncienDevis", type text}, {"CommandeClient", type text}, {"AncienDevis_1", Int64.Type}, {"Intitule", type text}, {"Take5", type text}, {"CompteRendu", type text}, {"Termine", Int64.Type}, {"CommentairesInternes", type text}, {"SignataireClient", type text}, {"SignatureClient", type text}, {"ValideParUnResponsable", Int64.Type}, {"Intervention_1", type text}, {"Facturation", type text}, {"Secteur", type text}, {"TempsPasseEnHeure", type number}, {"FourniturePrixEnFCFP", Int64.Type}, {"TypeDEQuipements", type text}, {"CommentaireGeNeRal", type text}, {"NumeRoClient", type text}, {"InformationsDeFacturation", type text}, {"ProbleMeDeFacturation", type text}, {"InformationImportanteEric", type text}, {"CACCorrectif", Int64.Type}, {"CACPreVentif", Int64.Type}, {"BISigneE", type text}, {"AttachementSigneE", type text}, {"TempsPasseEnHeureAutomatique", Int64.Type}, {"NatureDevis", Int64.Type}, {"DemandeDeDevisReAlise", type text}, {"DateHeureSignatureNC", type datetime}, {"DateHeureDeFinDInterventionNC", type datetime}}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"AncienDevis", "CommandeClient", "AncienDevis_1", "Intitule", "Take5", "Termine", "SignatureClient", "TempsPasseEnHeure", "FourniturePrixEnFCFP", "TypeDEQuipements", "CACCorrectif", "CACPreVentif", "NatureDevis", "DateHeureSignatureFR", "CACFANC", "DateHeureDeFinDIntervention"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Colonnes supprimées",{{"ExemplePlanning_ID", "BI_ID"}, {"AttachementSigneE", "AttachementSigne"}, {"TempsPasseEnHeureAutomatique", "TempsPasseEnHeure_1"}, {"NumeRoDeBI", "NumeRoDeBI_1"}, {"DateHeureSignatureNC", "DateSignatureNC"}})
+				in
+				    #"Colonnes renommées"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

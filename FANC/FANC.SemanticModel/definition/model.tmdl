@@ -1,0 +1,48 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		fastCombine
+		legacyRedirects
+		returnErrorValuesAsNull
+
+/// Erreurs dans les requêtes qui ont été chargées sur 07/10/2026 14:48:15.
+queryGroup 'Erreurs des requêtes – 07/10/2026 14:48:15'
+
+	annotation PBI_QueryGroupOrder = 0
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["Tab_Tickets","Tab_Entreprise","Tab_Sites","Tab_Bons d'Intervention_Tickets","Tab_Horraires","Tab_Validation ticket","Rel_Ticket->Entreprise","Rel_Ticekt->Validation","Rel_Ticket->Sites","Rel_Ticket->BI","Rel_BI->Entreprise","Rel_BI->Sites","Tab_SousSites","Tab_Equipements","Rel_Equipements->SousSites","Rel_Equipements->Sites","Rel_Equipements->Entreprise","Tab_Bons d'Intervention_Maintenance","Tab_Entreprise_Historique","Tab_Site_Historique","Rel_Horraires_BI_Historique","Rel_BI->Site_Historique","Rel_BI->Entreprise_Historique","Erreurs dans Tab_Entreprise"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Tab_Tickets
+ref table Tab_Entreprise
+ref table Rel_Ticket->Entreprise
+ref table Tab_Sites
+ref table 'Tab_Bons d''Intervention_Tickets'
+ref table Tab_Horraires
+ref table 'Tab_Validation ticket'
+ref table Rel_Ticekt->Validation
+ref table Tab_date
+ref table Mesures
+ref table Rel_Ticket->Sites
+ref table Rel_Ticket->BI
+ref table 'Tab_Bons d''Intervention_Maintenance'
+ref table Tab_Entreprise_Historique
+ref table Tab_Site_Historique
+ref table Rel_Horraires_BI_Historique
+ref table Rel_BI->Site_Historique
+ref table Rel_BI->Entreprise
+ref table Rel_BI->Sites
+ref table Rel_BI->Entreprise_Historique
+ref table Tab_Equipements
+ref table Tab_SousSites
+ref table Rel_Equipements->SousSites
+ref table Rel_Equipements->Sites
+ref table Rel_Equipements->Entreprise
+
+ref cultureInfo fr-FR
+

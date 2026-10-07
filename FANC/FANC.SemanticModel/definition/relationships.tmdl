@@ -1,0 +1,69 @@
+relationship e1c6fe87-4ce1-a2e1-baf3-cb83d5993eeb
+	fromColumn: Tab_Horraires.BonsDIntervention_ID
+	toColumn: 'Tab_Bons d''Intervention_Tickets'.BI_ID
+
+relationship 46ec2918-0786-5b4e-8e8d-0cb31dc2d67e
+	isActive: false
+	fromColumn: Rel_Ticket->Entreprise.Clients_ID
+	toColumn: Tab_Entreprise.Clients_ID
+
+relationship a9fd9d0b-54bc-20b1-e6be-5cb3846b4b59
+	fromColumn: Tab_Tickets.Ticket_ID
+	toColumn: Rel_Ticket->Entreprise.DemandeDInterventionSolutionTertiaire_ID
+
+relationship AutoDetected_7245cfa2-804a-41ac-afda-eb37622802f4
+	isActive: false
+	fromColumn: Rel_Ticket->Sites.AgencesClients_ID
+	toColumn: Tab_Sites.Sites_ID
+
+relationship 823ad7ba-f5f8-c210-7372-9bc987b1c3f1
+	fromColumn: Tab_Tickets.Ticket_ID
+	toColumn: Rel_Ticket->Sites.DemandeDInterventionSolutionTertiaire_ID
+
+relationship 492186b0-e308-0627-7fda-abf84e5dd11b
+	fromColumn: Rel_Ticket->BI.DemandeDInterventionSolutionTertiaire_ID
+	toColumn: Tab_Tickets.Ticket_ID
+
+relationship 3aab4a2d-a266-9fe4-91de-44fa4e5ce480
+	fromColumn: 'Tab_Bons d''Intervention_Tickets'.BI_ID
+	toColumn: Rel_Ticket->BI.BonsDIntervention_ID
+
+relationship AutoDetected_95dcbb19-0e26-4f27-95b8-e12a0e895320
+	fromColumn: Rel_BI->Entreprise.Clients_ID
+	toColumn: Tab_Entreprise.Clients_ID
+
+relationship 53cd2945-29de-7cf9-5ae4-bd4b1d9a4a28
+	crossFilteringBehavior: bothDirections
+	fromColumn: Rel_BI->Sites.AgencesClients_ID
+	toColumn: Tab_Sites.Sites_ID
+
+relationship 9cc405ac-daf1-6e11-f5f5-abd38215dfec
+	crossFilteringBehavior: bothDirections
+	fromColumn: Rel_BI->Entreprise.BonsDIntervention_ID
+	toColumn: 'Tab_Bons d''Intervention_Tickets'.BI_ID
+
+relationship a18d2a08-4d01-6d01-ced0-e3cfde74eb1f
+	crossFilteringBehavior: bothDirections
+	fromColumn: Rel_BI->Sites.BonsDIntervention_ID
+	toColumn: 'Tab_Bons d''Intervention_Tickets'.BI_ID
+
+relationship 76d67cd6-4e23-daf5-a2e0-c9dd9bfee271
+	fromColumn: 'Tab_Bons d''Intervention_Tickets'.'Date de création'
+	toColumn: Tab_date.Date
+
+relationship 4a9ff743-4c1a-b560-1030-cdeaf4d4b620
+	crossFilteringBehavior: bothDirections
+	fromColumn: Rel_Equipements->Sites.EquipementsV2_ID
+	toColumn: Tab_Equipements.EquipementsV2_ID
+
+relationship 77d46d23-e4ba-464f-12f2-2440664958dd
+	crossFilteringBehavior: bothDirections
+	fromColumn: Rel_Equipements->SousSites.EquipementsV2_ID
+	toColumn: Tab_Equipements.EquipementsV2_ID
+
+relationship AutoDetected_c443db8c-59e9-4089-bf2f-834115473783
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Rel_Equipements->Entreprise.EquipementsV2_ID
+	toColumn: Tab_Equipements.EquipementsV2_ID
+

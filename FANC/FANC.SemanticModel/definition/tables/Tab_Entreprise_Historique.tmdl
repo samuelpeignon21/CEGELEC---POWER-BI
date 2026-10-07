@@ -1,0 +1,59 @@
+table Tab_Entreprise_Historique
+	isHidden
+	lineageTag: c8f1aae3-ccd8-4969-819e-9df0c267b0c5
+
+	column Clients_ID
+		dataType: string
+		isHidden
+		lineageTag: 0b2a8872-949b-43f5-ba8f-9dec563bf053
+		summarizeBy: none
+		sourceColumn: Clients_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nom
+		dataType: string
+		isHidden
+		lineageTag: 5fcf5151-23f7-4de3-95f1-7e0a9495f5c9
+		summarizeBy: none
+		sourceColumn: Nom
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tab_Entreprise_Historique = m
+		mode: import
+		source =
+				let
+				    Source =
+				        Excel.Workbook(
+				            Web.Contents(
+				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/d6c1a035-aba4-488e-8e40-e24499b26ba3",
+				                [
+				                    Headers = [
+				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
+				                        client_secret = "PmtCJuCO9kd2YV8LALTJZebodSV0rXt3Xepaq49LxDKRESZlxydxHQKlLMbN+er8K7q/fm0xHg5eqBAQ+1gGJshnJzE58WJqAzSITxChxcM="
+				                    ]
+				                ]
+				            ),
+				            null,
+				            true
+				        ),
+				    TEEPEE_Entreprise_Sheet = Source{[Item="TEEPEE_Entreprise",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(TEEPEE_Entreprise_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"TEEPEE_Entreprise_ID", type text}, {"Nom", type text}, {"TeLePhone", type text}, {"Fax", type text}, {"Email", type text}, {"Web", type text}, {"Adresse", type text}, {"CodePostal", Int64.Type}, {"Ville", type text}, {"Pays", type text}, {"IdentifiantEntreprise", type text}, {"MatriculeClientCodex", type text}, {"AdresseLivraison", type text}, {"VilleLivraison", type text}, {"CodePostalLivraison", Int64.Type}, {"PaysLivraison", type text}, {"LAdresseDeLivraisonEstIdentiqueALAdresseDeFacturation", Int64.Type}, {"Statut", type text}, {"LOGOCLIENT", type text}, {"Email_1", type text}, {"Email_2", type text}, {"ProcessDeFacturation", type text}, {"MailSignatureBI", type text}, {"TauxHorairesTech", Int64.Type}, {"TauxHorairesRT", Int64.Type}, {"DePlacements", Int64.Type}, {"TypeDeContrat", type any}, {"SignatureBI", type text}, {"MailSignatureBI_1", type text}}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"AdresseLivraison", "VilleLivraison", "CodePostalLivraison", "PaysLivraison", "LAdresseDeLivraisonEstIdentiqueALAdresseDeFacturation", "LOGOCLIENT", "Email_1", "Email_2", "ProcessDeFacturation", "Email", "Adresse", "CodePostal", "Ville", "Pays", "MailSignatureBI", "TauxHorairesTech", "TypeDeContrat", "TauxHorairesRT", "DePlacements", "SignatureBI", "MailSignatureBI_1", "TeLePhone", "Fax", "Web", "Statut", "MatriculeClientCodex", "IdentifiantEntreprise"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Colonnes supprimées",{{"TEEPEE_Entreprise_ID", "Clients_ID"}}),
+				    #"Lignes filtrées" = Table.SelectRows(#"Colonnes renommées", each ([Nom] = "FANC"))
+				in
+				    #"Lignes filtrées"
+
+	changedProperty = IsHidden
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
