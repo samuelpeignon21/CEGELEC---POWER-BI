@@ -27,8 +27,8 @@ table Rel_BI->Sites
 				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/cd13bb30-6453-4ef0-94d8-384d5583c75d",
 				                [
 				                    Headers = [
-				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
-				                        client_secret = "TUvS8OG8xb1D5ndf/jZVW4s1k22EPvV38UULp+YHTuQOjJ7mqOWMrgANFmGhdQoeAK17v2JyU3R93bWmGZnWAMspRE8zQPvFfBTQsQx7uMI="
+				                        client_id = "<CLIENT_ID_A_RENSEIGNER>",
+				                        client_secret = "<CLIENT_SECRET_A_RENSEIGNER>"
 				                    ]
 				                ]
 				            ),

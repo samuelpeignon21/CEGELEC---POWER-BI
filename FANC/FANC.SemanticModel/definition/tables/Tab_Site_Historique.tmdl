@@ -61,8 +61,8 @@ table Tab_Site_Historique
 				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/d6c1a035-aba4-488e-8e40-e24499b26ba3",
 				                [
 				                    Headers = [
-				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
-				                        client_secret = "PmtCJuCO9kd2YV8LALTJZebodSV0rXt3Xepaq49LxDKRESZlxydxHQKlLMbN+er8K7q/fm0xHg5eqBAQ+1gGJshnJzE58WJqAzSITxChxcM="
+				                        client_id = "<CLIENT_ID_A_RENSEIGNER>",
+				                        client_secret = "<CLIENT_SECRET_A_RENSEIGNER>"
 				                    ]
 				                ]
 				            ),
