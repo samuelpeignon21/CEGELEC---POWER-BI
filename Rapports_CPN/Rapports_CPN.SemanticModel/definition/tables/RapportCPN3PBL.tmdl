@@ -1,0 +1,227 @@
+table RapportCPN3PBL
+	lineageTag: 648e8b06-3eb8-4379-a581-f3031dd2637c
+
+	measure 'Temps total (min) 3PBL' =
+			
+			SUMX (
+			    RapportCPN3PBL,
+			    HOUR ( RapportCPN3PBL[Temps] ) * 60
+			        + MINUTE ( RapportCPN3PBL[Temps] )
+			)
+		formatString: 0
+		lineageTag: e030e5be-d771-498e-a37e-7136b30012ac
+
+	measure 'Temps moyen (min) 3PBL' =
+			
+			AVERAGEX (
+			    RapportCPN3PBL,
+			    HOUR ( RapportCPN3PBL[Temps] ) * 60
+			        + MINUTE ( RapportCPN3PBL[Temps] )
+			)
+		lineageTag: 3b6a0e95-a15d-4cce-ae64-ff7150f60e82
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Temps total 3PBL' =
+			
+			VAR m = ROUND ( [Temps total (min) 3PBL], 0 )
+			RETURN
+			    FORMAT ( INT ( m / 60 ), "0" ) & " h " & FORMAT ( MOD ( m, 60 ), "00" )
+		lineageTag: d757403b-94f2-4914-97ed-85ee35d62cb3
+
+	measure 'Temps moyen 3PBL' =
+			
+			VAR m = ROUND ( [Temps moyen (min) 3PBL], 0 )
+			RETURN
+			    FORMAT ( INT ( m / 60 ), "0" ) & " h " & FORMAT ( MOD ( m, 60 ), "00" )
+		lineageTag: feef48de-4131-42c9-b223-edbc7777c964
+
+	column RapportCPN3PBL_ID
+		dataType: string
+		lineageTag: 5dec8aa5-9d5e-4597-85d6-da1d500e265f
+		summarizeBy: none
+		sourceColumn: RapportCPN3PBL_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateHeureDArriveE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: fff9ca12-54f3-4c7d-9697-515849ed5ccc
+		summarizeBy: none
+		sourceColumn: DateHeureDArriveE
+
+		variation Variation
+			isDefault
+			relationship: 43c794a8-d4c1-4097-803a-4e0b2e05cccc
+			defaultHierarchy: LocalDateTable_e3adfef1-4811-4135-8e9a-02aa95d27193.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateHeureFin
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a82cf161-1781-43ea-a48e-e8ff4c3e2679
+		summarizeBy: none
+		sourceColumn: DateHeureFin
+
+		variation Variation
+			isDefault
+			relationship: a89b220e-3937-4ab8-8e16-be4c4f366c1b
+			defaultHierarchy: LocalDateTable_c4268811-de8f-4c12-8ef8-ef31beb1f866.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type_3PBL
+		dataType: string
+		lineageTag: cf7c6950-2a46-4823-b66b-98ec26016155
+		summarizeBy: none
+		sourceColumn: Type_3PBL
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rapport
+		dataType: string
+		lineageTag: e4ef7a94-4997-482f-8139-3ee1a3913bc0
+		summarizeBy: none
+		sourceColumn: Rapport
+
+		annotation SummarizationSetBy = Automatic
+
+	column SignatureClient
+		dataType: string
+		lineageTag: 652ca99a-b1b0-4030-8c25-aad3caf74d06
+		summarizeBy: none
+		sourceColumn: SignatureClient
+
+		annotation SummarizationSetBy = Automatic
+
+	column NomSignataireClient
+		dataType: string
+		lineageTag: 5d3dfbec-c898-4a95-a4d0-ede89b2cf3c6
+		summarizeBy: none
+		sourceColumn: NomSignataireClient
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeRoDeRapport
+		dataType: int64
+		formatString: 0
+		lineageTag: c475e27a-9db1-4bbb-a311-f3976926fe7c
+		summarizeBy: sum
+		sourceColumn: NumeRoDeRapport
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompteRendu
+		dataType: string
+		lineageTag: ce2ff482-2c91-40c7-918f-a133505df014
+		summarizeBy: none
+		sourceColumn: CompteRendu
+
+		annotation SummarizationSetBy = Automatic
+
+	column AEnvoyer
+		dataType: int64
+		formatString: 0
+		lineageTag: ab50e9de-c5f7-4bc8-bf23-a75b117de2c8
+		summarizeBy: sum
+		sourceColumn: AEnvoyer
+
+		annotation SummarizationSetBy = Automatic
+
+	column HeureDAppelAstreinte
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 958b9cef-5518-4f9e-b54e-04f48d8c4814
+		summarizeBy: none
+		sourceColumn: HeureDAppelAstreinte
+
+		variation Variation
+			isDefault
+			relationship: 144ef977-638e-4fc6-8590-5c3b747cd66e
+			defaultHierarchy: LocalDateTable_8f229d58-c0c1-4bc9-bc73-d88711f9b229.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column CommentairesInterne
+		dataType: string
+		lineageTag: ee0f6643-69b3-4854-8d4b-d92122ddedbf
+		summarizeBy: none
+		sourceColumn: CommentairesInterne
+
+		annotation SummarizationSetBy = Automatic
+
+	column HeureDeDeBut1
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 20089006-3cf6-4895-842f-75831be3a6fe
+		summarizeBy: none
+		sourceColumn: HeureDeDeBut1
+
+		variation Variation
+			isDefault
+			relationship: 0606b45c-466e-4d92-be23-52eb522191e1
+			defaultHierarchy: LocalDateTable_9c16cffa-3fd2-40a1-8ec0-c2e41d459d27.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nom Prenom'
+		dataType: string
+		lineageTag: 04473ec3-7539-452c-ab8d-e2799af672d5
+		summarizeBy: none
+		sourceColumn: Nom Prenom
+
+		annotation SummarizationSetBy = Automatic
+
+	column Temps
+		dataType: dateTime
+		formatString: hh:nn
+		lineageTag: 10a86ea0-0cf8-4ca1-af68-48c4b798fdeb
+		summarizeBy: none
+		sourceColumn: Temps
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column DateArriver
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 751a56bb-5855-46bf-83f8-9ac364822bff
+		summarizeBy: none
+		sourceColumn: DateArriver
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition RapportCPN3PBL = m
+		mode: import
+		queryGroup: 3PBL
+		source =
+				let
+				    Source = Excel.Workbook(Web.Contents("https://safeplace.teepee.fr/source/api/powerbi/getfile/fadba461-7b27-4b3c-ab11-7f0ed4da7891", [Headers=[Client_Id="<CLIENT_ID_A_RENSEIGNER>", Client_Secret="<CLIENT_SECRET_A_RENSEIGNER>"]]), null, true),
+				    RapportCPN3PBL_Sheet = Source{[Item="RapportCPN3PBL",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(RapportCPN3PBL_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"RapportCPN3PBL_ID", type text}, {"DateHeureDArriveE", type datetime}, {"DateHeureDArriveE_1", type datetime}, {"Type", type text}, {"Rapport", type text}, {"SignatureClient", type any}, {"NomSignataireClient", type text}, {"NumeRoDeRapport", Int64.Type}, {"CompteRendu", type text}, {"AEnvoyer", Int64.Type}, {"HeureDAppelAstreinte", type datetime}, {"CommentairesInterne", type any}, {"HeureDeDeBut1", type datetime}}),
+				    #"Requêtes fusionnées" = Table.NestedJoin(#"Type modifié", {"RapportCPN3PBL_ID"}, #"Rel_utilisateur (3)", {"RapportCPN3PBL_ID"}, "Rel_utilisateur (3)", JoinKind.LeftOuter),
+				    #"Rel_utilisateur (3) développé" = Table.ExpandTableColumn(#"Requêtes fusionnées", "Rel_utilisateur (3)", {"Nom Prenom"}, {"Nom Prenom"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Rel_utilisateur (3) développé",{{"DateHeureDArriveE_1", "DateHeureFin"}}),
+				    #"Personnalisée ajoutée" = Table.AddColumn(#"Colonnes renommées", "Personnalisé", each Time.From(Number.Abs(Number.From([DateHeureFin] - [DateHeureDArriveE])))),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"Personnalisée ajoutée",{{"Personnalisé", type time}}),
+				    #"Erreurs supprimées" = Table.RemoveRowsWithErrors(#"Type modifié1", {"Personnalisé"}),
+				    #"Colonnes renommées1" = Table.RenameColumns(#"Erreurs supprimées",{{"Personnalisé", "Temps"}}),
+				    #"Duplication de la colonne" = Table.DuplicateColumn(#"Colonnes renommées1", "DateHeureDArriveE", "DateHeureDArriveE - Copier"),
+				    #"Colonnes renommées2" = Table.RenameColumns(#"Duplication de la colonne",{{"DateHeureDArriveE - Copier", "DateArriver"}}),
+				    #"Type modifié2" = Table.TransformColumnTypes(#"Colonnes renommées2",{{"DateArriver", type date}}),
+				    #"Colonnes renommées3" = Table.RenameColumns(#"Type modifié2",{{"Type", "Type_3PBL"}})
+				in
+				    #"Colonnes renommées3"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

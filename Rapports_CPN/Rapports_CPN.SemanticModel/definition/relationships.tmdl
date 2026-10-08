@@ -1,0 +1,72 @@
+relationship 8af3ad84-01d4-4282-b7cd-aa15e1b8463e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: RapportCPNVideO.DateHeureDArriveE
+	toColumn: LocalDateTable_9c5c947b-0b88-4647-93b6-52d2e486aa57.Date
+
+relationship 9a7bd37f-bcc2-4fee-9950-2de32488a9e3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: RapportCPNVideO.DateHeureFin
+	toColumn: LocalDateTable_2378fccd-677b-46b2-ab9c-81b9362bf8bd.Date
+
+relationship 6c1ec552-4d87-4a9e-8772-d6dc381c3ba2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: RapportCPNVideO.HeureDAppelAstreinte
+	toColumn: LocalDateTable_d3d55912-4212-4ec2-b7e0-7f83a1ba8961.Date
+
+relationship 06c8d356-7921-449c-a02c-e30a91a857fa
+	joinOnDateBehavior: datePartOnly
+	fromColumn: RapportCPNVideO.DatedeBut1
+	toColumn: LocalDateTable_421e0b4e-9715-426e-8c43-23c8a4dbd94e.Date
+
+relationship 241b0aae-7a48-4ebc-ac88-25269a5e7e1c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: RapportCPNAntiIntrus.DateHeureDArriveE
+	toColumn: LocalDateTable_dc08c3fa-eb20-47de-8478-b32db3edc034.Date
+
+relationship a114debe-4c6b-4380-8083-0268d96efdfe
+	joinOnDateBehavior: datePartOnly
+	fromColumn: RapportCPNAntiIntrus.DateHeureFin
+	toColumn: LocalDateTable_c3f21add-25bd-4257-bb70-0c82d97176b9.Date
+
+relationship 2eb78ed1-62b4-4570-96fb-bf45bc83b943
+	joinOnDateBehavior: datePartOnly
+	fromColumn: RapportCPNAntiIntrus.HeureDAppelAstreinte
+	toColumn: LocalDateTable_12ea4d05-6d16-4327-9131-261c2d83156d.Date
+
+relationship dd391c85-8621-47c5-b070-08738e13a679
+	joinOnDateBehavior: datePartOnly
+	fromColumn: RapportCPNAntiIntrus.DateDeBut1
+	toColumn: LocalDateTable_4f24c02e-9c53-421b-ac70-e6e4c028a92a.Date
+
+relationship 43c794a8-d4c1-4097-803a-4e0b2e05cccc
+	joinOnDateBehavior: datePartOnly
+	fromColumn: RapportCPN3PBL.DateHeureDArriveE
+	toColumn: LocalDateTable_e3adfef1-4811-4135-8e9a-02aa95d27193.Date
+
+relationship a89b220e-3937-4ab8-8e16-be4c4f366c1b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: RapportCPN3PBL.DateHeureFin
+	toColumn: LocalDateTable_c4268811-de8f-4c12-8ef8-ef31beb1f866.Date
+
+relationship 144ef977-638e-4fc6-8590-5c3b747cd66e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: RapportCPN3PBL.HeureDAppelAstreinte
+	toColumn: LocalDateTable_8f229d58-c0c1-4bc9-bc73-d88711f9b229.Date
+
+relationship 0606b45c-466e-4d92-be23-52eb522191e1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: RapportCPN3PBL.HeureDeDeBut1
+	toColumn: LocalDateTable_9c16cffa-3fd2-40a1-8ec0-c2e41d459d27.Date
+
+relationship e3cecb33-8460-0b68-ec2d-76b6172fa730
+	fromColumn: RapportCPN3PBL.DateArriver
+	toColumn: TAB_Date.Date
+
+relationship d9d7a569-0486-54cf-783c-477fd58bebf4
+	fromColumn: RapportCPNVideO.Datearrivee
+	toColumn: TAB_Date.Date
+
+relationship fcb394c6-77fc-de01-7a88-cadec7023021
+	fromColumn: RapportCPNAntiIntrus.'Date arriver'
+	toColumn: TAB_Date.Date
+

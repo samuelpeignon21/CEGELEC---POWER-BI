@@ -1,0 +1,84 @@
+expression Rel_utilisateur =
+		let
+		    Source = Excel.Workbook(Web.Contents("https://safeplace.teepee.fr/source/api/powerbi/getfile/8f2005d1-a476-473f-a589-39e9e0d6ab3e", [Headers=[Client_Id="<CLIENT_ID_A_RENSEIGNER>", Client_Secret="<CLIENT_SECRET_A_RENSEIGNER>"]]), null, true),
+		    Rel_utilisateur_Sheet = Source{[Item="Rel_utilisateur",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_utilisateur_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"RapportCPNVideO_ID", type text}, {"USER_ID", type text}}),
+		    #"Requêtes fusionnées" = Table.NestedJoin(#"Type modifié", {"USER_ID"}, USER, {"USER_ID"}, "USER", JoinKind.LeftOuter),
+		    #"USER développé" = Table.ExpandTableColumn(#"Requêtes fusionnées", "USER", {"nom", "prenom", "email"}, {"USER.nom", "USER.prenom", "USER.email"}),
+		    #"Colonnes fusionnées" = Table.CombineColumns(#"USER développé",{"USER.nom", "USER.prenom"},Combiner.CombineTextByDelimiter(", ", QuoteStyle.None),"Nom Prenom")
+		in
+		    #"Colonnes fusionnées"
+	lineageTag: 9720946a-64df-4873-a42c-33d0fce8000a
+	queryGroup: VIDEO\RELATION
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression tab_AjouterDesPhotos =
+		let
+		    Source = Excel.Workbook(Web.Contents("https://safeplace.teepee.fr/source/api/powerbi/getfile/8f2005d1-a476-473f-a589-39e9e0d6ab3e", [Headers=[Client_Id="<CLIENT_ID_A_RENSEIGNER>", Client_Secret="<CLIENT_SECRET_A_RENSEIGNER>"]]), null, true),
+		    tab_AjouterDesPhotos_Sheet = Source{[Item="tab_AjouterDesPhotos",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(tab_AjouterDesPhotos_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"tab_AjouterDesPhotosALIntervention_ID", type any}, {"RapportCPNVideO_ID", type any}, {"gallery_photo", type any}})
+		in
+		    #"Type modifié"
+	lineageTag: e304288c-ccf5-4dd7-a274-89be3e73eebf
+	queryGroup: VIDEO\RELATION
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TEEPEE_ROLE =
+		let
+		    Source = Excel.Workbook(Web.Contents("https://safeplace.teepee.fr/source/api/powerbi/getfile/8f2005d1-a476-473f-a589-39e9e0d6ab3e", [Headers=[Client_Id="<CLIENT_ID_A_RENSEIGNER>", Client_Secret="<CLIENT_SECRET_A_RENSEIGNER>"]]), null, true),
+		    TEEPEE_ROLE_Sheet = Source{[Item="TEEPEE_ROLE",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(TEEPEE_ROLE_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"TEEPEE_ROLE_ID", type text}, {"nom", type text}, {"droitDeCreerDesModelesDesDonnees", Int64.Type}, {"droitDeFaireDeModifierLeMenu", Int64.Type}, {"droitAuxFiltres", Int64.Type}, {"droitGestionDesLicences", Int64.Type}, {"DroitAuxPublicForms", Int64.Type}, {"DroitGestionAdminPlanning", Int64.Type}})
+		in
+		    #"Type modifié"
+	lineageTag: 5aaf9642-e97f-4f28-ab2e-d1ce913c7a27
+	queryGroup: VIDEO\TRSF
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Rel_utilisateur (2)' =
+		let
+		    Source = Excel.Workbook(Web.Contents("https://safeplace.teepee.fr/source/api/powerbi/getfile/950558fc-66a3-4082-804d-eb77ad1bb92e", [Headers=[Client_ID="<CLIENT_ID_A_RENSEIGNER>", Client_secret="<CLIENT_SECRET_A_RENSEIGNER>"]]), null, true),
+		    Rel_utilisateur_Sheet = Source{[Item="Rel_utilisateur",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_utilisateur_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"RapportCPNAntiIntrusion_ID", type text}, {"USER_ID", type text}}),
+		    #"Requêtes fusionnées" = Table.NestedJoin(#"Type modifié", {"USER_ID"}, USER, {"USER_ID"}, "USER", JoinKind.LeftOuter),
+		    #"USER développé" = Table.ExpandTableColumn(#"Requêtes fusionnées", "USER", {"nom", "prenom", "email"}, {"USER.nom", "USER.prenom", "USER.email"}),
+		    #"Colonnes fusionnées" = Table.CombineColumns(#"USER développé",{"USER.nom", "USER.prenom"},Combiner.CombineTextByDelimiter(", ", QuoteStyle.None),"Nom Prenom")
+		in
+		    #"Colonnes fusionnées"
+	lineageTag: 15d5f1c6-fa14-4ea6-8409-1eadc1192957
+	queryGroup: Anti-intusion
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Rel_utilisateur (3)' =
+		let
+		    Source = Excel.Workbook(Web.Contents("https://safeplace.teepee.fr/source/api/powerbi/getfile/fadba461-7b27-4b3c-ab11-7f0ed4da7891", [Headers=[Client_Id="<CLIENT_ID_A_RENSEIGNER>", Client_Secret="<CLIENT_SECRET_A_RENSEIGNER>"]]), null, true),
+		    Rel_utilisateur_Sheet = Source{[Item="Rel_utilisateur",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_utilisateur_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"RapportCPN3PBL_ID", type text}, {"USER_ID", type text}}),
+		    #"Requêtes fusionnées" = Table.NestedJoin(#"Type modifié", {"USER_ID"}, USER, {"USER_ID"}, "USER", JoinKind.LeftOuter),
+		    #"USER développé" = Table.ExpandTableColumn(#"Requêtes fusionnées", "USER", {"nom", "prenom", "email"}, {"USER.nom", "USER.prenom", "USER.email"}),
+		    #"Colonnes fusionnées" = Table.CombineColumns(#"USER développé",{"USER.nom", "USER.prenom"},Combiner.CombineTextByDelimiter(", ", QuoteStyle.None),"Nom Prenom")
+		in
+		    #"Colonnes fusionnées"
+	lineageTag: 67ad910a-d109-4333-b29d-c234ee5f1c13
+	queryGroup: 3PBL
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

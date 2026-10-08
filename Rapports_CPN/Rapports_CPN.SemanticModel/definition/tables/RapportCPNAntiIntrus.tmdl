@@ -1,0 +1,225 @@
+table RapportCPNAntiIntrus
+	lineageTag: bed91901-3535-41f0-9004-e7b24ba64292
+
+	measure Temps_moyen(min) =
+			
+			AVERAGEX (
+			    RapportCPNAntiIntrus,
+			    HOUR ( RapportCPNAntiIntrus[Temps] ) * 60
+			        + MINUTE ( RapportCPNAntiIntrus[Temps] )
+			)
+		lineageTag: e6ef627b-3f5c-4899-acb2-eaf89c3e86af
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Temps moyen Anti-intrusion' =
+			
+			VAR m = ROUND ( [Temps_moyen(min)], 0 )
+			RETURN
+			    FORMAT ( INT ( m / 60 ), "00" ) & " h " & FORMAT ( MOD ( m, 60 ), "00" )
+		lineageTag: 2832f5e6-8170-4a9f-9c72-537fa6713566
+
+	measure 'Temps total (min)' =
+			
+			SUMX (
+			    RapportCPNAntiIntrus,
+			    HOUR ( RapportCPNAntiIntrus[Temps] ) * 60
+			        + MINUTE ( RapportCPNAntiIntrus[Temps] )
+			)
+		formatString: 0
+		lineageTag: 442aa91a-96ea-4d27-b61f-7a2f9588aed3
+
+	measure 'Temps total Anti-intrusion' =
+			
+			VAR m = [Temps total (min)]
+			RETURN
+			    FORMAT ( INT ( m / 60 ), "0" ) & " h " & FORMAT ( MOD ( m, 60 ), "00" )
+		lineageTag: 0f978fd6-ad1f-425c-9c83-b511b284e3e2
+
+	column RapportCPNAntiIntrusion_ID
+		dataType: string
+		lineageTag: 0be11cf3-1287-4a20-bad7-c2294a22da4e
+		summarizeBy: none
+		sourceColumn: RapportCPNAntiIntrusion_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateHeureDArriveE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3df8defb-fc16-4044-a81a-85a3b8840738
+		summarizeBy: none
+		sourceColumn: DateHeureDArriveE
+
+		variation Variation
+			isDefault
+			relationship: 241b0aae-7a48-4ebc-ac88-25269a5e7e1c
+			defaultHierarchy: LocalDateTable_dc08c3fa-eb20-47de-8478-b32db3edc034.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateHeureFin
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 6bbfabbe-e9c0-455e-b002-0599dc257ce7
+		summarizeBy: none
+		sourceColumn: DateHeureFin
+
+		variation Variation
+			isDefault
+			relationship: a114debe-4c6b-4380-8083-0268d96efdfe
+			defaultHierarchy: LocalDateTable_c3f21add-25bd-4257-bb70-0c82d97176b9.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type_Anti-Intru
+		dataType: string
+		lineageTag: 190f198a-773a-4fed-ad2c-68af62c675ac
+		summarizeBy: none
+		sourceColumn: Type_Anti-Intru
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rapport
+		dataType: string
+		lineageTag: 22414dcd-bae0-4de8-a0e0-861c385b2405
+		summarizeBy: none
+		sourceColumn: Rapport
+
+		annotation SummarizationSetBy = Automatic
+
+	column SignatureClient
+		dataType: string
+		lineageTag: 63e77ed1-e435-4cbf-b86e-954ccd46e260
+		summarizeBy: none
+		sourceColumn: SignatureClient
+
+		annotation SummarizationSetBy = Automatic
+
+	column NomSignataireClient
+		dataType: string
+		lineageTag: a1d86145-5a2b-40db-af75-78d237bdf47d
+		summarizeBy: none
+		sourceColumn: NomSignataireClient
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeRoDeRapport
+		dataType: int64
+		formatString: 0
+		lineageTag: 0a381a5c-d287-4420-86d0-b5d31b4b95f9
+		summarizeBy: sum
+		sourceColumn: NumeRoDeRapport
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompteRendu
+		dataType: string
+		lineageTag: 5ec54852-3dfe-4b9e-88d4-4f65cac3503a
+		summarizeBy: none
+		sourceColumn: CompteRendu
+
+		annotation SummarizationSetBy = Automatic
+
+	column AEnvoyer
+		dataType: int64
+		formatString: 0
+		lineageTag: b56657bb-c083-41aa-8be8-8a4e62646001
+		summarizeBy: sum
+		sourceColumn: AEnvoyer
+
+		annotation SummarizationSetBy = Automatic
+
+	column HeureDAppelAstreinte
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 967c8c11-654b-4deb-8b71-ec5dcfdf1b3a
+		summarizeBy: none
+		sourceColumn: HeureDAppelAstreinte
+
+		variation Variation
+			isDefault
+			relationship: 2eb78ed1-62b4-4570-96fb-bf45bc83b943
+			defaultHierarchy: LocalDateTable_12ea4d05-6d16-4327-9131-261c2d83156d.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateDeBut1
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8f4c4cef-5559-4986-8e2a-2c826e01557c
+		summarizeBy: none
+		sourceColumn: DateDeBut1
+
+		variation Variation
+			isDefault
+			relationship: dd391c85-8621-47c5-b070-08738e13a679
+			defaultHierarchy: LocalDateTable_4f24c02e-9c53-421b-ac70-e6e4c028a92a.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column CommentairesInterne
+		dataType: string
+		lineageTag: daddc537-4aa7-4917-ac19-cc8effda1c7c
+		summarizeBy: none
+		sourceColumn: CommentairesInterne
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nom Prenom'
+		dataType: string
+		lineageTag: 08022e97-3d9b-4282-bf2e-5136fb72621e
+		summarizeBy: none
+		sourceColumn: Nom Prenom
+
+		annotation SummarizationSetBy = Automatic
+
+	column Temps
+		dataType: dateTime
+		formatString: hh" h "nn
+		lineageTag: 6015a10f-0dda-43ae-a3ce-c53a4a2e79e0
+		summarizeBy: none
+		sourceColumn: Temps
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Date arriver'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: db0a4b41-69d3-4edc-b1cd-dbe2f55a179a
+		summarizeBy: none
+		sourceColumn: Date arriver
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition RapportCPNAntiIntrus = m
+		mode: import
+		queryGroup: Anti-intusion
+		source =
+				let
+				    Source = Excel.Workbook(Web.Contents("https://safeplace.teepee.fr/source/api/powerbi/getfile/950558fc-66a3-4082-804d-eb77ad1bb92e", [Headers=[Client_ID="<CLIENT_ID_A_RENSEIGNER>", Client_secret="<CLIENT_SECRET_A_RENSEIGNER>"]]), null, true),
+				    RapportCPNAntiIntrus_Sheet = Source{[Item="RapportCPNAntiIntrus",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(RapportCPNAntiIntrus_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"RapportCPNAntiIntrusion_ID", type text}, {"DateHeureDArriveE", type datetime}, {"DateHeureDArriveE_1", type datetime}, {"Type", type text}, {"Rapport", type text}, {"SignatureClient", type any}, {"NomSignataireClient", type text}, {"NumeRoDeRapport", Int64.Type}, {"CompteRendu", type text}, {"AEnvoyer", Int64.Type}, {"HeureDAppelAstreinte", type datetime}, {"DateDeBut1", type datetime}, {"CommentairesInterne", type any}}),
+				    #"Requêtes fusionnées" = Table.NestedJoin(#"Type modifié", {"RapportCPNAntiIntrusion_ID"}, #"Rel_utilisateur (2)", {"RapportCPNAntiIntrusion_ID"}, "Rel_utilisateur (2)", JoinKind.LeftOuter),
+				    #"Rel_utilisateur (2) développé" = Table.ExpandTableColumn(#"Requêtes fusionnées", "Rel_utilisateur (2)", {"Nom Prenom"}, {"Nom Prenom"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Rel_utilisateur (2) développé",{{"DateHeureDArriveE_1", "DateHeureFin"}}),
+				    #"Personnalisée ajoutée" = Table.AddColumn(#"Colonnes renommées", "Personnalisé", each Time.From(Number.Abs(Number.From([DateHeureFin] - [DateHeureDArriveE])))),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"Personnalisée ajoutée",{{"Personnalisé", type time}}),
+				    #"Colonnes renommées1" = Table.RenameColumns(#"Type modifié1",{{"Personnalisé", "Temps"}}),
+				    #"Duplication de la colonne" = Table.DuplicateColumn(#"Colonnes renommées1", "DateHeureDArriveE", "DateHeureDArriveE - Copier"),
+				    #"Type modifié2" = Table.TransformColumnTypes(#"Duplication de la colonne",{{"DateHeureDArriveE - Copier", type date}}),
+				    #"Colonnes renommées2" = Table.RenameColumns(#"Type modifié2",{{"DateHeureDArriveE - Copier", "Date arriver"}, {"Type", "Type_Anti-Intru"}})
+				in
+				    #"Colonnes renommées2"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

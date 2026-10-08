@@ -1,0 +1,137 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "b8604c165034c2d63151",
+  "position": {
+    "x": 737.22177091795288,
+    "y": 141.41348497156784,
+    "z": 3000,
+    "height": 577.09179528838342,
+    "width": 542.77822908204712,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RapportCPNAntiIntrus"
+                    }
+                  },
+                  "Property": "NumeRoDeRapport"
+                }
+              },
+              "queryRef": "Sum(RapportCPNAntiIntrus.NumeRoDeRapport)",
+              "nativeQueryRef": "NumeRoDeRapport",
+              "displayName": "ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RapportCPNAntiIntrus"
+                    }
+                  },
+                  "Property": "Date arriver"
+                }
+              },
+              "queryRef": "RapportCPNAntiIntrus.Date arriver",
+              "nativeQueryRef": "Date",
+              "displayName": "Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RapportCPNAntiIntrus"
+                    }
+                  },
+                  "Property": "Rapport"
+                }
+              },
+              "queryRef": "RapportCPNAntiIntrus.Rapport",
+              "nativeQueryRef": "Rapport"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RapportCPNAntiIntrus"
+                    }
+                  },
+                  "Property": "Temps"
+                }
+              },
+              "queryRef": "RapportCPNAntiIntrus.Temps",
+              "nativeQueryRef": "Temps",
+              "displayName": "Durée"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "RapportCPNAntiIntrus"
+                  }
+                },
+                "Property": "NumeRoDeRapport"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "356.5660190210214D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "RapportCPNAntiIntrus.Rapport"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "83.66849773107236D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "RapportCPNAntiIntrus.Date arriver"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
