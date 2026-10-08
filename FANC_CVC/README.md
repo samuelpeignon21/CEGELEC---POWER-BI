@@ -1,4 +1,4 @@
-# FANC – Suivi de la maintenance CVC
+# FANC_CVC – Suivi de la maintenance CVC
 
 Projet Power BI (format **PBIP**, éditable sous Power BI Desktop) qui suit l'activité de maintenance **CVC** (chauffage, ventilation, climatisation) réalisée pour le client **FANC** : interventions correctives, interventions préventives et parc d'équipements.
 
@@ -19,7 +19,7 @@ Les techniciens saisissent leurs bons d'intervention (BI) et les clients leurs d
 | **Rapport d'activités préventives CVC** | Segments (année, site), cartes (nombre de BI, temps total passé, temps moyen), histogramme par site, tableau (compte rendu préventif, dates de création et de fin, description, numéro de BI) |
 | **Parc Équipements** | Segments site / sous-site, cartes de synthèse (équipements critiques, à l'arrêt, en marche dégradée, % de criticité), tableau du parc (local, désignation, marque, puissance, n° de série, statut, criticité, mesures, commentaire) |
 
-## Modèle de données (`FANC.SemanticModel`)
+## Modèle de données (`FANC_CVC.SemanticModel`)
 
 Les données sont importées (mode *Import*) depuis des fichiers Excel exposés par l'API Power BI de **safeplace.teepee.fr** (`Web.Contents` avec en-têtes `client_id` / `client_secret`, 23 requêtes).
 
@@ -72,15 +72,15 @@ Schéma en étoile autour de `Tab_Bons d'Intervention_Tickets` : tickets ↔ BI 
 ## Structure du dossier
 
 ```
-FANC/
-├── FANC.pbip              # Fichier projet à ouvrir dans Power BI Desktop
-├── FANC.Report/           # Définition du rapport (pages, visuels, thème Storm, logo)
-└── FANC.SemanticModel/    # Modèle sémantique (tables, mesures, relations, requêtes M)
+FANC_CVC/
+├── FANC_CVC.pbip              # Fichier projet à ouvrir dans Power BI Desktop
+├── FANC_CVC.Report/           # Définition du rapport (pages, visuels, thème Storm, logo)
+└── FANC_CVC.SemanticModel/    # Modèle sémantique (tables, mesures, relations, requêtes M)
 ```
 
 ## Ouvrir le projet
 
-1. Ouvrir `FANC.pbip` avec Power BI Desktop (fonction *Projets Power BI* activée).
+1. Ouvrir `FANC_CVC.pbip` avec Power BI Desktop (fonction *Projets Power BI* activée).
 2. Renseigner les identifiants d'accès : les valeurs `<CLIENT_ID_A_RENSEIGNER>` et `<CLIENT_SECRET_A_RENSEIGNER>` des requêtes sont des placeholders (voir ci-dessous).
 3. Actualiser les données.
 
