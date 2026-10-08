@@ -1,89 +1,89 @@
-# FANC_CVC – Suivi de la maintenance CVC
+# FANC_CVC – HVAC maintenance tracking
 
-Projet Power BI (format **PBIP**, éditable sous Power BI Desktop) qui suit l'activité de maintenance **CVC** (chauffage, ventilation, climatisation) réalisée pour le client **FANC** : interventions correctives, interventions préventives et parc d'équipements.
+Power BI project (**PBIP** format, editable in Power BI Desktop) that tracks **HVAC** (heating, ventilation, air conditioning) maintenance activity carried out for the client **FANC**: corrective interventions, preventive interventions and the equipment fleet.
 
-## Objectif
+## Purpose
 
-Les techniciens saisissent leurs bons d'intervention (BI) et les clients leurs demandes (tickets) dans la plateforme Teepee / SafePlace. Ce rapport rassemble ces données pour :
+Technicians enter their intervention orders (*bons d'intervention*, BI) and clients enter their requests (tickets) in the Teepee / SafePlace platform. This report gathers that data in order to:
 
-- **Mesurer l'activité** : nombre de bons d'intervention, temps total, moyen et médian passé ;
-- **Suivre les correctifs et les préventifs** par année, trimestre, mois et site ;
-- **Consulter le détail** de chaque intervention (compte rendu, constat d'arrivée, pièces à remplacer…) ;
-- **Surveiller le parc d'équipements** : criticité, équipements à l'arrêt ou en marche dégradée.
+- **Measure activity**: number of intervention orders, total, average and median time spent;
+- **Track corrective and preventive work** by year, quarter, month and site;
+- **Browse the details** of each intervention (report, arrival findings, parts to replace…);
+- **Monitor the equipment fleet**: criticality, equipment stopped or running in degraded mode.
 
-## Contenu du rapport (3 pages, 1280×720, thème *Storm*)
+## Report content (3 pages, 1280×720, *Storm* theme)
 
-| Page | Contenu |
+| Page | Content |
 |---|---|
-| **Rapport d'activités correctives CVC** | Segments (année, trimestre, numéro de BI, numéro client, « intervention réalisée en »), cartes (nombre de BI, temps moyen, temps médian), histogramme du nombre de BI par mois, barres par site, tableau détaillé (compte rendu, constat d'arrivée, pièces à remplacer, informations de la demande client…) |
-| **Rapport d'activités préventives CVC** | Segments (année, site), cartes (nombre de BI, temps total passé, temps moyen), histogramme par site, tableau (compte rendu préventif, dates de création et de fin, description, numéro de BI) |
-| **Parc Équipements** | Segments site / sous-site, cartes de synthèse (équipements critiques, à l'arrêt, en marche dégradée, % de criticité), tableau du parc (local, désignation, marque, puissance, n° de série, statut, criticité, mesures, commentaire) |
+| **Rapport d'activités correctives CVC** (corrective HVAC activity) | Slicers (year, quarter, BI number, client number, "intervention carried out in"), cards (number of BIs, average time, median time), column chart of BIs per month, bars per site, detailed table (report, arrival findings, parts to replace, client request information…) |
+| **Rapport d'activités préventives CVC** (preventive HVAC activity) | Slicers (year, site), cards (number of BIs, total time spent, average time), column chart per site, table (preventive report, creation and end dates, description, BI number) |
+| **Parc Équipements** (equipment fleet) | Site / sub-site slicers, summary cards (critical equipment, stopped, degraded mode, % criticality), fleet table (room, designation, brand, power, serial number, status, criticality, measurements, comment) |
 
-## Modèle de données (`FANC_CVC.SemanticModel`)
+## Data model (`FANC_CVC.SemanticModel`)
 
-Les données sont importées (mode *Import*) depuis des fichiers Excel exposés par l'API Power BI de **safeplace.teepee.fr** (`Web.Contents` avec en-têtes `client_id` / `client_secret`, 23 requêtes).
+Data is imported (*Import* mode) from Excel files exposed by the Power BI API of **safeplace.teepee.fr** (`Web.Contents` with `client_id` / `client_secret` headers, 23 queries).
 
-### Tables principales (`Tab_*`)
+### Main tables (`Tab_*`)
 
-| Table | Rôle |
+| Table | Role |
 |---|---|
-| `Tab_Tickets` | Demandes d'intervention (motif, statut, priorité, dates de création/résolution, demandeur…) |
-| `Tab_Bons d'Intervention_Tickets` | **Table de faits centrale** : bons d'intervention correctifs et préventifs (type, compte rendu, signature client, temps en heures…) |
-| `Tab_Bons d'Intervention_Maintenance` | BI issus du module maintenance, ajoutés à la table précédente |
-| `Tab_Horraires` | Horaires saisis par BI (début, fin, temps en heures) |
-| `Tab_Equipements` | Parc d'équipements (désignation, marque, statut, criticité, puissance…) enrichi de l'entreprise, du site et du sous-site |
-| `Tab_Entreprise`, `Tab_Sites`, `Tab_SousSites` | Référentiels clients, sites et sous-sites |
-| `Tab_Validation ticket` | Validation des tickets par le client |
-| `Tab_date` | Calendrier calculé en DAX (de 2024-01-01 à fin du mois courant) : année, mois, trimestre, semaine ISO, jour ouvré, semaine courante |
-| `Mesures` | Table vide qui regroupe les mesures DAX |
+| `Tab_Tickets` | Intervention requests (reason, status, priority, creation/resolution dates, requester…) |
+| `Tab_Bons d'Intervention_Tickets` | **Central fact table**: corrective and preventive intervention orders (type, report, client signature, time in hours…) |
+| `Tab_Bons d'Intervention_Maintenance` | BIs from the maintenance module, appended to the table above |
+| `Tab_Horraires` | Working hours entered per BI (start, end, time in hours) |
+| `Tab_Equipements` | Equipment fleet (designation, brand, status, criticality, power…) enriched with company, site and sub-site |
+| `Tab_Entreprise`, `Tab_Sites`, `Tab_SousSites` | Client, site and sub-site reference tables |
+| `Tab_Validation ticket` | Ticket validation by the client |
+| `Tab_date` | Calendar computed in DAX (from 2024-01-01 to the end of the current month): year, month, quarter, ISO week, working day, current week |
+| `Mesures` | Empty table that groups the DAX measures |
 
-### Tables de liaison et d'historique
+### Link and history tables
 
-- `Rel_Ticket->Entreprise`, `Rel_Ticket->Sites`, `Rel_Ticket->BI`, `Rel_Ticekt->Validation` : relations ticket ↔ entreprise / site / BI / validation ;
-- `Rel_BI->Entreprise`, `Rel_BI->Sites` : relations BI ↔ entreprise / site ;
-- `Rel_Equipements->Entreprise|Sites|SousSites` : relations équipement ↔ entreprise / site / sous-site ;
-- `Tab_Entreprise_Historique`, `Tab_Site_Historique`, `Rel_Horraires_BI_Historique`, `Rel_BI->…_Historique` : **données de l'ancien système**, ajoutées (`Table.Combine`) aux tables actuelles pour conserver l'historique. L'historique entreprise est filtré sur le client « FANC ».
+- `Rel_Ticket->Entreprise`, `Rel_Ticket->Sites`, `Rel_Ticket->BI`, `Rel_Ticekt->Validation`: ticket ↔ company / site / BI / validation relations;
+- `Rel_BI->Entreprise`, `Rel_BI->Sites`: BI ↔ company / site relations;
+- `Rel_Equipements->Entreprise|Sites|SousSites`: equipment ↔ company / site / sub-site relations;
+- `Tab_Entreprise_Historique`, `Tab_Site_Historique`, `Rel_Horraires_BI_Historique`, `Rel_BI->…_Historique`: **data from the legacy system**, appended (`Table.Combine`) to the current tables to keep the history. The company history is filtered on the client "FANC".
 
-### Transformations Power Query
+### Power Query transformations
 
-- Renommage et typage des colonnes, suppression des colonnes inutiles ;
-- Fusion des BI « tickets » et « maintenance » (`Table.Combine`) ;
-- **Filtres métier** : on ne garde que les BI dont le statut n'est ni vide ni « À faire », **et** dont la signature client est « OUI » (colonne calculée à partir du champ de signature) ;
-- Colonne conditionnelle pour distinguer les BI préventifs ;
-- Horaires : suppression des valeurs aberrantes de `TempsEnHeure` (négatives, nulles ou démesurées) ;
-- Équipements : jointures successives avec entreprise, site et sous-site ;
-- Requête `Erreurs dans Tab_Entreprise` : requête de diagnostic générée par Power BI (lignes en erreur).
+- Column renaming and typing, removal of unused columns;
+- Merge of "ticket" BIs and "maintenance" BIs (`Table.Combine`);
+- **Business filters**: only BIs whose status is neither empty nor "À faire" (to do) **and** whose client signature is "OUI" (yes) are kept (column derived from the signature field);
+- Conditional column to identify preventive BIs;
+- Working hours: removal of outlier `TempsEnHeure` values (negative, zero or unreasonably large);
+- Equipment: successive joins with company, site and sub-site;
+- `Erreurs dans Tab_Entreprise` query: diagnostic query generated by Power BI (rows in error).
 
-### Relations
+### Relationships
 
-Schéma en étoile autour de `Tab_Bons d'Intervention_Tickets` : tickets ↔ BI via `Rel_Ticket->BI`, BI ↔ sites/entreprises via les tables `Rel_BI->…`, `Tab_date` reliée à la date de création des BI, équipements reliés à leur entreprise/site/sous-site. Certaines relations sont en filtrage bidirectionnel, d'autres inactives (`Rel_Ticket->Entreprise`, `Rel_Ticket->Sites`).
+Star schema around `Tab_Bons d'Intervention_Tickets`: tickets ↔ BIs through `Rel_Ticket->BI`, BIs ↔ sites/companies through the `Rel_BI->…` tables, `Tab_date` linked to the BI creation date, equipment linked to its company/site/sub-site. Some relationships use bidirectional filtering; others are inactive (`Rel_Ticket->Entreprise`, `Rel_Ticket->Sites`).
 
-### Mesures DAX (table `Mesures`)
+### DAX measures (`Mesures` table)
 
-| Mesure | Définition |
+| Measure | Definition |
 |---|---|
-| `Nb Tickets` / `Nb Tickets Résolus` | Nombre de tickets / tickets au statut « Resolu » |
-| `KPI Couleur Résolution` | Vert si tous les tickets sont résolus, rouge sinon (mise en forme conditionnelle) |
-| `Temps Total passé` / `Temps Moyen Intervention` / `Temps Médian Intervention` | Somme, moyenne, médiane de `Temps en heures` |
-| `Nbr_Equipements_Critiques` | Équipements de criticité « Critique » |
-| `Nbr_Equipements_Arrêt` / `Nbr_Equipements_Marche_dégradée` | Équipements à l'arrêt / en marche dégradée |
-| `%_Criticité` | Part d'équipements critiques dans le parc |
+| `Nb Tickets` / `Nb Tickets Résolus` | Number of tickets / tickets with status "Resolu" (resolved) |
+| `KPI Couleur Résolution` | Green if all tickets are resolved, red otherwise (conditional formatting) |
+| `Temps Total passé` / `Temps Moyen Intervention` / `Temps Médian Intervention` | Sum, average, median of `Temps en heures` |
+| `Nbr_Equipements_Critiques` | Equipment with criticality "Critique" |
+| `Nbr_Equipements_Arrêt` / `Nbr_Equipements_Marche_dégradée` | Equipment stopped / running in degraded mode |
+| `%_Criticité` | Share of critical equipment in the fleet |
 
-## Structure du dossier
+## Folder structure
 
 ```
 FANC_CVC/
-├── FANC_CVC.pbip              # Fichier projet à ouvrir dans Power BI Desktop
-├── FANC_CVC.Report/           # Définition du rapport (pages, visuels, thème Storm, logo)
-└── FANC_CVC.SemanticModel/    # Modèle sémantique (tables, mesures, relations, requêtes M)
+├── FANC_CVC.pbip              # Project file to open in Power BI Desktop
+├── FANC_CVC.Report/           # Report definition (pages, visuals, Storm theme, logo)
+└── FANC_CVC.SemanticModel/    # Semantic model (tables, measures, relationships, M queries)
 ```
 
-## Ouvrir le projet
+## Opening the project
 
-1. Ouvrir `FANC_CVC.pbip` avec Power BI Desktop (fonction *Projets Power BI* activée).
-2. Renseigner les identifiants d'accès : les valeurs `<CLIENT_ID_A_RENSEIGNER>` et `<CLIENT_SECRET_A_RENSEIGNER>` des requêtes sont des placeholders (voir ci-dessous).
-3. Actualiser les données.
+1. Open `FANC_CVC.pbip` with Power BI Desktop (*Power BI Projects* feature enabled).
+2. Fill in the access credentials: the values `<CLIENT_ID_A_RENSEIGNER>` and `<CLIENT_SECRET_A_RENSEIGNER>` ("to be filled in") in the queries are placeholders (see below).
+3. Refresh the data.
 
-## Sécurité
+## Security
 
-Les requêtes contenaient en clair des `client_id` / `client_secret` de l'API Teepee (plusieurs jeux de clés selon les sources). Ils ont été **remplacés par des placeholders** dans la version actuelle du dépôt. Attention : ils restent visibles dans l'**historique Git** des commits précédents. Il est donc recommandé de **les régénérer côté Teepee**, puis de les stocker dans des paramètres Power BI ou la passerelle de données plutôt que dans le code M.
+The queries used to contain the Teepee API `client_id` / `client_secret` in clear text (several key sets depending on the source). They were **replaced by placeholders** in the current version of the repository. Note that they remain visible in the **Git history** of earlier commits, so it is recommended to **regenerate them in Teepee**, then store them in Power BI parameters or in the data gateway rather than in the M code.

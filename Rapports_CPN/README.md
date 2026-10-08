@@ -1,71 +1,71 @@
-# Rapports CPN – Suivi des interventions d'astreinte
+# Rapports_CPN – On-call intervention tracking
 
-Projet Power BI (format **PBIP**, éditable sous Power BI Desktop) qui suit et analyse les **interventions d'astreinte CPN** de Cegelec, réalisées sur trois domaines techniques.
+Power BI project (**PBIP** format, editable in Power BI Desktop) that tracks and analyses Cegelec's **CPN on-call interventions** across three technical domains.
 
-## Objectif
+## Purpose
 
-Les techniciens saisissent un rapport après chaque intervention d'astreinte (application Teepee / SafePlace). Ce rapport Power BI les centralise afin de :
+After each on-call intervention, technicians fill in a report (Teepee / SafePlace application). This Power BI report centralises those reports in order to:
 
-- **Compter** le nombre d'interventions par mois et par année ;
-- **Mesurer** le temps passé (total et moyen) par domaine ;
-- **Consulter** le détail de chaque rapport (date, numéro, temps, contenu du rapport).
+- **Count** the number of interventions per month and per year;
+- **Measure** the time spent (total and average) per domain;
+- **Browse** the details of each report (date, number, time, report content).
 
-## Contenu du rapport (3 pages, 1280×720)
+## Report content (3 pages, 1280×720)
 
-| Page | Domaine | Contenu |
+| Page | Domain | Content |
 |---|---|---|
-| `Astreinte_Anti-Intrusion` | Anti-intrusion | Interventions sur les systèmes anti-intrusion |
-| `Astreinte_3PBL` | 3PBL | Interventions 3PBL |
-| `Astreinte_VIDEO` | Vidéo | Interventions sur les systèmes vidéo |
+| `Astreinte_Anti-Intrusion` | Anti-intrusion | Interventions on anti-intrusion systems |
+| `Astreinte_3PBL` | 3PBL | 3PBL interventions |
+| `Astreinte_VIDEO` | Video | Interventions on video systems |
 
-Chaque page a la même structure :
+(*Astreinte* = on call.) Every page has the same structure:
 
-1. **Segment (filtre) Année**, issu de la table de dates ;
-2. **Cartes** : temps total et temps moyen d'intervention (format `X h XX`) ;
-3. **Histogramme** : nombre de rapports par mois ;
-4. **Tableau** : date d'arrivée, numéro de rapport, temps et rapport.
+1. **Year slicer**, based on the date table;
+2. **Cards**: total and average intervention time (`X h XX` format);
+3. **Column chart**: number of reports per month;
+4. **Table**: arrival date, report number, time and report text.
 
-## Modèle de données (`Rapports_CPN.SemanticModel`)
+## Data model (`Rapports_CPN.SemanticModel`)
 
-Les données sont importées (mode *Import*) depuis des fichiers Excel exposés par l'API Power BI de **safeplace.teepee.fr** (`Web.Contents` avec en-têtes `Client_Id` / `Client_Secret`).
+Data is imported (*Import* mode) from Excel files exposed by the Power BI API of **safeplace.teepee.fr** (`Web.Contents` with `Client_Id` / `Client_Secret` headers).
 
-| Table | Rôle |
+| Table | Role |
 |---|---|
-| `RapportCPNAntiIntrus` | Rapports d'astreinte Anti-intrusion |
-| `RapportCPN3PBL` | Rapports d'astreinte 3PBL |
-| `RapportCPNVideO` | Rapports d'astreinte Vidéo |
-| `USER` | Référentiel des utilisateurs (nom, prénom, e-mail, poste, service…) |
-| `TAB_Date` | Table calendrier calculée en DAX (du 06/01/2025 à la fin du mois courant) : année, mois, trimestre, semaine ISO, jour ouvré, semaine courante… |
+| `RapportCPNAntiIntrus` | Anti-intrusion on-call reports |
+| `RapportCPN3PBL` | 3PBL on-call reports |
+| `RapportCPNVideO` | Video on-call reports |
+| `USER` | User reference table (last name, first name, e-mail, position, department…) |
+| `TAB_Date` | Calendar table computed in DAX (from 2025-01-06 to the end of the current month): year, month, quarter, ISO week, working day, current week… |
 
-Requêtes intermédiaires (`expressions.tmdl`), classées par groupes (`VIDEO\RELATION`, `VIDEO\TRSF`, `Anti-intusion`, `3PBL`) : tables de relation rapport ↔ utilisateur, rôles Teepee, photos jointes.
+Intermediate queries (`expressions.tmdl`), organised in groups (`VIDEO\RELATION`, `VIDEO\TRSF`, `Anti-intusion`, `3PBL`): report ↔ user relation tables, Teepee roles, attached photos.
 
-**Transformations Power Query** : promotion des en-têtes, typage, jointure avec `USER` pour obtenir une colonne `Nom Prenom` (« Nom, Prénom »), séparation de la date et de l'heure pour produire `Temps` (durée d'intervention) et la date d'arrivée.
+**Power Query transformations**: header promotion, typing, join with `USER` to build a `Nom Prenom` column ("Last name, First name"), and splitting of date and time to produce `Temps` (intervention duration) and the arrival date.
 
-**Relations** : chaque table de rapports est reliée à `TAB_Date` par sa date d'arrivée (`DateArriver`, `Datearrivee`, `Date arriver`). Les dates secondaires ont des tables de dates automatiques Power BI (`LocalDateTable_*`).
+**Relationships**: each report table is linked to `TAB_Date` through its arrival date (`DateArriver`, `Datearrivee`, `Date arriver`). Secondary dates use Power BI automatic date tables (`LocalDateTable_*`).
 
-**Mesures DAX** (une série par domaine) :
+**DAX measures** (one series per domain):
 
-- `Temps total (min) …` : somme des durées en minutes (`HOUR*60 + MINUTE` sur `Temps`) ;
-- `Temps moyen (min) …` : moyenne des durées en minutes ;
-- `Temps total …` / `Temps moyen …` : mise en forme `X h XX` pour l'affichage.
+- `Temps total (min) …`: sum of durations in minutes (`HOUR*60 + MINUTE` on `Temps`);
+- `Temps moyen (min) …`: average duration in minutes;
+- `Temps total …` / `Temps moyen …`: `X h XX` formatting for display.
 
-## Structure du dossier
+## Folder structure
 
 ```
 Rapports_CPN/
-├── Rapports_CPN.pbip            # Fichier projet à ouvrir dans Power BI Desktop
-├── Rapports_CPN.Report/         # Définition du rapport (pages, visuels, thème)
-└── Rapports_CPN.SemanticModel/  # Modèle sémantique (tables, mesures, relations, requêtes M)
+├── Rapports_CPN.pbip            # Project file to open in Power BI Desktop
+├── Rapports_CPN.Report/         # Report definition (pages, visuals, theme)
+└── Rapports_CPN.SemanticModel/  # Semantic model (tables, measures, relationships, M queries)
 ```
 
-## Ouvrir le projet
+## Opening the project
 
-1. Ouvrir `Rapports_CPN.pbip` avec Power BI Desktop (fonction *Projets Power BI* activée).
-2. **Renseigner les identifiants d'accès** : dans les requêtes, les valeurs `<CLIENT_ID_A_RENSEIGNER>` et `<CLIENT_SECRET_A_RENSEIGNER>` ont volontairement été remplacées par des placeholders (voir ci-dessous).
-3. Actualiser les données.
+1. Open `Rapports_CPN.pbip` with Power BI Desktop (*Power BI Projects* feature enabled).
+2. **Fill in the access credentials**: in the queries, the values `<CLIENT_ID_A_RENSEIGNER>` and `<CLIENT_SECRET_A_RENSEIGNER>` ("to be filled in") are intentional placeholders (see below).
+3. Refresh the data.
 
-## Sécurité
+## Security
 
-Les fichiers d'origine contenaient en clair les `Client_Id` / `Client_Secret` de l'API Teepee. Ils ont été **retirés avant versionnement** (ils n'apparaissent pas dans ce dépôt, mais figuraient dans le fichier source partagé). Il est recommandé de **les régénérer côté Teepee** et, à terme, de les stocker dans des paramètres Power BI ou la passerelle de données plutôt que dans le code M.
+The original files contained the Teepee API `Client_Id` / `Client_Secret` in clear text. They were **removed before versioning** (they do not appear in this repository, but were present in the shared source file). It is recommended to **regenerate them in Teepee** and, in the long run, to store them in Power BI parameters or in the data gateway rather than in the M code.
 
-Les fichiers locaux (`.pbi/cache.abf`, `localSettings.json`) sont exclus par le `.gitignore`.
+Local files (`.pbi/cache.abf`, `localSettings.json`) are excluded by `.gitignore`.
