@@ -183,8 +183,8 @@ table Tab_Equipements
 				                "https://safeplace.teepee.fr/source/api/powerbi/getfile/eac81fae-2d68-4102-9ebe-52dbdfd36e4d",
 				                [
 				                    Headers = [
-				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
-				                        client_secret = "x3WXzw7WjLaiGwsl41kiGXcASYPp9fTbwJmmL2yRYAK6PSp1jXdQq3sCwY3rUuMYCd8Jv08wq1DztSkAWd+SbIPyNUB/HiuXyhCp3ioAoqo="
+				                        client_id = "<CLIENT_ID_A_RENSEIGNER>",
+				                        client_secret = "<CLIENT_SECRET_A_RENSEIGNER>"
 				                    ]
 				                ]
 				            ),

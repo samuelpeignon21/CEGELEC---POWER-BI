@@ -144,8 +144,8 @@ table Tab_Tickets
 				                url,
 				                [
 				                    Headers = [
-				                        client_id = "Nj0xbKhBmoYJxsj1cP7S5w==",
-				                        client_secret = "Mw+CH+JqJFkiDjFW2ky3H82aNmF7K0ZoYfueCIIaa+uQ9YB8dTI7fqAR0+XA4JsD1FjrfmB424hQPcle1UdHJPf2sUqAZI2z1czeF7svwec="
+				                        client_id = "<CLIENT_ID_A_RENSEIGNER>",
+				                        client_secret = "<CLIENT_SECRET_A_RENSEIGNER>"
 				                    ],
 				                    RelativePath = key
 				                ]
