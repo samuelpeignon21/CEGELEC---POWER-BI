@@ -1,0 +1,55 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup VIDEO\RELATION
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup VIDEO
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup VIDEO\TRSF
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup Anti-intusion
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup 3PBL
+
+	annotation PBI_QueryGroupOrder = 4
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["RapportCPNVideO","Rel_utilisateur","tab_AjouterDesPhotos","USER","TEEPEE_ROLE","RapportCPNAntiIntrus","Rel_utilisateur (2)","RapportCPN3PBL","Rel_utilisateur (3)"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table TAB_Date
+ref table RapportCPNVideO
+ref table DateTableTemplate_b7ad4c31-536e-41b4-9802-8c7583f5f2db
+ref table LocalDateTable_9c5c947b-0b88-4647-93b6-52d2e486aa57
+ref table LocalDateTable_2378fccd-677b-46b2-ab9c-81b9362bf8bd
+ref table LocalDateTable_d3d55912-4212-4ec2-b7e0-7f83a1ba8961
+ref table LocalDateTable_421e0b4e-9715-426e-8c43-23c8a4dbd94e
+ref table USER
+ref table RapportCPNAntiIntrus
+ref table LocalDateTable_dc08c3fa-eb20-47de-8478-b32db3edc034
+ref table LocalDateTable_c3f21add-25bd-4257-bb70-0c82d97176b9
+ref table LocalDateTable_12ea4d05-6d16-4327-9131-261c2d83156d
+ref table LocalDateTable_4f24c02e-9c53-421b-ac70-e6e4c028a92a
+ref table RapportCPN3PBL
+ref table LocalDateTable_e3adfef1-4811-4135-8e9a-02aa95d27193
+ref table LocalDateTable_c4268811-de8f-4c12-8ef8-ef31beb1f866
+ref table LocalDateTable_8f229d58-c0c1-4bc9-bc73-d88711f9b229
+ref table LocalDateTable_9c16cffa-3fd2-40a1-8ec0-c2e41d459d27
+
+ref cultureInfo fr-FR
+

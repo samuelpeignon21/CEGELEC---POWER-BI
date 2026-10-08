@@ -1,0 +1,101 @@
+table USER
+	lineageTag: a664c784-db9e-4c3e-a22f-d345a0b65c6b
+
+	column USER_ID
+		dataType: string
+		lineageTag: 891c83d7-912a-4740-a564-2018e6fb2367
+		summarizeBy: none
+		sourceColumn: USER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column nom
+		dataType: string
+		lineageTag: 17a4806d-22ac-495a-9694-215349caf781
+		summarizeBy: none
+		sourceColumn: nom
+
+		annotation SummarizationSetBy = Automatic
+
+	column prenom
+		dataType: string
+		lineageTag: 567cce43-a8e0-4d98-88c0-315f3d43c08d
+		summarizeBy: none
+		sourceColumn: prenom
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 28abe555-bdb1-45c6-bc66-5f3cf3297cbe
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column AssignLicense
+		dataType: string
+		lineageTag: fa6f4766-e126-44b9-9972-c8e91b5d04f5
+		summarizeBy: none
+		sourceColumn: AssignLicense
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeRoDeTeLePhone
+		dataType: int64
+		formatString: 0
+		lineageTag: 8999ab7a-2ce4-46ff-baac-3a6df71d5b6d
+		summarizeBy: sum
+		sourceColumn: NumeRoDeTeLePhone
+
+		annotation SummarizationSetBy = Automatic
+
+	column Matricule
+		dataType: int64
+		formatString: 0
+		lineageTag: 79222dd4-893a-4ee8-a220-4648f8fed69b
+		summarizeBy: sum
+		sourceColumn: Matricule
+
+		annotation SummarizationSetBy = Automatic
+
+	column Poste
+		dataType: string
+		lineageTag: 78803f59-212c-4ba5-a2ad-b263f6889a58
+		summarizeBy: none
+		sourceColumn: Poste
+
+		annotation SummarizationSetBy = Automatic
+
+	column Service_1
+		dataType: string
+		lineageTag: f81a76f8-a77a-4c43-b83b-148059d649a3
+		summarizeBy: none
+		sourceColumn: Service_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column SignatureCachet
+		dataType: string
+		lineageTag: e58bb2d3-7ad8-4a25-b9ef-a60e9e0805f5
+		summarizeBy: none
+		sourceColumn: SignatureCachet
+
+		annotation SummarizationSetBy = Automatic
+
+	partition USER = m
+		mode: import
+		queryGroup: VIDEO\TRSF
+		source =
+				let
+				    Source = Excel.Workbook(Web.Contents("https://safeplace.teepee.fr/source/api/powerbi/getfile/8f2005d1-a476-473f-a589-39e9e0d6ab3e", [Headers=[Client_Id="<CLIENT_ID_A_RENSEIGNER>", Client_Secret="<CLIENT_SECRET_A_RENSEIGNER>"]]), null, true),
+				    USER_Sheet = Source{[Item="USER",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(USER_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"USER_ID", type text}, {"nom", type text}, {"prenom", type text}, {"email", type text}, {"AssignLicense", type text}, {"NumeRoDeTeLePhone", Int64.Type}, {"Matricule", Int64.Type}, {"Poste", type text}, {"Service_1", type text}, {"SignatureCachet", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

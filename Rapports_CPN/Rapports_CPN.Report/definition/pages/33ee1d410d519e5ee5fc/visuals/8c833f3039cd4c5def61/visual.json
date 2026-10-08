@@ -1,0 +1,122 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "8c833f3039cd4c5def61",
+  "position": {
+    "x": 737.22177091795288,
+    "y": 141.41348497156784,
+    "z": 4000,
+    "height": 577.09179528838342,
+    "width": 542.77822908204712,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RapportCPN3PBL"
+                    }
+                  },
+                  "Property": "NumeRoDeRapport"
+                }
+              },
+              "queryRef": "Sum(RapportCPN3PBL.NumeRoDeRapport)",
+              "nativeQueryRef": "ID",
+              "displayName": "ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RapportCPN3PBL"
+                    }
+                  },
+                  "Property": "DateArriver"
+                }
+              },
+              "queryRef": "RapportCPN3PBL.DateArriver",
+              "nativeQueryRef": "Date",
+              "displayName": "Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RapportCPN3PBL"
+                    }
+                  },
+                  "Property": "Rapport"
+                }
+              },
+              "queryRef": "RapportCPN3PBL.Rapport",
+              "nativeQueryRef": "Rapport"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "RapportCPN3PBL"
+                    }
+                  },
+                  "Property": "Temps"
+                }
+              },
+              "queryRef": "RapportCPN3PBL.Temps",
+              "nativeQueryRef": "Temps"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "RapportCPN3PBL"
+                  }
+                },
+                "Property": "NumeRoDeRapport"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {}
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "361.2265109175629D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "RapportCPN3PBL.Rapport"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

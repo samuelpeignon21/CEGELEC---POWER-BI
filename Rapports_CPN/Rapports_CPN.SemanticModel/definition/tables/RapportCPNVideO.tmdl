@@ -1,0 +1,225 @@
+table RapportCPNVideO
+	lineageTag: ef59cde8-22be-4320-acca-55bd639daa9e
+
+	measure 'Temps total (min) Vidéo' =
+			
+			SUMX (
+			    RapportCPNVideO,
+			    HOUR ( RapportCPNVideO[Temps] ) * 60
+			        + MINUTE ( RapportCPNVideO[Temps] )
+			)
+		formatString: 0
+		lineageTag: 658298ba-23fa-41ad-8805-c4f484a0ec53
+
+	measure 'Temps moyen (min) Vidéo' =
+			
+			AVERAGEX (
+			    RapportCPNVideO,
+			    HOUR ( RapportCPNVideO[Temps] ) * 60
+			        + MINUTE ( RapportCPNVideO[Temps] )
+			)
+		lineageTag: 9ffc274e-4bf3-497e-97b3-0de351041232
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Temps total Vidéo' =
+			
+			VAR m = ROUND ( [Temps total (min) Vidéo], 0 )
+			RETURN
+			    FORMAT ( INT ( m / 60 ), "0" ) & " h " & FORMAT ( MOD ( m, 60 ), "00" )
+		lineageTag: f0e79577-753a-485e-92d7-5de8e4d53683
+
+	measure 'Temps moyen Vidéo' =
+			
+			VAR m = ROUND ( [Temps moyen (min) Vidéo], 0 )
+			RETURN
+			    FORMAT ( INT ( m / 60 ), "0" ) & " h " & FORMAT ( MOD ( m, 60 ), "00" )
+		lineageTag: c21a2b9e-5786-4976-9661-69ad897a1160
+
+	column RapportCPNVideO_ID
+		dataType: string
+		lineageTag: 6f0e184f-a9dc-4ae8-8951-5a07ff475b0d
+		summarizeBy: none
+		sourceColumn: RapportCPNVideO_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateHeureDArriveE
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 796a886e-c91d-4c10-9efc-744a2e00583c
+		summarizeBy: none
+		sourceColumn: DateHeureDArriveE
+
+		variation Variation
+			isDefault
+			relationship: 8af3ad84-01d4-4282-b7cd-aa15e1b8463e
+			defaultHierarchy: LocalDateTable_9c5c947b-0b88-4647-93b6-52d2e486aa57.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateHeureFin
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a8881bce-6c31-482b-a812-b1ffef5f3902
+		summarizeBy: none
+		sourceColumn: DateHeureFin
+
+		variation Variation
+			isDefault
+			relationship: 9a7bd37f-bcc2-4fee-9950-2de32488a9e3
+			defaultHierarchy: LocalDateTable_2378fccd-677b-46b2-ab9c-81b9362bf8bd.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type_Video
+		dataType: string
+		lineageTag: 433a4eec-3d08-454a-8756-2cf5de99d1f9
+		summarizeBy: none
+		sourceColumn: Type_Video
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rapport
+		dataType: string
+		lineageTag: bacb009d-f19b-462a-af71-31dc3f05ebe3
+		summarizeBy: none
+		sourceColumn: Rapport
+
+		annotation SummarizationSetBy = Automatic
+
+	column SignatureClient
+		dataType: string
+		lineageTag: a7634135-2d7d-4e3d-8e52-cb8182a1e6c1
+		summarizeBy: none
+		sourceColumn: SignatureClient
+
+		annotation SummarizationSetBy = Automatic
+
+	column NomSignataireClient
+		dataType: string
+		lineageTag: 0f816084-5e7a-48a5-8a89-c2b950192c8c
+		summarizeBy: none
+		sourceColumn: NomSignataireClient
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeRoDeRapport
+		dataType: int64
+		formatString: 0
+		lineageTag: dd76375a-8099-47b7-8079-12fe4b996068
+		summarizeBy: sum
+		sourceColumn: NumeRoDeRapport
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompteRendu
+		dataType: string
+		lineageTag: d6ec9f35-98d9-4200-bedc-999b840049b2
+		summarizeBy: none
+		sourceColumn: CompteRendu
+
+		annotation SummarizationSetBy = Automatic
+
+	column AEnvoyer
+		dataType: int64
+		formatString: 0
+		lineageTag: 8ab9a841-24ba-45ba-8365-3a7e9ce8911c
+		summarizeBy: sum
+		sourceColumn: AEnvoyer
+
+		annotation SummarizationSetBy = Automatic
+
+	column HeureDAppelAstreinte
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 7c4c46f3-014a-4e5e-9539-b3bccd342926
+		summarizeBy: none
+		sourceColumn: HeureDAppelAstreinte
+
+		variation Variation
+			isDefault
+			relationship: 6c1ec552-4d87-4a9e-8772-d6dc381c3ba2
+			defaultHierarchy: LocalDateTable_d3d55912-4212-4ec2-b7e0-7f83a1ba8961.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DatedeBut1
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 0b519f8b-59bf-43a3-b605-fd47fbd190cf
+		summarizeBy: none
+		sourceColumn: DatedeBut1
+
+		variation Variation
+			isDefault
+			relationship: 06c8d356-7921-449c-a02c-e30a91a857fa
+			defaultHierarchy: LocalDateTable_421e0b4e-9715-426e-8c43-23c8a4dbd94e.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column CommentairesInterne
+		dataType: string
+		lineageTag: 2caedc53-ccab-467f-9ac8-03851179bb92
+		summarizeBy: none
+		sourceColumn: CommentairesInterne
+
+		annotation SummarizationSetBy = Automatic
+
+	column Temps
+		dataType: dateTime
+		formatString: hh:nn
+		lineageTag: fca77315-3258-4a2b-a741-b5c31cfaf110
+		summarizeBy: none
+		sourceColumn: Temps
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Nom Prenom'
+		dataType: string
+		lineageTag: ad7f5b20-1468-41fe-84df-1f9d3d523fed
+		summarizeBy: none
+		sourceColumn: Nom Prenom
+
+		annotation SummarizationSetBy = Automatic
+
+	column Datearrivee
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: fc4e0887-1fed-4125-8ff7-fadb88b5ae11
+		summarizeBy: none
+		sourceColumn: Datearrivee
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition RapportCPNVideO = m
+		mode: import
+		queryGroup: VIDEO\TRSF
+		source =
+				let
+				    Source = Excel.Workbook(Web.Contents("https://safeplace.teepee.fr/source/api/powerbi/getfile/8f2005d1-a476-473f-a589-39e9e0d6ab3e", [Headers=[Client_Id="<CLIENT_ID_A_RENSEIGNER>", Client_Secret="<CLIENT_SECRET_A_RENSEIGNER>"]]), null, true),
+				    RapportCPNVideO_Sheet = Source{[Item="RapportCPNVideO",Kind="Sheet"]}[Data],
+				    #"En-têtes promus" = Table.PromoteHeaders(RapportCPNVideO_Sheet, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"RapportCPNVideO_ID", type text}, {"DateHeureDArriveE", type datetime}, {"DateHeureDArriveE_1", type datetime}, {"Type", type text}, {"Rapport", type text}, {"SignatureClient", type any}, {"NomSignataireClient", type text}, {"NumeRoDeRapport", Int64.Type}, {"CompteRendu", type text}, {"AEnvoyer", Int64.Type}, {"HeureDAppelAstreinte", type datetime}, {"DatedeBut1", type datetime}, {"CommentairesInterne", type text}}),
+				    #"Personnalisée ajoutée" = Table.AddColumn(#"Type modifié", "Personnalisé", each Time.From(Number.Abs(Number.From([DateHeureDArriveE_1] - [DateHeureDArriveE])))),
+				    #"Erreurs supprimées" = Table.RemoveRowsWithErrors(#"Personnalisée ajoutée", {"Personnalisé"}),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"Erreurs supprimées",{{"Personnalisé", type time}}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Type modifié1",{{"DateHeureDArriveE_1", "DateHeureFin"}}),
+				    #"Requêtes fusionnées" = Table.NestedJoin(#"Colonnes renommées", {"RapportCPNVideO_ID"}, Rel_utilisateur, {"RapportCPNVideO_ID"}, "Rel_utilisateur", JoinKind.LeftOuter),
+				    #"Rel_utilisateur développé" = Table.ExpandTableColumn(#"Requêtes fusionnées", "Rel_utilisateur", {"Nom Prenom"}, {"Nom Prenom"}),
+				    #"Duplication de la colonne" = Table.DuplicateColumn(#"Rel_utilisateur développé", "DateHeureDArriveE", "DateHeureDArriveE - Copier"),
+				    #"Type modifié2" = Table.TransformColumnTypes(#"Duplication de la colonne",{{"DateHeureDArriveE - Copier", type date}}),
+				    #"Colonnes renommées1" = Table.RenameColumns(#"Type modifié2",{{"DateHeureDArriveE - Copier", "Datearrivee"}, {"Personnalisé", "Temps"}, {"Type", "Type_Video"}})
+				in
+				    #"Colonnes renommées1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,87 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1273.441308582773,
+            "y": 39.766671319027623
+          },
+          "nodeIndex": "TAB_Date",
+          "nodeLineageTag": "780997b2-ea21-49f7-8033-598125590adb",
+          "size": {
+            "height": 503.00662665636253,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 828.67593468085227,
+            "y": 653.93058031884755
+          },
+          "nodeIndex": "RapportCPN3PBL",
+          "nodeLineageTag": "648e8b06-3eb8-4379-a581-f3031dd2637c",
+          "size": {
+            "height": 519.85597096926767,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 219.11997766866745,
+            "y": 651.11191402436964
+          },
+          "nodeIndex": "RapportCPNAntiIntrus",
+          "nodeLineageTag": "bed91901-3535-41f0-9004-e7b24ba64292",
+          "size": {
+            "height": 504.35330634963987,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 521.39334542947176,
+            "y": 652.52124717160859
+          },
+          "nodeIndex": "RapportCPNVideO",
+          "nodeLineageTag": "ef59cde8-22be-4320-acca-55bd639daa9e",
+          "size": {
+            "height": 508.58130579135661,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 222.02808318421364,
+            "y": 108.15065568709483
+          },
+          "nodeIndex": "USER",
+          "nodeLineageTag": "a664c784-db9e-4c3e-a22f-d345a0b65c6b",
+          "size": {
+            "height": 353.554659595078,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Toutes les tables",
+      "zoomValue": 70.95554390096882,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Toutes les tables",
+  "defaultDiagram": "Toutes les tables"
+}
