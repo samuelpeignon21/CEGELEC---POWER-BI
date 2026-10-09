@@ -1,0 +1,133 @@
+table DIM_Sites
+	lineageTag: 9d56d709-a052-43f7-8a85-8083a8e34e84
+
+	column Site_ID
+		dataType: string
+		lineageTag: be34ac41-fe9d-4ddf-96bd-77e2afab335f
+		isHidden
+		summarizeBy: none
+		sourceColumn: Site_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Site
+		dataType: string
+		lineageTag: 0076bc7f-fff9-477c-af02-b13ec26e9cb3
+		summarizeBy: none
+		sourceColumn: Site
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numéro de site'
+		dataType: int64
+		formatString: 0
+		lineageTag: e60f6c20-42c7-4be0-a181-b149add6d24f
+		summarizeBy: none
+		sourceColumn: Numéro de site
+
+		annotation SummarizationSetBy = Automatic
+
+	column Adresse
+		dataType: string
+		lineageTag: 5eb255f3-dd98-4293-bc91-94f95a06b8ef
+		summarizeBy: none
+		sourceColumn: Adresse
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Code postal'
+		dataType: string
+		lineageTag: 9bbd3518-9959-4ea4-a6dd-f657d04ad1bc
+		summarizeBy: none
+		sourceColumn: Code postal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ville
+		dataType: string
+		lineageTag: 6d8196f4-ded0-43ea-a415-417916919574
+		summarizeBy: none
+		sourceColumn: Ville
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pays
+		dataType: string
+		lineageTag: e1fec2df-02ff-4a30-abca-786d81435165
+		summarizeBy: none
+		sourceColumn: Pays
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitude
+		dataType: double
+		formatString: 0.000000
+		lineageTag: 1696e255-e8c3-4865-a4ad-4c5f82cabae3
+		summarizeBy: none
+		sourceColumn: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column Longitude
+		dataType: double
+		formatString: 0.000000
+		lineageTag: da38dc51-114b-4b58-9392-9c61620977e1
+		summarizeBy: none
+		sourceColumn: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fréquence de maintenance'
+		dataType: string
+		lineageTag: 64aed93a-b250-4c63-80c5-3184a99202cb
+		summarizeBy: none
+		sourceColumn: Fréquence de maintenance
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statut
+		dataType: string
+		lineageTag: e920655c-68b9-4d11-a651-4023d4a30672
+		summarizeBy: none
+		sourceColumn: Statut
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Statut activité'
+		dataType: string
+		lineageTag: 92b3c5a1-e571-44d2-88af-ea1c76e68f18
+		summarizeBy: none
+		sourceColumn: Statut activité
+
+		annotation SummarizationSetBy = Automatic
+
+	column Origine
+		dataType: string
+		lineageTag: 1ed23cc5-b0ad-44bc-b42c-25277024464d
+		summarizeBy: none
+		sourceColumn: Origine
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Sites = m
+		mode: import
+		source =
+				let
+				    Actifs = Table.SelectColumns(fnFeuille("AgencesClients"), {"AgencesClients_ID", "NomDelAgence", "IDAgenceSite", "AdresseDuSite", "Statut"}, MissingField.UseNull),
+				    #"Actifs renommés" = Table.RenameColumns(Actifs, {{"AgencesClients_ID", "Site_ID"}, {"NomDelAgence", "Site"}, {"IDAgenceSite", "Numero"}, {"AdresseDuSite", "Adresse"}}),
+				    #"Actifs origine" = Table.AddColumn(#"Actifs renommés", "Origine", each "Actif", type text),
+				    Archives = Table.SelectColumns(fnFeuille("Site"), {"Site_ID", "DeSignationDuSite", "NDeSite", "Adresse", "CodePostal", "Ville", "Pays", "GeOlocalisation_Lat", "GeOlocalisation_Long", "FreQuenceDeMaintenance", "Statut", "StatutDActivite"}, MissingField.UseNull),
+				    #"Archives renommées" = Table.RenameColumns(Archives, {{"DeSignationDuSite", "Site"}, {"NDeSite", "Numero"}, {"GeOlocalisation_Lat", "Lat"}, {"GeOlocalisation_Long", "Long"}, {"FreQuenceDeMaintenance", "Freq"}, {"StatutDActivite", "StatutAct"}}),
+				    #"Archives origine" = Table.AddColumn(#"Archives renommées", "Origine", each "Archive", type text),
+				    Union = Table.Combine({#"Actifs origine", #"Archives origine"}),
+				    #"Lignes valides" = Table.SelectRows(Union, each [Site_ID] <> null),
+				    #"Doublons supprimés" = Table.Distinct(#"Lignes valides", {"Site_ID"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Doublons supprimés", {{"Numero", "Numéro de site"}, {"CodePostal", "Code postal"}, {"Lat", "Latitude"}, {"Long", "Longitude"}, {"Freq", "Fréquence de maintenance"}, {"StatutAct", "Statut activité"}}),
+				    #"Texte nettoyé" = Table.TransformColumns(#"Colonnes renommées", {{"Site_ID", fnNet, type nullable text}, {"Site", fnNet, type nullable text}, {"Adresse", fnNet, type nullable text}, {"Ville", fnNet, type nullable text}, {"Pays", fnNet, type nullable text}, {"Fréquence de maintenance", fnNet, type nullable text}, {"Statut", fnNet, type nullable text}, {"Statut activité", fnNet, type nullable text}, {"Origine", fnNet, type nullable text}}),
+				    #"Valeurs converties" = Table.TransformColumns(#"Texte nettoyé", {{"Code postal", fnCodePostal, type nullable text}, {"Latitude", fnCoord, type nullable number}, {"Longitude", fnCoord, type nullable number}}),
+				    #"Types définis" = Table.TransformColumnTypes(#"Valeurs converties", {{"Site_ID", type text}, {"Site", type text}, {"Numéro de site", Int64.Type}, {"Adresse", type text}, {"Code postal", type text}, {"Ville", type text}, {"Pays", type text}, {"Latitude", type number}, {"Longitude", type number}, {"Fréquence de maintenance", type text}, {"Statut", type text}, {"Statut activité", type text}, {"Origine", type text}}, "fr-FR"),
+				    #"Colonnes ordonnées" = Table.SelectColumns(#"Types définis", {"Site_ID", "Site", "Numéro de site", "Adresse", "Code postal", "Ville", "Pays", "Latitude", "Longitude", "Fréquence de maintenance", "Statut", "Statut activité", "Origine"})
+				in
+				    #"Colonnes ordonnées"
+
+	annotation PBI_ResultType = Table

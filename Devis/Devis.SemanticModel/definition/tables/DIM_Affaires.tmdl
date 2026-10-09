@@ -1,0 +1,341 @@
+table DIM_Affaires
+	lineageTag: 053c4a92-1d3e-4ee7-b36e-d5387211f3ce
+
+	column Affaire_ID
+		dataType: string
+		lineageTag: 6dba8011-b1d3-4265-8603-ba1556ea7d86
+		isHidden
+		summarizeBy: none
+		sourceColumn: Affaire_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'N° de projet'
+		dataType: string
+		lineageTag: b4ccadaf-fcb2-4cb0-8f23-989d66b93a5c
+		summarizeBy: none
+		sourceColumn: N° de projet
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Description courte'
+		dataType: string
+		lineageTag: 61b3b383-384a-47fa-ad4e-66e55cb3037b
+		summarizeBy: none
+		sourceColumn: Description courte
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 865d58d6-e5f9-46e6-a680-97dc43cee03d
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Description longue'
+		dataType: string
+		lineageTag: 74635787-a327-4773-b1bb-edb91d39e9d6
+		summarizeBy: none
+		sourceColumn: Description longue
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Type de projet'
+		dataType: string
+		lineageTag: 759202d1-ff6c-488d-aa29-5afe059deb59
+		summarizeBy: none
+		sourceColumn: Type de projet
+
+		annotation SummarizationSetBy = Automatic
+
+	column WBS
+		dataType: string
+		lineageTag: 6454995d-8577-4b5b-8bac-882458bd9d02
+		summarizeBy: none
+		sourceColumn: WBS
+
+		annotation SummarizationSetBy = Automatic
+
+	column Position
+		dataType: string
+		lineageTag: e75b9d9c-66e6-47f0-bec4-98ca5d37f909
+		summarizeBy: none
+		sourceColumn: Position
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Code BU'
+		dataType: int64
+		formatString: 0
+		lineageTag: c8401d68-358d-401f-ad88-8049891ccecc
+		summarizeBy: none
+		sourceColumn: Code BU
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de création du projet'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: c00ce251-9b60-482f-8776-1f87df3b91ec
+		summarizeBy: none
+		sourceColumn: Date de création du projet
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de début'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: f5333971-3cea-44d8-b8f9-afcebb211640
+		summarizeBy: none
+		sourceColumn: Date de début
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de fin'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 44c53527-c04f-425b-92f9-c37c74c121de
+		summarizeBy: none
+		sourceColumn: Date de fin
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Axe métier'
+		dataType: string
+		lineageTag: 89360bef-d53a-4603-8052-ed2581272b4d
+		summarizeBy: none
+		sourceColumn: Axe métier
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Axe processus'
+		dataType: string
+		lineageTag: 994740c7-0bbd-4941-b46e-5965a9d16a47
+		summarizeBy: none
+		sourceColumn: Axe processus
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prix du devis'
+		dataType: decimal
+		formatString: #,0
+		lineageTag: c21a1933-25c5-40df-acbd-5778e9912885
+		summarizeBy: none
+		sourceColumn: Prix du devis
+
+		annotation SummarizationSetBy = Automatic
+
+	column Utilisateur
+		dataType: string
+		lineageTag: 2576f8b1-8227-441f-8f31-750a9209428f
+		summarizeBy: none
+		sourceColumn: Utilisateur
+
+		annotation SummarizationSetBy = Automatic
+
+	column Service
+		dataType: string
+		lineageTag: 43f018b5-6909-4115-bef7-a2d0000cb2eb
+		summarizeBy: none
+		sourceColumn: Service
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Commentaire projet'
+		dataType: string
+		lineageTag: 4530820d-810e-4f93-95b6-4358ad46e85d
+		summarizeBy: none
+		sourceColumn: Commentaire projet
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUM
+		dataType: string
+		lineageTag: 9eaebd3e-5d9b-44ae-b3c1-adaefe63825c
+		isHidden
+		summarizeBy: none
+		sourceColumn: OBJECT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROJECT_HIERARCHY_LEVEL
+		dataType: int64
+		formatString: 0
+		lineageTag: 9741c158-a3af-4890-a91c-195dfeb045c9
+		isHidden
+		summarizeBy: none
+		sourceColumn: PROJECT_HIERARCHY_LEVEL
+
+		annotation SummarizationSetBy = Automatic
+
+	column ACCOUNT_ASSIGN_FLAG
+		dataType: string
+		lineageTag: eddd6c6c-7d92-4f5f-8f81-db2ce5449290
+		isHidden
+		summarizeBy: none
+		sourceColumn: ACCOUNT_ASSIGN_FLAG
+
+		annotation SummarizationSetBy = Automatic
+
+	column P2_CHANGE_DT
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 7fc2063f-582c-48d7-8bf5-04f323503c0d
+		isHidden
+		summarizeBy: none
+		sourceColumn: P2_CHANGE_DT
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column P3_OR_P6_CHANGE_DT
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: f0e61160-ef7c-4ac1-8dc1-02046fd6c7dd
+		isHidden
+		summarizeBy: none
+		sourceColumn: P3_OR_P6_CHANGE_DT
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column P4_CHANGE_DT
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 752ed760-5a04-42aa-bc07-b5929607ccd5
+		isHidden
+		summarizeBy: none
+		sourceColumn: P4_CHANGE_DT
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column OSMOSE_CD
+		dataType: int64
+		formatString: 0
+		lineageTag: 6da2d584-580d-4ac3-b24a-9f354e8a31b5
+		isHidden
+		summarizeBy: none
+		sourceColumn: OSMOSE_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column TECH_1
+		dataType: string
+		lineageTag: 32990a96-acd8-4c8b-8abf-a5a8d7284a2e
+		isHidden
+		summarizeBy: none
+		sourceColumn: TECH_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column TECH_2
+		dataType: string
+		lineageTag: 2c65aa8d-a689-42fa-8f26-ae85133001ef
+		isHidden
+		summarizeBy: none
+		sourceColumn: TECH_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column ANALYTICAL_UNIT
+		dataType: int64
+		formatString: 0
+		lineageTag: e224be49-1d15-47a2-9916-6be4e37ab1c7
+		isHidden
+		summarizeBy: none
+		sourceColumn: ANALYTICAL_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreationDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 4164ff06-c4d9-43fc-9893-82417af9f9f2
+		isHidden
+		summarizeBy: none
+		sourceColumn: CreationDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column UpdatedDate
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 0055af05-81d2-4d68-a246-193ddf91b0a4
+		isHidden
+		summarizeBy: none
+		sourceColumn: UpdatedDate
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column ConcateNation
+		dataType: string
+		lineageTag: ee4899ed-9d84-4821-908c-d039600db0ac
+		isHidden
+		summarizeBy: none
+		sourceColumn: ConcateNation
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnneE
+		dataType: string
+		lineageTag: 797aaf69-03a6-4536-9a99-b385305b3996
+		isHidden
+		summarizeBy: none
+		sourceColumn: AnneE
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnneE_1
+		dataType: string
+		lineageTag: be956f9e-1f56-4e57-94cb-e1166f83dbe2
+		isHidden
+		summarizeBy: none
+		sourceColumn: AnneE_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column AnneE_2
+		dataType: int64
+		formatString: 0
+		lineageTag: 4d93a31a-828b-4be6-9a3d-3617078f6b5b
+		isHidden
+		summarizeBy: none
+		sourceColumn: AnneE_2
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Affaires = m
+		mode: import
+		source =
+				let
+				    Source = Table.SelectColumns(fnFeuille("TEEPEE_AffairesCodex"), {"TEEPEE_AffairesCodex_ID", "PROJECT_ID", "PROJECT_SHORT_DESC", "PROJECT_DESC", "PROJECT_LONG_DESC", "PROJECT_TYPE", "WBS_ID", "POSITION", "BU_CD", "RECORD_CREATION_DT", "WBS_BASIC_START_DT", "WBS_BASIC_END_DT", "SEGMENT_BUS_AXIS", "SEGMENT_BUS_PROC_AXIS", "QUOTE_PRICE", "USER_NAME", "Service", "PROJECT_COMMENT", "OBJECT_NUM", "PROJECT_HIERARCHY_LEVEL", "ACCOUNT_ASSIGN_FLAG", "P2_CHANGE_DT", "P3_OR_P6_CHANGE_DT", "P4_CHANGE_DT", "OSMOSE_CD", "TECH_1", "TECH_2", "ANALYTICAL_UNIT", "CreationDate", "UpdatedDate", "ConcateNation", "AnneE", "AnneE_1", "AnneE_2", "Sercive"}, MissingField.UseNull),
+				    #"Service fusionné" = Table.AddColumn(Source, "Service_ok", each if [Service] <> null and Text.Trim(Text.From([Service])) <> "" then [Service] else [Sercive]),
+				    #"Service remplacé" = Table.RemoveColumns(#"Service fusionné", {"Service", "Sercive"}),
+				    #"Service renommé" = Table.RenameColumns(#"Service remplacé", {{"Service_ok", "Service"}}),
+				    #"Lignes valides" = Table.SelectRows(#"Service renommé", each [TEEPEE_AffairesCodex_ID] <> null),
+				    #"Doublons supprimés" = Table.Distinct(#"Lignes valides", {"TEEPEE_AffairesCodex_ID"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Doublons supprimés", {{"TEEPEE_AffairesCodex_ID", "Affaire_ID"}, {"PROJECT_ID", "N° de projet"}, {"PROJECT_SHORT_DESC", "Description courte"}, {"PROJECT_DESC", "Description"}, {"PROJECT_LONG_DESC", "Description longue"}, {"PROJECT_TYPE", "Type de projet"}, {"WBS_ID", "WBS"}, {"POSITION", "Position"}, {"BU_CD", "Code BU"}, {"RECORD_CREATION_DT", "Date de création du projet"}, {"WBS_BASIC_START_DT", "Date de début"}, {"WBS_BASIC_END_DT", "Date de fin"}, {"SEGMENT_BUS_AXIS", "Axe métier"}, {"SEGMENT_BUS_PROC_AXIS", "Axe processus"}, {"QUOTE_PRICE", "Prix du devis"}, {"USER_NAME", "Utilisateur"}, {"PROJECT_COMMENT", "Commentaire projet"}}),
+				    #"Texte nettoyé" = Table.TransformColumns(#"Colonnes renommées", {{"Affaire_ID", fnNet, type nullable text}, {"N° de projet", fnNet, type nullable text}, {"Description courte", fnNet, type nullable text}, {"Description", fnNet, type nullable text}, {"Description longue", fnNet, type nullable text}, {"Type de projet", fnNet, type nullable text}, {"WBS", fnNet, type nullable text}, {"Position", fnNet, type nullable text}, {"Axe métier", fnNet, type nullable text}, {"Axe processus", fnNet, type nullable text}, {"Utilisateur", fnNet, type nullable text}, {"Service", fnNet, type nullable text}, {"Commentaire projet", fnNet, type nullable text}, {"OBJECT_NUM", fnNet, type nullable text}, {"ACCOUNT_ASSIGN_FLAG", fnNet, type nullable text}, {"TECH_1", fnNet, type nullable text}, {"TECH_2", fnNet, type nullable text}, {"ConcateNation", fnNet, type nullable text}, {"AnneE", fnNet, type nullable text}, {"AnneE_1", fnNet, type nullable text}}),
+				    #"Valeurs converties" = Table.TransformColumns(#"Texte nettoyé", {{"Prix du devis", fnNombre, type nullable number}}),
+				    #"Types définis" = Table.TransformColumnTypes(#"Valeurs converties", {{"Affaire_ID", type text}, {"N° de projet", type text}, {"Description courte", type text}, {"Description", type text}, {"Description longue", type text}, {"Type de projet", type text}, {"WBS", type text}, {"Position", type text}, {"Code BU", Int64.Type}, {"Date de création du projet", type date}, {"Date de début", type date}, {"Date de fin", type date}, {"Axe métier", type text}, {"Axe processus", type text}, {"Prix du devis", Currency.Type}, {"Utilisateur", type text}, {"Service", type text}, {"Commentaire projet", type text}, {"OBJECT_NUM", type text}, {"PROJECT_HIERARCHY_LEVEL", Int64.Type}, {"ACCOUNT_ASSIGN_FLAG", type text}, {"P2_CHANGE_DT", type date}, {"P3_OR_P6_CHANGE_DT", type date}, {"P4_CHANGE_DT", type date}, {"OSMOSE_CD", Int64.Type}, {"TECH_1", type text}, {"TECH_2", type text}, {"ANALYTICAL_UNIT", Int64.Type}, {"CreationDate", type date}, {"UpdatedDate", type date}, {"ConcateNation", type text}, {"AnneE", type text}, {"AnneE_1", type text}, {"AnneE_2", Int64.Type}}, "fr-FR"),
+				    #"Colonnes ordonnées" = Table.SelectColumns(#"Types définis", {"Affaire_ID", "N° de projet", "Description courte", "Description", "Description longue", "Type de projet", "WBS", "Position", "Code BU", "Date de création du projet", "Date de début", "Date de fin", "Axe métier", "Axe processus", "Prix du devis", "Utilisateur", "Service", "Commentaire projet", "OBJECT_NUM", "PROJECT_HIERARCHY_LEVEL", "ACCOUNT_ASSIGN_FLAG", "P2_CHANGE_DT", "P3_OR_P6_CHANGE_DT", "P4_CHANGE_DT", "OSMOSE_CD", "TECH_1", "TECH_2", "ANALYTICAL_UNIT", "CreationDate", "UpdatedDate", "ConcateNation", "AnneE", "AnneE_1", "AnneE_2"})
+				in
+				    #"Colonnes ordonnées"
+
+	annotation PBI_ResultType = Table

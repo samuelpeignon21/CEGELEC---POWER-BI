@@ -1,0 +1,23 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		fastCombine
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["SRC_Classeur", "fnFeuille", "fnNet", "fnNombre", "fnCoord", "fnBool", "fnCodePostal", "fnAjouterCle", "FACT_Devis", "DIM_Clients", "DIM_Sites", "DIM_Affaires", "DIM_Utilisateurs"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table FACT_Devis
+ref table DIM_Clients
+ref table DIM_Sites
+ref table DIM_Affaires
+ref table DIM_Utilisateurs
+ref table DIM_Calendrier
+ref table Mesures

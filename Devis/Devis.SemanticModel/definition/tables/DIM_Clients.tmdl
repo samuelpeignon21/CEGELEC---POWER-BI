@@ -1,0 +1,133 @@
+table DIM_Clients
+	lineageTag: 9afde190-bde4-4a55-883a-b456977477b6
+
+	column Client_ID
+		dataType: string
+		lineageTag: 0a7c5f03-f713-4332-98c6-50d4652be2a7
+		isHidden
+		summarizeBy: none
+		sourceColumn: Client_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Client
+		dataType: string
+		lineageTag: eb97662b-5ed1-467a-bc91-1ef36c439a2f
+		summarizeBy: none
+		sourceColumn: Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Identifiant entreprise'
+		dataType: string
+		lineageTag: 74e552ca-fe79-4933-85b8-2850a0a67369
+		summarizeBy: none
+		sourceColumn: Identifiant entreprise
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statut
+		dataType: string
+		lineageTag: dc1d0355-8757-4972-89e7-23b264bec69b
+		summarizeBy: none
+		sourceColumn: Statut
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ville
+		dataType: string
+		lineageTag: 9892a11f-fd8d-4e5d-a404-3db280d1391a
+		summarizeBy: none
+		sourceColumn: Ville
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Code postal'
+		dataType: string
+		lineageTag: 3e1a1058-005c-45a2-ae50-1b8922cb0ab2
+		summarizeBy: none
+		sourceColumn: Code postal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pays
+		dataType: string
+		lineageTag: db002077-1d2c-44ae-b89e-359d4ca009e6
+		summarizeBy: none
+		sourceColumn: Pays
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Taux horaire technicien'
+		dataType: decimal
+		formatString: #,0
+		lineageTag: 31f97642-2ea6-404b-af05-d4694d802b60
+		summarizeBy: none
+		sourceColumn: Taux horaire technicien
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Taux horaire RT'
+		dataType: decimal
+		formatString: #,0
+		lineageTag: ade0433c-69b1-4d1e-b61d-f67c0553efb1
+		summarizeBy: none
+		sourceColumn: Taux horaire RT
+
+		annotation SummarizationSetBy = Automatic
+
+	column Déplacements
+		dataType: decimal
+		formatString: #,0
+		lineageTag: 9333a590-27ca-436e-8f56-511bc14bbf28
+		summarizeBy: none
+		sourceColumn: Déplacements
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Process de facturation'
+		dataType: string
+		lineageTag: c3f527de-af0b-4089-bc79-ec6410603859
+		summarizeBy: none
+		sourceColumn: Process de facturation
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Type de contrat'
+		dataType: string
+		lineageTag: 2b44f317-71dd-48fc-8546-74091f41e230
+		summarizeBy: none
+		sourceColumn: Type de contrat
+
+		annotation SummarizationSetBy = Automatic
+
+	column Origine
+		dataType: string
+		lineageTag: d2c3a1c5-5f29-4392-8aa1-f3e8528fc6af
+		summarizeBy: none
+		sourceColumn: Origine
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Clients = m
+		mode: import
+		source =
+				let
+				    Actifs = Table.SelectColumns(fnFeuille("Clients"), {"Clients_ID", "Nom", "IdentifiantEntreprise", "Statut", "VilleFacturation", "CodePostalFacturation", "PaysFacturation", "TauxHorairesTech", "TauxHorairesRT", "DePlacements", "ProcessDeFacturation"}, MissingField.UseNull),
+				    #"Actifs renommés" = Table.RenameColumns(Actifs, {{"VilleFacturation", "Ville"}, {"CodePostalFacturation", "CodePostal"}, {"PaysFacturation", "Pays"}}),
+				    #"Actifs origine" = Table.AddColumn(#"Actifs renommés", "Origine", each "Actif", type text),
+				    Archives = Table.SelectColumns(fnFeuille("TEEPEE_Entreprise"), {"TEEPEE_Entreprise_ID", "Nom", "IdentifiantEntreprise", "Statut", "Ville", "CodePostal", "Pays", "TauxHorairesTech", "TauxHorairesRT", "DePlacements", "ProcessDeFacturation", "TypeDeContrat"}, MissingField.UseNull),
+				    #"Archives renommées" = Table.RenameColumns(Archives, {{"TEEPEE_Entreprise_ID", "Clients_ID"}}),
+				    #"Archives origine" = Table.AddColumn(#"Archives renommées", "Origine", each "Archive", type text),
+				    Union = Table.Combine({#"Actifs origine", #"Archives origine"}),
+				    #"Lignes valides" = Table.SelectRows(Union, each [Clients_ID] <> null),
+				    #"Doublons supprimés" = Table.Distinct(#"Lignes valides", {"Clients_ID"}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Doublons supprimés", {{"Clients_ID", "Client_ID"}, {"Nom", "Client"}, {"IdentifiantEntreprise", "Identifiant entreprise"}, {"CodePostal", "Code postal"}, {"TauxHorairesTech", "Taux horaire technicien"}, {"TauxHorairesRT", "Taux horaire RT"}, {"DePlacements", "Déplacements"}, {"ProcessDeFacturation", "Process de facturation"}, {"TypeDeContrat", "Type de contrat"}}),
+				    #"Texte nettoyé" = Table.TransformColumns(#"Colonnes renommées", {{"Client_ID", fnNet, type nullable text}, {"Client", fnNet, type nullable text}, {"Identifiant entreprise", fnNet, type nullable text}, {"Statut", fnNet, type nullable text}, {"Ville", fnNet, type nullable text}, {"Pays", fnNet, type nullable text}, {"Process de facturation", fnNet, type nullable text}, {"Type de contrat", fnNet, type nullable text}, {"Origine", fnNet, type nullable text}}),
+				    #"Valeurs converties" = Table.TransformColumns(#"Texte nettoyé", {{"Code postal", fnCodePostal, type nullable text}, {"Taux horaire technicien", fnNombre, type nullable number}, {"Taux horaire RT", fnNombre, type nullable number}, {"Déplacements", fnNombre, type nullable number}}),
+				    #"Types définis" = Table.TransformColumnTypes(#"Valeurs converties", {{"Client_ID", type text}, {"Client", type text}, {"Identifiant entreprise", type text}, {"Statut", type text}, {"Ville", type text}, {"Code postal", type text}, {"Pays", type text}, {"Taux horaire technicien", Currency.Type}, {"Taux horaire RT", Currency.Type}, {"Déplacements", Currency.Type}, {"Process de facturation", type text}, {"Type de contrat", type text}, {"Origine", type text}}, "fr-FR"),
+				    #"Colonnes ordonnées" = Table.SelectColumns(#"Types définis", {"Client_ID", "Client", "Identifiant entreprise", "Statut", "Ville", "Code postal", "Pays", "Taux horaire technicien", "Taux horaire RT", "Déplacements", "Process de facturation", "Type de contrat", "Origine"})
+				in
+				    #"Colonnes ordonnées"
+
+	annotation PBI_ResultType = Table

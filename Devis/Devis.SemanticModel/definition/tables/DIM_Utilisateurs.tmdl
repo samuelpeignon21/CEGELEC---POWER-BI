@@ -1,0 +1,87 @@
+table DIM_Utilisateurs
+	lineageTag: 7f8ac347-78a0-40d0-817e-2a7514cff5cc
+
+	column Utilisateur_ID
+		dataType: string
+		lineageTag: c5228830-7017-4ddb-9434-aee37d23f163
+		isHidden
+		summarizeBy: none
+		sourceColumn: Utilisateur_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Utilisateur
+		dataType: string
+		lineageTag: abcbb5b9-aeb0-4865-91c1-bdcdba28d9c5
+		summarizeBy: none
+		sourceColumn: Utilisateur
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prénom
+		dataType: string
+		lineageTag: 8a7be6dc-417f-4896-a37a-b0fc59e58e93
+		summarizeBy: none
+		sourceColumn: Prénom
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nom
+		dataType: string
+		lineageTag: 848cf9eb-5d21-46bb-9ade-a73705f6bfc1
+		summarizeBy: none
+		sourceColumn: Nom
+
+		annotation SummarizationSetBy = Automatic
+
+	column Poste
+		dataType: string
+		lineageTag: 23571ed0-5b78-4c43-a178-d1fef8cbb2f1
+		summarizeBy: none
+		sourceColumn: Poste
+
+		annotation SummarizationSetBy = Automatic
+
+	column Service
+		dataType: string
+		lineageTag: 04aa4513-d674-4b04-862a-93a8f3a1296a
+		summarizeBy: none
+		sourceColumn: Service
+
+		annotation SummarizationSetBy = Automatic
+
+	column Matricule
+		dataType: int64
+		formatString: 0
+		lineageTag: 13d29c34-2aea-48e0-a8c4-1a7744e2ed43
+		isHidden
+		summarizeBy: none
+		sourceColumn: Matricule
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: 6974b7b0-1a75-4ca2-b0b1-a9323e4dc46a
+		isHidden
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Utilisateurs = m
+		mode: import
+		source =
+				let
+				    Source = Table.SelectColumns(fnFeuille("USER"), {"USER_ID", "prenom", "nom", "Poste", "Service_1", "Matricule", "email"}, MissingField.UseNull),
+				    #"Lignes valides" = Table.SelectRows(Source, each [USER_ID] <> null),
+				    #"Doublons supprimés" = Table.Distinct(#"Lignes valides", {"USER_ID"}),
+				    #"Nom complet" = Table.AddColumn(#"Doublons supprimés", "NomComplet", each Text.Trim((if [prenom] = null then "" else Text.From([prenom])) & " " & (if [nom] = null then "" else Text.From([nom]))), type text),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Nom complet", {{"USER_ID", "Utilisateur_ID"}, {"NomComplet", "Utilisateur"}, {"prenom", "Prénom"}, {"nom", "Nom"}, {"Service_1", "Service"}, {"email", "Email"}}),
+				    #"Texte nettoyé" = Table.TransformColumns(#"Colonnes renommées", {{"Utilisateur_ID", fnNet, type nullable text}, {"Utilisateur", fnNet, type nullable text}, {"Prénom", fnNet, type nullable text}, {"Nom", fnNet, type nullable text}, {"Poste", fnNet, type nullable text}, {"Service", fnNet, type nullable text}, {"Email", fnNet, type nullable text}}),
+				    #"Types définis" = Table.TransformColumnTypes(#"Texte nettoyé", {{"Utilisateur_ID", type text}, {"Utilisateur", type text}, {"Prénom", type text}, {"Nom", type text}, {"Poste", type text}, {"Service", type text}, {"Matricule", Int64.Type}, {"Email", type text}}, "fr-FR"),
+				    #"Colonnes ordonnées" = Table.SelectColumns(#"Types définis", {"Utilisateur_ID", "Utilisateur", "Prénom", "Nom", "Poste", "Service", "Matricule", "Email"})
+				in
+				    #"Colonnes ordonnées"
+
+	annotation PBI_ResultType = Table

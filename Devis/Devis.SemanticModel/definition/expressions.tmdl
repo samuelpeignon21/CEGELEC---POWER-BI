@@ -1,0 +1,103 @@
+expression SRC_Classeur =
+		let
+		    Source =
+		        Excel.Workbook(
+		            Web.Contents(
+		                "https://safeplace.teepee.fr/source/api/powerbi/getfile/da1d34fc-fbad-4a5b-a58f-2b0918876700",
+		                [
+		                    Headers = [
+		                        client_id = "<CLIENT_ID_A_RENSEIGNER>",
+		                        client_secret = "<CLIENT_SECRET_A_RENSEIGNER>"
+		                    ]
+		                ]
+		            ),
+		            null,
+		            true
+		        )
+		in
+		    Source
+	lineageTag: 6777385a-79f0-4309-bbfb-ca1bc8e435db
+
+	annotation PBI_ResultType = Table
+
+expression fnFeuille =
+		(nomFeuille as text) as table =>
+		let
+		    Feuille = SRC_Classeur{[Item = nomFeuille, Kind = "Sheet"]}[Data],
+		    Entetes = Table.PromoteHeaders(Feuille, [PromoteAllScalars = true])
+		in
+		    Entetes
+	lineageTag: 57a97c66-a0dc-41f6-a114-4edf17af79ff
+
+	annotation PBI_ResultType = Function
+
+expression fnNet =
+		(x as any) as any =>
+		if x is text then
+		    (let s = Text.Trim(x) in if s = "" then null else s)
+		else
+		    x
+	lineageTag: a868c798-4bf0-4f96-a31b-acd4740cbe3c
+
+	annotation PBI_ResultType = Function
+
+expression fnNombre =
+		(x as any) as nullable number =>
+		if x = null then null
+		else if x is number then x
+		else if x is text then
+		    (let s = Text.Replace(Text.Replace(Text.Trim(x), " ", ""), "#(00A0)", "")
+		     in try Number.FromText(s, "fr-FR") otherwise null)
+		else null
+	lineageTag: e01049ed-134c-4cb0-be5b-a9ea7ed69f64
+
+	annotation PBI_ResultType = Function
+
+expression fnCoord =
+		(x as any) as nullable number =>
+		if x = null then null
+		else if x is number then x
+		else if x is text then
+		    (try Number.FromText(Text.Replace(Text.Trim(x), ",", "."), "en-US") otherwise null)
+		else null
+	lineageTag: 2e18a0ed-1419-4a5a-ac9d-e359241389db
+
+	annotation PBI_ResultType = Function
+
+expression fnBool =
+		(x as any) as nullable logical =>
+		if x = null then null
+		else if x is logical then x
+		else if x is number then x <> 0
+		else if x is text then
+		    (let s = Text.Lower(Text.Trim(x)) in
+		        if List.Contains({"1", "oui", "true", "vrai"}, s) then true
+		        else if List.Contains({"0", "non", "false", "faux"}, s) then false
+		        else null)
+		else null
+	lineageTag: 56ade715-4ace-40fe-a5a5-06b31ff5371e
+
+	annotation PBI_ResultType = Function
+
+expression fnCodePostal =
+		(x as any) as nullable text =>
+		if x = null then null
+		else
+		    (let s = Text.Trim(Text.From(x))
+		     in if s = "" then null
+		        else if Text.Length(s) < 5 then Text.PadStart(s, 5, "0")
+		        else s)
+	lineageTag: 9678fda3-5e83-4bfa-9cb8-ac8fed109b51
+
+	annotation PBI_ResultType = Function
+
+expression fnAjouterCle =
+		(base as table, rel as table, colSource as text, colCible as text) as table =>
+		let
+		    Fusion = Table.NestedJoin(base, {"Devis_ID"}, rel, {"DevisDePannages_ID"}, "R", JoinKind.LeftOuter),
+		    Etendu = Table.ExpandTableColumn(Fusion, "R", {colSource}, {colCible})
+		in
+		    Etendu
+	lineageTag: b42ca753-186f-44d0-a28a-74b9decaba6b
+
+	annotation PBI_ResultType = Function

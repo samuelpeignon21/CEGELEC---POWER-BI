@@ -1,0 +1,83 @@
+table Mesures
+	lineageTag: da411f82-ad58-4aa0-aa6e-d813e62e75a6
+
+	measure 'Nombre de devis' = DISTINCTCOUNT ( FACT_Devis[Devis_ID] )
+		formatString: 0
+		displayFolder: Volumes
+		lineageTag: a9d17c57-1500-4f7a-b679-16789f0b8e6c
+
+	measure 'Nombre de clients' = DISTINCTCOUNT ( FACT_Devis[Client_ID] )
+		formatString: 0
+		displayFolder: Volumes
+		lineageTag: a73d128c-14cb-4af1-9040-6a4ad4c98b9c
+
+	measure 'Nombre de sites' = DISTINCTCOUNT ( FACT_Devis[Site_ID] )
+		formatString: 0
+		displayFolder: Volumes
+		lineageTag: 4df7dd81-7eac-4f55-a8a9-9f8153a37b51
+
+	measure 'Montant HT' = SUM ( FACT_Devis[Total HT] )
+		formatString: #,0
+		displayFolder: Montants
+		lineageTag: ee97ec9f-52ef-4b48-8833-36f5f8230f17
+
+	measure 'Montant HT moyen' = DIVIDE ( [Montant HT], [Nombre de devis] )
+		formatString: #,0
+		displayFolder: Montants
+		lineageTag: 7850f84f-7f15-4858-82c0-8c7e3c7b13ea
+
+	measure 'Montant HT cumul annuel' = TOTALYTD ( [Montant HT], DIM_Calendrier[Date] )
+		formatString: #,0
+		displayFolder: Montants
+		lineageTag: 6807364d-0276-404e-837a-1c3fc4ce2988
+
+	measure 'Montant HT N-1' = CALCULATE ( [Montant HT], SAMEPERIODLASTYEAR ( DIM_Calendrier[Date] ) )
+		formatString: #,0
+		displayFolder: Comparaison N-1
+		lineageTag: b3991574-eaef-4b05-9c34-2c3f05a48ec9
+
+	measure 'Variation Montant HT vs N-1' = DIVIDE ( [Montant HT] - [Montant HT N-1], [Montant HT N-1] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Comparaison N-1
+		lineageTag: b64199e7-3e29-4693-b983-430417c6b7f3
+
+	measure 'Nombre de devis N-1' = CALCULATE ( [Nombre de devis], SAMEPERIODLASTYEAR ( DIM_Calendrier[Date] ) )
+		formatString: 0
+		displayFolder: Comparaison N-1
+		lineageTag: 5cfa3e86-0310-4dd5-8dc0-fd2301ca87dc
+
+	measure 'Devis validés' = CALCULATE ( [Nombre de devis], FACT_Devis[Validé] = TRUE () )
+		formatString: 0
+		displayFolder: Suivi
+		lineageTag: 8473c660-36d5-4980-8430-4107ece85442
+
+	measure 'Taux de validation' = DIVIDE ( [Devis validés], [Nombre de devis] )
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: Suivi
+		lineageTag: efc20b8a-6b41-44ed-acf7-2fbd1a836b03
+
+	measure 'Devis à relancer' = CALCULATE ( [Nombre de devis], FILTER ( FACT_Devis, NOT ISBLANK ( FACT_Devis[Date de relance] ) && FACT_Devis[Date de relance] <= TODAY () ) )
+		formatString: 0
+		displayFolder: Suivi
+		lineageTag: c9f8c431-14f8-4576-89e6-817572e895a0
+
+	measure 'Délai moyen avant relance (jours)' = AVERAGEX ( FILTER ( FACT_Devis, NOT ISBLANK ( FACT_Devis[Date de relance] ) && NOT ISBLANK ( FACT_Devis[Date de création] ) ), DATEDIFF ( FACT_Devis[Date de création], FACT_Devis[Date de relance], DAY ) )
+		formatString: 0.0
+		displayFolder: Suivi
+		lineageTag: b82617b3-64ca-4e69-978c-8c9f34e00e80
+
+	column Value
+		isHidden
+		formatString: 0
+		lineageTag: 34882416-b32b-472e-9709-70d877406326
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Mesures = calculated
+		mode: import
+		source = { BLANK() }
+
+	annotation PBI_Id = a5b46b94e1234ef0b971d671116535af

@@ -1,0 +1,29 @@
+relationship 0263c181-1f0b-4e8c-b47a-2f3fe89e6bc3
+	fromColumn: FACT_Devis.Site_ID
+	toColumn: DIM_Sites.Site_ID
+
+relationship f7821e5e-11c0-4d41-b694-4879e552d2f2
+	fromColumn: FACT_Devis.Client_ID
+	toColumn: DIM_Clients.Client_ID
+
+relationship b9bfc1ad-6901-4669-afd8-3a5334544935
+	fromColumn: FACT_Devis.Affaire_ID
+	toColumn: DIM_Affaires.Affaire_ID
+
+relationship 64272e6b-98ad-4e3d-9de0-d86447c103b0
+	fromColumn: FACT_Devis.Responsable_RA_ID
+	toColumn: DIM_Utilisateurs.Utilisateur_ID
+
+relationship b59e89ad-cfb6-4559-91ce-98e30a0522c6
+	isActive: false
+	fromColumn: FACT_Devis.Responsable_RT_ID
+	toColumn: DIM_Utilisateurs.Utilisateur_ID
+
+relationship 0cc87b28-8d14-452d-88e2-10d340ac1b35
+	fromColumn: FACT_Devis.'Date de création'
+	toColumn: DIM_Calendrier.Date
+
+relationship 3b0a452d-ab37-4f84-8b25-9a73e194e069
+	isActive: false
+	fromColumn: FACT_Devis.'Date de relance'
+	toColumn: DIM_Calendrier.Date

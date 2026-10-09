@@ -1,0 +1,381 @@
+table FACT_Devis
+	lineageTag: 9c1e66dd-af0a-4470-b986-24acc313a177
+
+	column Devis_ID
+		dataType: string
+		lineageTag: 49781b1a-5b2a-47fd-b94e-6b386a413a08
+		isHidden
+		summarizeBy: none
+		sourceColumn: Devis_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numéro de devis'
+		dataType: string
+		lineageTag: 89222668-123e-44de-986e-7d76893d772c
+		summarizeBy: none
+		sourceColumn: Numéro de devis
+
+		annotation SummarizationSetBy = Automatic
+
+	column Intitulé
+		dataType: string
+		lineageTag: dfc25622-4eac-44bf-b3f7-d7b15f8c745d
+		summarizeBy: none
+		sourceColumn: Intitulé
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de création'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: e931f9f8-fa20-42a0-b970-20e33932a07d
+		summarizeBy: none
+		sourceColumn: Date de création
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de relance'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 6d690b0b-6ac9-40bf-8b6e-3401ba0d01bd
+		summarizeBy: none
+		sourceColumn: Date de relance
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'État du devis'
+		dataType: string
+		lineageTag: 67b7f440-806c-4759-ae28-8e1283d898a4
+		summarizeBy: none
+		sourceColumn: État du devis
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Type de devis'
+		dataType: string
+		lineageTag: 799dad3b-c0ba-4166-894c-368b7cd70f59
+		summarizeBy: none
+		sourceColumn: Type de devis
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Type d''intervention'
+		dataType: string
+		lineageTag: 052b9bce-1a13-4572-a028-17575af41b86
+		summarizeBy: none
+		sourceColumn: Type d'intervention
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Régularisation ou standard'
+		dataType: string
+		lineageTag: 5524455c-1bc9-486a-be60-46ba5fc972c9
+		summarizeBy: none
+		sourceColumn: Régularisation ou standard
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total HT'
+		dataType: decimal
+		formatString: #,0
+		lineageTag: a5b013b3-fcb0-494b-a46d-1241a832731e
+		summarizeBy: none
+		sourceColumn: Total HT
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TGC total'
+		dataType: decimal
+		formatString: #,0
+		lineageTag: 170c917f-e7ec-4c01-9617-7c8fe7d4cd9c
+		summarizeBy: none
+		sourceColumn: TGC total
+
+		annotation SummarizationSetBy = Automatic
+
+	column Validé
+		dataType: boolean
+		lineageTag: 5d1904d0-e777-4b62-a16a-53bc2a54f23f
+		summarizeBy: none
+		sourceColumn: Validé
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'BC enregistré'
+		dataType: boolean
+		lineageTag: 73729834-9973-4cc3-b3e8-2cfa4be22256
+		summarizeBy: none
+		sourceColumn: BC enregistré
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numéro de facture'
+		dataType: string
+		lineageTag: 9c7a17f6-9b90-40e7-a8e2-d09d13d6dada
+		summarizeBy: none
+		sourceColumn: Numéro de facture
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numéros de BI'
+		dataType: string
+		lineageTag: 3dbfdc6a-004b-4b4a-bbf4-36e45fc742ee
+		summarizeBy: none
+		sourceColumn: Numéros de BI
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Affaire à créer'
+		dataType: string
+		lineageTag: 8fdabd88-9da2-4f44-b8d4-31e14ac29045
+		summarizeBy: none
+		sourceColumn: Affaire à créer
+
+		annotation SummarizationSetBy = Automatic
+
+	column Destinataire
+		dataType: string
+		lineageTag: 6952c364-da39-4b39-b84b-6485f212848b
+		summarizeBy: none
+		sourceColumn: Destinataire
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Adresse mail'
+		dataType: string
+		lineageTag: 9cbefb86-d546-46e6-b116-d046815ce75e
+		summarizeBy: none
+		sourceColumn: Adresse mail
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Délai d''exécution'
+		dataType: string
+		lineageTag: 58772f6a-3557-4938-bed9-26749edf7f34
+		summarizeBy: none
+		sourceColumn: Délai d'exécution
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Délai d''exécution 2'
+		dataType: string
+		lineageTag: eec3a679-7486-4d77-bfb1-0557c7746bc6
+		summarizeBy: none
+		sourceColumn: Délai d'exécution 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Validité de l''offre'
+		dataType: string
+		lineageTag: 5853face-f35c-4ac1-815f-b0168cbfc17f
+		summarizeBy: none
+		sourceColumn: Validité de l'offre
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Condition de règlement'
+		dataType: string
+		lineageTag: 40a01702-2668-4ae3-b787-79216ab89d82
+		summarizeBy: none
+		sourceColumn: Condition de règlement
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Commentaire descriptif'
+		dataType: string
+		lineageTag: 07ec8a28-e7e4-480e-8a53-c5ec254f5843
+		summarizeBy: none
+		sourceColumn: Commentaire descriptif
+
+		annotation SummarizationSetBy = Automatic
+
+	column Commentaire
+		dataType: string
+		lineageTag: 30056199-1fd5-4804-ad9e-160801a36a7f
+		summarizeBy: none
+		sourceColumn: Commentaire
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Commentaire 2'
+		dataType: string
+		lineageTag: 1e9387d6-7001-406f-8378-72150801d86d
+		summarizeBy: none
+		sourceColumn: Commentaire 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Liste du matériel'
+		dataType: string
+		lineageTag: 285f39c9-93fa-4619-bc97-6d9dc987314e
+		summarizeBy: none
+		sourceColumn: Liste du matériel
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalMainDOeuvre_1
+		dataType: decimal
+		formatString: #,0
+		lineageTag: 2452aaa6-0883-4b08-ba7d-88c108610a5f
+		isHidden
+		summarizeBy: none
+		sourceColumn: TotalMainDOeuvre_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalMainDOeuvre_2
+		dataType: decimal
+		formatString: #,0
+		lineageTag: 49634714-433f-4bcd-a395-5b5948e50476
+		isHidden
+		summarizeBy: none
+		sourceColumn: TotalMainDOeuvre_2
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalMainDOeuvre_3
+		dataType: decimal
+		formatString: #,0
+		lineageTag: 6e1ead7c-a70e-4a13-bd9e-4f06dac012f9
+		isHidden
+		summarizeBy: none
+		sourceColumn: TotalMainDOeuvre_3
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalMainDOeuvre_4
+		dataType: decimal
+		formatString: #,0
+		lineageTag: da7bd8ad-e5b7-4132-b458-6f18e0931fe6
+		isHidden
+		summarizeBy: none
+		sourceColumn: TotalMainDOeuvre_4
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalMainDOeuvre_5
+		dataType: decimal
+		formatString: #,0.00
+		lineageTag: ec8bc186-2d8c-4c8c-b4ee-060ac1e42ea1
+		isHidden
+		summarizeBy: none
+		sourceColumn: TotalMainDOeuvre_5
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalMainDOeuvre_6
+		dataType: decimal
+		formatString: #,0
+		lineageTag: cbe27857-eff1-4bc1-a497-f83d099a6e60
+		isHidden
+		summarizeBy: none
+		sourceColumn: TotalMainDOeuvre_6
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalMainDOeuvre_7
+		dataType: decimal
+		formatString: #,0
+		lineageTag: 8b13a0c8-09e9-43ff-8ff6-c54c3aed4b3f
+		isHidden
+		summarizeBy: none
+		sourceColumn: TotalMainDOeuvre_7
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalMainDOeuvre_8
+		dataType: decimal
+		formatString: #,0
+		lineageTag: 70c22509-4893-44e3-8741-2c0a5102195a
+		isHidden
+		summarizeBy: none
+		sourceColumn: TotalMainDOeuvre_8
+
+		annotation SummarizationSetBy = Automatic
+
+	column TauxHoraireTechniciens_1
+		dataType: decimal
+		formatString: #,0
+		lineageTag: 8b21209b-4953-4d7c-b1b9-3e7c85b6cbe0
+		isHidden
+		summarizeBy: none
+		sourceColumn: TauxHoraireTechniciens_1
+
+		annotation SummarizationSetBy = Automatic
+
+	column Site_ID
+		dataType: string
+		lineageTag: e82f7507-d9b7-4ef5-9f14-bf9df3c957b2
+		isHidden
+		summarizeBy: none
+		sourceColumn: Site_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Client_ID
+		dataType: string
+		lineageTag: a55773d4-fb79-4857-9782-1244d056bf0e
+		isHidden
+		summarizeBy: none
+		sourceColumn: Client_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Affaire_ID
+		dataType: string
+		lineageTag: 5388e82c-9c6a-43e6-a4f1-78dd4d019f66
+		isHidden
+		summarizeBy: none
+		sourceColumn: Affaire_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Responsable_RA_ID
+		dataType: string
+		lineageTag: efd6caf2-28c2-49f5-b068-503713afc196
+		isHidden
+		summarizeBy: none
+		sourceColumn: Responsable_RA_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Responsable_RT_ID
+		dataType: string
+		lineageTag: 705fe56f-a9b9-45e2-bcf4-94277554025c
+		isHidden
+		summarizeBy: none
+		sourceColumn: Responsable_RT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FACT_Devis = m
+		mode: import
+		source =
+				let
+				    Source = Table.SelectColumns(fnFeuille("DevisDePannages"), {"DevisDePannages_ID", "NumeRoDeDevis", "IntituleDuDevis", "Date", "DateDeRelance", "EtatDuDevis", "TypeDeDevis", "TypeDIntervention", "ReGularisationOuStandard", "TotalHT", "TGCTOTGeneral", "Valide", "EnregistrementBC", "NumeRoDeFacture", "NumeRosDeBI", "NomDeLAffaireACreEr", "ALAttentionDe", "AdresseMail", "DeLaisDExeCution", "DeLaisDExeCution_2", "ValiditeDeLOffre", "ConditionDeReGlement", "CommentairesDesciptif", "Commentaire", "Commentaire_1", "ListeDuMateRiel", "TotalMainDOeuvre_1", "TotalMainDOeuvre_2", "TotalMainDOeuvre_3", "TotalMainDOeuvre_4", "TotalMainDOeuvre_5", "TotalMainDOeuvre_6", "TotalMainDOeuvre_7", "TotalMainDOeuvre_8", "TauxHoraireTechniciens_1"}, MissingField.UseNull),
+				    #"Lignes valides" = Table.SelectRows(Source, each [DevisDePannages_ID] <> null),
+				    #"Doublons supprimés" = Table.Distinct(#"Lignes valides", {"DevisDePannages_ID"}),
+				    #"Base renommée" = Table.RenameColumns(#"Doublons supprimés", {{"DevisDePannages_ID", "Devis_ID"}, {"NumeRoDeDevis", "Numéro de devis"}, {"IntituleDuDevis", "Intitulé"}, {"Date", "Date de création"}, {"DateDeRelance", "Date de relance"}, {"EtatDuDevis", "État du devis"}, {"TypeDeDevis", "Type de devis"}, {"TypeDIntervention", "Type d'intervention"}, {"ReGularisationOuStandard", "Régularisation ou standard"}, {"TotalHT", "Total HT"}, {"TGCTOTGeneral", "TGC total"}, {"Valide", "Validé"}, {"EnregistrementBC", "BC enregistré"}, {"NumeRoDeFacture", "Numéro de facture"}, {"NumeRosDeBI", "Numéros de BI"}, {"NomDeLAffaireACreEr", "Affaire à créer"}, {"ALAttentionDe", "Destinataire"}, {"AdresseMail", "Adresse mail"}, {"DeLaisDExeCution", "Délai d'exécution"}, {"DeLaisDExeCution_2", "Délai d'exécution 2"}, {"ValiditeDeLOffre", "Validité de l'offre"}, {"ConditionDeReGlement", "Condition de règlement"}, {"CommentairesDesciptif", "Commentaire descriptif"}, {"Commentaire_1", "Commentaire 2"}, {"ListeDuMateRiel", "Liste du matériel"}}),
+				    #"Rel sites" = Table.Distinct(Table.Combine({Table.SelectColumns(fnFeuille("Rel_Agences"), {"DevisDePannages_ID", "AgencesClients_ID"}, MissingField.UseNull), Table.RenameColumns(Table.SelectColumns(fnFeuille("Rel_sites"), {"DevisDePannages_ID", "Site_ID"}, MissingField.UseNull), {{"Site_ID", "AgencesClients_ID"}})}), {"DevisDePannages_ID"}),
+				    #"Rel clients" = Table.Distinct(Table.Combine({Table.RenameColumns(Table.SelectColumns(fnFeuille("Rel_Clients"), {"DevisDePannages_ID", "Clients_ID"}, MissingField.UseNull), {{"Clients_ID", "TEEPEE_Entreprise_ID"}}), Table.SelectColumns(fnFeuille("Rel_entrerise"), {"DevisDePannages_ID", "TEEPEE_Entreprise_ID"}, MissingField.UseNull)}), {"DevisDePannages_ID"}),
+				    #"Rel affaires" = Table.Distinct(Table.SelectColumns(fnFeuille("Rel_Affaire"), {"DevisDePannages_ID", "TEEPEE_AffairesCodex_ID"}, MissingField.UseNull), {"DevisDePannages_ID"}),
+				    #"Rel RA" = Table.Distinct(Table.SelectColumns(fnFeuille("Rel_Utilisateurs (Re"), {"DevisDePannages_ID", "USER_ID"}, MissingField.UseNull), {"DevisDePannages_ID"}),
+				    #"Rel RT" = Table.Distinct(Table.SelectColumns(fnFeuille("Rel_Utilisateurs (El"), {"DevisDePannages_ID", "USER_ID"}, MissingField.UseNull), {"DevisDePannages_ID"}),
+				    #"Avec site" = fnAjouterCle(#"Base renommée", #"Rel sites", "AgencesClients_ID", "Site_ID"),
+				    #"Avec client" = fnAjouterCle(#"Avec site", #"Rel clients", "TEEPEE_Entreprise_ID", "Client_ID"),
+				    #"Avec affaire" = fnAjouterCle(#"Avec client", #"Rel affaires", "TEEPEE_AffairesCodex_ID", "Affaire_ID"),
+				    #"Avec RA" = fnAjouterCle(#"Avec affaire", #"Rel RA", "USER_ID", "Responsable_RA_ID"),
+				    #"Avec RT" = fnAjouterCle(#"Avec RA", #"Rel RT", "USER_ID", "Responsable_RT_ID"),
+				    #"Texte nettoyé" = Table.TransformColumns(#"Avec RT", {{"Devis_ID", fnNet, type nullable text}, {"Numéro de devis", fnNet, type nullable text}, {"Intitulé", fnNet, type nullable text}, {"État du devis", fnNet, type nullable text}, {"Type de devis", fnNet, type nullable text}, {"Type d'intervention", fnNet, type nullable text}, {"Régularisation ou standard", fnNet, type nullable text}, {"Numéro de facture", fnNet, type nullable text}, {"Numéros de BI", fnNet, type nullable text}, {"Affaire à créer", fnNet, type nullable text}, {"Destinataire", fnNet, type nullable text}, {"Adresse mail", fnNet, type nullable text}, {"Délai d'exécution", fnNet, type nullable text}, {"Délai d'exécution 2", fnNet, type nullable text}, {"Validité de l'offre", fnNet, type nullable text}, {"Condition de règlement", fnNet, type nullable text}, {"Commentaire descriptif", fnNet, type nullable text}, {"Commentaire", fnNet, type nullable text}, {"Commentaire 2", fnNet, type nullable text}, {"Liste du matériel", fnNet, type nullable text}, {"Site_ID", fnNet, type nullable text}, {"Client_ID", fnNet, type nullable text}, {"Affaire_ID", fnNet, type nullable text}, {"Responsable_RA_ID", fnNet, type nullable text}, {"Responsable_RT_ID", fnNet, type nullable text}}),
+				    #"Valeurs converties" = Table.TransformColumns(#"Texte nettoyé", {{"Total HT", fnNombre, type nullable number}, {"TGC total", fnNombre, type nullable number}, {"Validé", fnBool, type nullable logical}, {"BC enregistré", fnBool, type nullable logical}, {"TotalMainDOeuvre_1", fnNombre, type nullable number}, {"TotalMainDOeuvre_2", fnNombre, type nullable number}, {"TotalMainDOeuvre_3", fnNombre, type nullable number}, {"TotalMainDOeuvre_4", fnNombre, type nullable number}, {"TotalMainDOeuvre_5", fnNombre, type nullable number}, {"TotalMainDOeuvre_6", fnNombre, type nullable number}, {"TotalMainDOeuvre_7", fnNombre, type nullable number}, {"TotalMainDOeuvre_8", fnNombre, type nullable number}, {"TauxHoraireTechniciens_1", fnNombre, type nullable number}}),
+				    #"Types définis" = Table.TransformColumnTypes(#"Valeurs converties", {{"Devis_ID", type text}, {"Numéro de devis", type text}, {"Intitulé", type text}, {"Date de création", type date}, {"Date de relance", type date}, {"État du devis", type text}, {"Type de devis", type text}, {"Type d'intervention", type text}, {"Régularisation ou standard", type text}, {"Total HT", Currency.Type}, {"TGC total", Currency.Type}, {"Validé", type logical}, {"BC enregistré", type logical}, {"Numéro de facture", type text}, {"Numéros de BI", type text}, {"Affaire à créer", type text}, {"Destinataire", type text}, {"Adresse mail", type text}, {"Délai d'exécution", type text}, {"Délai d'exécution 2", type text}, {"Validité de l'offre", type text}, {"Condition de règlement", type text}, {"Commentaire descriptif", type text}, {"Commentaire", type text}, {"Commentaire 2", type text}, {"Liste du matériel", type text}, {"TotalMainDOeuvre_1", Currency.Type}, {"TotalMainDOeuvre_2", Currency.Type}, {"TotalMainDOeuvre_3", Currency.Type}, {"TotalMainDOeuvre_4", Currency.Type}, {"TotalMainDOeuvre_5", Currency.Type}, {"TotalMainDOeuvre_6", Currency.Type}, {"TotalMainDOeuvre_7", Currency.Type}, {"TotalMainDOeuvre_8", Currency.Type}, {"TauxHoraireTechniciens_1", Currency.Type}, {"Site_ID", type text}, {"Client_ID", type text}, {"Affaire_ID", type text}, {"Responsable_RA_ID", type text}, {"Responsable_RT_ID", type text}}, "fr-FR"),
+				    #"Colonnes ordonnées" = Table.SelectColumns(#"Types définis", {"Devis_ID", "Numéro de devis", "Intitulé", "Date de création", "Date de relance", "État du devis", "Type de devis", "Type d'intervention", "Régularisation ou standard", "Total HT", "TGC total", "Validé", "BC enregistré", "Numéro de facture", "Numéros de BI", "Affaire à créer", "Destinataire", "Adresse mail", "Délai d'exécution", "Délai d'exécution 2", "Validité de l'offre", "Condition de règlement", "Commentaire descriptif", "Commentaire", "Commentaire 2", "Liste du matériel", "TotalMainDOeuvre_1", "TotalMainDOeuvre_2", "TotalMainDOeuvre_3", "TotalMainDOeuvre_4", "TotalMainDOeuvre_5", "TotalMainDOeuvre_6", "TotalMainDOeuvre_7", "TotalMainDOeuvre_8", "TauxHoraireTechniciens_1", "Site_ID", "Client_ID", "Affaire_ID", "Responsable_RA_ID", "Responsable_RT_ID"})
+				in
+				    #"Colonnes ordonnées"
+
+	annotation PBI_ResultType = Table

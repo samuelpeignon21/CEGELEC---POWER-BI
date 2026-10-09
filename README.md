@@ -8,6 +8,7 @@ Power BI reports (PBIP format) used to track technical interventions at Cegelec 
 |---|---|
 | [`FANC_CVC/`](FANC_CVC/README.md) | HVAC maintenance tracking for the client FANC: corrective and preventive intervention orders, time spent, equipment fleet and criticality |
 | [`Rapports_CPN/`](Rapports_CPN/README.md) | On-call intervention tracking (Anti-intrusion, 3PBL, Video): number of reports, total and average time per month/year |
+| [`Devis/`](Devis/README.md) | Breakdown quote tracking: quote volumes and amounts, follow-up dates, clients, sites, jobs and managers (star schema, ready for report design) |
 
 ## Requirements
 
