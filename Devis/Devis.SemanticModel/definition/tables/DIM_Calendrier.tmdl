@@ -118,7 +118,7 @@ table DIM_Calendrier
 				VAR MinDate = DATE ( YEAR ( MIN ( FACT_Devis[Date de création] ) ), 1, 1 )
 				VAR MaxDate =
 				    DATE (
-				        MAX ( YEAR ( MAX ( FACT_Devis[Date de relance] ) ), YEAR ( MAX ( FACT_Devis[Date de création] ) ), YEAR ( TODAY () ) ),
+				        MAX ( MAX ( YEAR ( MAX ( FACT_Devis[Date de relance] ) ), YEAR ( MAX ( FACT_Devis[Date de création] ) ) ), YEAR ( TODAY () ) ),
 				        12,
 				        31
 				    )
