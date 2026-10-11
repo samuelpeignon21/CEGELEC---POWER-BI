@@ -1,0 +1,8 @@
+﻿# Images officielles (propriété de Cegelec / VINCI Energies) : téléchargées en local par telecharger_assets.py
+assets/
+
+# Photos de collègues : ne jamais les versionner
+**/equipe/
+
+__pycache__/
+*.pyc
