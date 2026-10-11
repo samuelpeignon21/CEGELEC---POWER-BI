@@ -382,8 +382,9 @@
     planifierIA();
   }
   function planifierIA() {
+    var partie = duel;   // si le joueur abandonne puis relance, les anciens timers s'arrêtent
     function pas() {
-      if (!duel || duel.fini) return;
+      if (!duel || duel !== partie || duel.fini) return;
       var fait = iaEtape();
       nettoyer();
       var fin = verifierFin();
