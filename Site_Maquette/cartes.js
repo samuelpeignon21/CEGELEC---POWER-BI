@@ -100,7 +100,15 @@
     'omexom-te':            { cri: 'energie', n: 1, nom: 'Énergie', ico: '☀️', txt: function (n) { return 'Donne +' + n + ' énergie ce tour.'; } },
     'omexom-reseaux':       { cri: 'buff',   n: 1, nom: 'Renfort', ico: '🔗', txt: function (n) { return 'Tes serviteurs gagnent +' + n + ' attaque.'; } },
     'citeos':               { cri: 'heros',  n: 2, nom: 'Éclair',  ico: '💡', txt: function (n) { return 'Inflige ' + n + ' dégâts au héros adverse.'; } },
-    'vinci':                { cri: 'epargne', n: 2, nom: 'Épargne', ico: '🦫', fixe: true, txt: function (n) { return 'Gagne +' + n + ' cristaux d\'énergie maximum.'; } }
+    'vinci':                { cri: 'epargne', n: 2, nom: 'Épargne', ico: '🦫', fixe: true, txt: function (n) { return 'Gagne +' + n + ' cristaux d\'énergie maximum.'; } },
+    // Teepee (Actemium Lille Digital) : « cri de guerre à chance » — le réseau marche… ou pas.
+    // « ok » / « ko » : liste de [effet, valeur] appliquée selon le tirage ; la carte la choisit avec son champ « capacite ».
+    'teepee-bureau':        { cri: 'reseau', chance: 0.7, ok: [['pioche', 2], ['epargne', 1]], ko: [['retard', 2]],
+                              nom: 'Digitalisation', ico: '🪶', fixe: true,
+                              txt: function () { return '7 chances sur 10 : pioche 2 cartes et +1 cristal d\'énergie maximum. Sinon (serveur HS) : 2 dégâts à ton héros.'; } },
+    'teepee-mobile':        { cri: 'reseau', chance: 0.5, ok: [['pioche', 1]], ko: [],
+                              nom: 'Synchro mobile', ico: '🪶', fixe: true,
+                              txt: function () { return '1 chance sur 2 : pioche 1 carte. Sinon : pas de réseau, rien ne se synchronise.'; } }
   };
   function capaciteInstance(marqueCle, rang) {
     var base = CAPACITES[marqueCle];
@@ -109,6 +117,7 @@
     if (n && !base.fixe && rang >= 2) n += rang - 1;
     return {
       kw: base.kw || null, cri: base.cri || null, n: n, nom: base.nom, ico: base.ico,
+      chance: base.chance || 0, ok: base.ok || [], ko: base.ko || [],
       type: base.cri ? 'Cri de guerre' : 'Pouvoir',
       txt: base.txt(n),
       court: base.ico + ' ' + base.nom + (n && base.cri ? ' ' + n : '')
@@ -133,7 +142,7 @@
     var puiss = clamp(Number(m.puissance) || 20, 1, 100);
     var r = rareteDe(m);
     var cout = clamp(Math.round(puiss / 16) + r.rang - 1, 1, 8);
-    var cap = capaciteInstance(m.marque, r.rang);
+    var cap = capaciteInstance(m.capacite || m.marque, r.rang);
     var total = cout * 2 + 1;
     if (cap && total >= 4) total -= 1;
     total = Math.max(total, 2);
@@ -145,10 +154,10 @@
       nom: m.nom, fonction: m.fonction || '', icone: m.icone || '', photo: m.photo || '',
       marqueCle: m.marque, marqueNom: marque.nom, couleur: marque.couleur, puissance: puiss,
       rarete: r, cout: cout, att: att, pv: total - att, cap: cap,
-      forts: m.forts || [], faibles: m.faibles || [], devise: m.devise || ''
+      forts: m.forts || [], faibles: m.faibles || [], devise: m.devise || '', partout: !!m.partout
     };
   }
-  function capCle(c) { return c.cap ? (c.cap.kw || c.cap.cri) + ':' + c.cap.n : '-'; }
+  function capCle(c) { return c.cap ? (c.cap.kw || c.cap.cri) + ':' + c.cap.n + ':' + c.cap.chance : '-'; }
   // Évite les doublons « mêmes stats + même pouvoir » : la carte la plus puissante garde ses stats,
   // les suivantes sont décalées au plus près (attaque/vie échangées, ou +1/-1 de total).
   function dedoublonner(cartes) {
@@ -193,7 +202,7 @@
       deck.push(c);
       return true;
     }
-    pool.filter(function (c) { return c.marqueCle === 'vinci'; }).forEach(ajouter);   // CASTOR : dans tous les decks
+    pool.filter(function (c) { return c.partout; }).forEach(ajouter);                  // CASTOR : dans tous les decks
     var fam = FAMILLES[familleCle];
     var propres = fam ? pool.filter(function (c) { return fam.marques.indexOf(c.marqueCle) !== -1; }) : [];
     melanger(propres);
@@ -300,11 +309,19 @@
     verifierFin();
     return true;
   }
-  function appliquerCri(cote, u) {
-    var cap = u.carte.cap;
+  function appliquerCri(cote, u, effet) {
+    var cap = effet || u.carte.cap;   // « effet » : sous-effet d'un cri à chance (réseau)
     if (!cap || !cap.cri) return;
     var adv = adversaire(cote);
-    if (cap.cri === 'soin') {
+    if (cap.cri === 'reseau') {
+      var reussi = Math.random() < cap.chance;
+      fx('reseau', { id: u.id, ok: reussi });
+      log(u.nom + (reussi ? ' : réseau OK, tout est digitalisé !' : ' : pas de réseau, synchronisation impossible…'));
+      (reussi ? cap.ok : cap.ko).forEach(function (e) { appliquerCri(cote, u, { cri: e[0], n: e[1] }); });
+    } else if (cap.cri === 'retard') {
+      blesser(cote, cap.n);
+      log(u.nom + ' : le chantier prend du retard, ' + cote.nom + ' perd ' + cap.n + ' PV.');
+    } else if (cap.cri === 'soin') {
       soigner(cote, cap.n);
       log(u.nom + ' : ' + cote.nom + ' récupère ' + cap.n + ' PV.');
     } else if (cap.cri === 'pioche') {
@@ -596,6 +613,7 @@
       else if (e.type === 'soin' && el) flotter(el, '+' + e.n, 'soin');
       else if (e.type === 'bouclier' && el) el.classList.add('anim-bouclier');
       else if (e.type === 'buff' && el) el.classList.add('anim-buff');
+      else if (e.type === 'reseau' && el) flotter(el, e.ok ? '📶 OK' : '📵 HS', e.ok ? 'soin' : 'degats');
       else if (e.type === 'pioche' && e.cote === 'joueur') {
         var main = $('d-joueur-main');
         if (main && main.lastChild && main.lastChild.classList) main.lastChild.classList.add('anim-pioche');

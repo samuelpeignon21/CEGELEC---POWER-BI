@@ -92,7 +92,7 @@ window.EQUIPE = (window.EQUIPE || []).concat([
   // Un objet, mais d'une rareté exceptionnelle : le plan d'épargne Groupe VINCI.
   // Infos relevées sur castor.vinci.com (les règles d'abondement sont fixées chaque année).
   {
-    type: "objet", rarete: "Légendaire", marque: "vinci", icone: "🦫",
+    type: "objet", rarete: "Légendaire", marque: "vinci", icone: "🦫", partout: true,   // dans tous les decks
     nom: "CASTOR", fonction: "Plan d'épargne Groupe VINCI", puissance: 90,
     forts: [
       "Jusqu'à 80 actions VINCI gratuites (offre 2023)",
@@ -104,6 +104,38 @@ window.EQUIPE = (window.EQUIPE || []).concat([
       "Investi en actions : la Bourse monte… et descend"
     ],
     devise: "Avec CASTOR, investissez-vous dans VINCI !"
+  },
+
+  // ───────── VINCI : Teepee, en deux versions ─────────
+  // Logiciel de digitalisation des tâches édité par Actemium Lille Digital Solutions (logo : une plume d'indien).
+  // Il peut tout digitaliser… quand le réseau suit. Leur cri de guerre est un tirage au sort (voir cartes.js,
+  // capacités « teepee-bureau » et « teepee-mobile ») : la carte choisit sa capacité avec le champ « capacite ».
+  {
+    type: "objet", rarete: "Légendaire", marque: "vinci", icone: "🪶", capacite: "teepee-bureau",
+    nom: "Teepee · Bureau", fonction: "Digitalisation des tâches (Actemium Lille Digital)", puissance: 66,
+    forts: [
+      "Digitalise presque tout le chantier",
+      "Formulaires, rapports et photos au même endroit",
+      "Personnalisable à l'infini"
+    ],
+    faibles: [
+      "Serveur capricieux : parfois, plus rien ne répond",
+      "Un oubli de synchro et tout est à refaire"
+    ],
+    devise: "Quand ça marche, tout est digitalisé."
+  },
+  {
+    type: "objet", rarete: "Commune", marque: "vinci", icone: "🪶", capacite: "teepee-mobile",
+    nom: "Teepee · Mobile", fonction: "Teepee sur smartphone", puissance: 22,
+    forts: [
+      "Dans la poche, directement sur le chantier",
+      "Prête en dix secondes"
+    ],
+    faibles: [
+      "Pas de réseau : synchronisation impossible",
+      "L'appli plante au pire moment"
+    ],
+    devise: "Ça synchronise… un jour sur deux."
   }
 ]);
 
